@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cs_Code</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Vazirmatn:wght@400;600&family=Share+Tech+Mono&family=Lalezar&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--red:#ff1e2d;--bg:#050305;--line:#3a0f14;--mut:#b09a9c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#eee;font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9;overflow-x:hidden}
+body.hack{--red:#19ff7a}
+@media(hover:hover){body.cc,body.cc *{cursor:none!important}}
+#cur{position:fixed;top:0;left:0;will-change:transform;z-index:9999;pointer-events:none;font:700 18px 'Share Tech Mono',monospace;color:var(--red);text-shadow:0 0 8px var(--red);transform:translate(-100px,-100px);direction:ltr;white-space:nowrap}
+#cur::after{content:'_';animation:bl 1s steps(1) infinite}#cur.h::after{content:''}
+@keyframes bl{50%{opacity:0}}
+canvas#bg{position:fixed;inset:0;z-index:0;width:100%;height:100%;opacity:.4}
+.logo,h1,h2,.mono{font-family:Orbitron,Lalezar,'Share Tech Mono',monospace;direction:ltr}
+.hide{display:none!important}
+button,input,textarea{font:inherit}
+.btn{background:linear-gradient(135deg,var(--red),#5a000a);color:#fff;border:1px solid var(--red);padding:.7rem 1.6rem;cursor:pointer;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);font-weight:600}
+.btn:hover{filter:brightness(1.3)}.btn.ghost{background:transparent}.btn.sm{padding:.3rem 1rem}
+input,textarea{width:100%;background:#0a0406;border:1px solid var(--line);color:#fff;padding:.7rem 1rem;margin:.4rem 0 1rem;outline:none;border-radius:2px}
+input:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 10px var(--red)}
+.ltr{direction:ltr;text-align:left}
+.link{color:#ff6b75;background:none;border:0;text-decoration:underline;padding:0}
+.err{color:#ff6b75;min-height:1.6rem;font-size:.9rem}
+.steps{display:flex;gap:6px;margin-bottom:1.4rem}.steps i{flex:1;height:3px;background:var(--line)}.steps i.on{background:var(--red)}
+#auth,#gate{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:1.5rem}
+.box{width:min(440px,100%);background:#0e0507ee;border:1px solid var(--red);padding:2rem;box-shadow:0 0 40px #ff1e2d33}
+.box .logo{font-size:2.3rem;font-weight:900;text-align:center;margin:0;text-shadow:0 0 18px var(--red)}
+.sub{text-align:center;color:var(--mut);margin:.2rem 0 1.5rem}.box .btn{width:100%}
+.lb{position:fixed;top:calc(.8rem + env(safe-area-inset-top,0px));inset-inline-start:1rem;z-index:30}
+#site{position:relative;z-index:1}
+nav{position:fixed;top:0;inset-inline:0;z-index:20;display:flex;align-items:center;gap:1rem;padding:.7rem 1.2rem;padding-top:calc(.7rem + env(safe-area-inset-top,0px));background:#050305ee;border-bottom:1px solid var(--line)}
+nav .logo{font-weight:900;font-size:1.3rem;text-shadow:0 0 10px var(--red);margin-inline-end:auto}
+nav a{color:#eee;text-decoration:none;font-size:.9rem}nav a:hover{color:var(--red)}
+@media(max-width:860px){nav a{display:none}}
+#cp{position:fixed;left:1rem;bottom:1rem;width:300px;z-index:-1;direction:ltr;text-align:left;white-space:pre;font:.72rem/1.5 'Share Tech Mono',monospace;color:#ff6b75;opacity:.55;border-left:2px solid var(--red);padding-left:.6rem;overflow:hidden;height:16em}
+@media(max-width:900px){#cp{display:none}}
+.hero{height:100vh;min-height:560px;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;padding:0 1rem}
+.layer{position:absolute;inset:-10% 0;pointer-events:none}
+.ring{position:absolute;border:1px solid var(--red);border-radius:50%;box-shadow:0 0 40px #ff1e2d55,inset 0 0 40px #ff1e2d22}
+.cl{position:absolute;font:.85rem 'Share Tech Mono',monospace;direction:ltr;color:#ff1e2daa;white-space:pre;text-align:left}
+.hero h1{font-size:clamp(2.6rem,11vw,7.5rem);font-weight:900;margin:0;background:linear-gradient(180deg,#fff,#b9b9bf 60%,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px var(--red));letter-spacing:.04em;animation:gl 6s infinite}
+@keyframes gl{0%,92%,100%{transform:none}93%{transform:translate(-5px,1px) skewX(7deg);filter:drop-shadow(-7px 0 #0ff) drop-shadow(7px 0 var(--red))}95%{transform:translate(6px,-2px);filter:drop-shadow(6px 0 #0ff) drop-shadow(-6px 0 var(--red))}97%{transform:translate(-2px,0) skewX(-5deg)}}
+.tag{font-family:Orbitron,monospace;direction:ltr;letter-spacing:.25em;font-size:clamp(.65rem,2.3vw,1.1rem);margin-top:.6rem}
+.desc{max-width:640px;margin:1.2rem auto 2rem;color:var(--mut)}
+section.s{padding:5rem 1.5rem;max-width:1100px;margin:auto}
+section.s h2{font-size:clamp(1.4rem,4vw,2.2rem);margin:0 0 2rem;text-shadow:0 0 14px var(--red);direction:ltr;text-align:start}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
+.card{background:linear-gradient(160deg,#1a080bf0,#0a0507f0);border:1px solid var(--line);padding:1.4rem;border-inline-start:3px solid var(--red)}
+.card h3{margin:0 0 .4rem;font:700 1rem Orbitron,monospace;direction:ltr;text-align:start;color:#ff6b75}
+.card small{color:var(--mut)}.tg{display:inline-block;border:1px solid var(--red);padding:0 .5rem;margin:.1rem;font:.75rem 'Share Tech Mono',monospace;direction:ltr}
+pre.pc{direction:ltr;text-align:left;background:#050203;border:1px solid var(--line);padding:.8rem;overflow:auto;font:.78rem 'Share Tech Mono',monospace;color:#ff9aa2}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center;max-width:800px;margin:auto;padding:2rem 1rem}
+.stats b{display:block;font:900 clamp(1.6rem,6vw,3rem) Orbitron,Lalezar,monospace;color:#fff;text-shadow:0 0 14px var(--red)}.stats span{color:var(--mut)}
+.band{position:relative;padding:7rem 1.5rem;text-align:center;overflow:hidden;border-block:1px solid var(--line);background:#050305cc}
+.bgp{position:absolute;inset:-30% 0;background:repeating-linear-gradient(90deg,#ff1e2d14 0 2px,transparent 2px 60px),radial-gradient(circle,#ff1e2d33,transparent 60%)}
+.band p{position:relative;font-size:1.25rem;max-width:760px;margin:auto}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
+canvas.fr{width:100%;border:1px solid var(--red);background:#0a0609}
+.mr{display:flex;justify-content:space-between;font:1rem 'Share Tech Mono',monospace;direction:ltr;padding:.4rem 0;border-bottom:1px solid var(--line)}
+.up{color:#fff}.dn{color:var(--red)}
+.term{background:#070305;border:1px solid var(--red);font:.9rem 'Share Tech Mono',monospace;direction:ltr;text-align:left;height:290px;overflow:auto;padding:1rem;white-space:pre-wrap;color:#ffb3b8}
+.tl{display:flex;gap:.5rem}.term input{border:0;background:transparent;margin:0;box-shadow:none;padding:0;flex:1;width:auto;color:#fff;font:inherit}
+footer{text-align:center;padding:2.5rem;color:var(--mut);border-top:1px solid var(--line);background:#050305cc}
+#fab{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:40;width:56px;height:56px;border-radius:50%;border:1px solid var(--red);background:#1a060a;color:#fff;font:900 .95rem Orbitron,monospace;box-shadow:0 0 20px var(--red)}
+#chat{position:fixed;right:1rem;bottom:calc(5rem + env(safe-area-inset-bottom,0px));z-index:40;width:min(370px,94vw);height:min(480px,65vh);background:#0c0406;border:1px solid var(--red);display:flex;flex-direction:column;box-shadow:0 0 30px #ff1e2d55}
+#chat header{padding:.6rem 1rem;border-bottom:1px solid var(--line);font-weight:600}
+#cm{flex:1;overflow:auto;padding:.6rem}.m{padding:.45rem .8rem;margin:.4rem 0;border:1px solid var(--line);white-space:pre-wrap;max-width:90%;font-size:.92rem}
+.m.u{background:#2a0a0f;margin-inline-start:auto}.m.b{background:#12080a}
+#chat .cf{display:flex;gap:.4rem;padding:.5rem}#chat input{margin:0}
+#admin{position:relative;z-index:2;min-height:100vh;padding:5rem 1rem 3rem;max-width:900px;margin:auto}
+#admin .card{margin-bottom:1rem}.row{display:flex;gap:.6rem;justify-content:space-between;border-bottom:1px solid var(--line);padding:.5rem 0}
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.toast{position:fixed;bottom:calc(6rem + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:#1c0609;border:1px solid var(--red);padding:.8rem 1.4rem;z-index:99;max-width:90%}
+#nl{display:contents}#mb{display:none}
+.adb{display:flex;align-items:center;justify-content:center;gap:1rem;max-width:1100px;margin:1.5rem auto;padding:1rem;border:1px dashed var(--red);color:#fff;text-decoration:none;background:#0d0609e6;flex-wrap:wrap;text-align:center}
+.adb img{max-width:100%;max-height:220px;object-fit:contain}#ad0,#ad1{padding:0 1rem}
+.pi{width:100%;height:150px;object-fit:cover;margin-bottom:.8rem;border:1px solid var(--line)}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.8rem;direction:ltr}.chips .btn{font-family:'Share Tech Mono',monospace}
+.soc a{color:#ff6b75;text-decoration:none}#navImg{height:28px;width:auto}
+@media(max-width:860px){#mb{display:block}#nl{display:none;position:fixed;top:calc(3.4rem + env(safe-area-inset-top,0px));inset-inline:0;flex-direction:column;padding:1rem 1.4rem;background:#050305f7;border-bottom:1px solid var(--red)}nav.open #nl{display:flex}#nl a{display:block;padding:.55rem 0;font-size:1.05rem}}
+@media(max-width:640px){
+section.s{padding:3.2rem 1rem}.band{padding:4rem 1rem}.hero{min-height:520px}.stats b{font-size:1.5rem}
+input,textarea,.term input{font-size:16px}.term{height:250px;font-size:.78rem}
+#chat{left:.5rem;right:.5rem;width:auto;bottom:calc(4.8rem + env(safe-area-inset-bottom,0px));height:70vh}
+.tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.4rem}.tabs .btn{white-space:nowrap;flex:none}
+.cl{display:none}.ring{transform:scale(.6)}
+nav{gap:.5rem;padding:.6rem .8rem;padding-top:calc(.6rem + env(safe-area-inset-top,0px))}nav .btn.sm{padding:.2rem .6rem;font-size:.78rem}nav .logo{font-size:1.1rem}
+.toast{bottom:calc(5rem + env(safe-area-inset-bottom,0px))}#admin{padding-top:4.5rem}.box{padding:1.4rem}}
+#boot{position:fixed;inset:0;z-index:9998;background:#000;display:grid;place-content:center;transition:opacity .4s;font:1rem 'Share Tech Mono',monospace;color:var(--red);direction:ltr;text-align:left;padding:1rem}#boot small{color:var(--mut);display:block;margin-top:1rem}
+#pal,#ov{position:fixed;inset:0;z-index:9990;background:#000000b8;display:grid;place-items:start center;padding:12vh 1rem 1rem}#ov{place-items:center;padding:1rem}
+.pbox{width:min(520px,100%);background:#0c0406;border:1px solid var(--red);box-shadow:0 0 30px #ff1e2d55}.pbox input{margin:0;border:0;border-bottom:1px solid var(--line);font-size:16px}
+.pi2{padding:.6rem 1rem;cursor:pointer}.pi2.on,.pi2:hover{background:#2a0a0f;color:#fff}
+#pk{position:fixed;left:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:40;border:1px solid var(--red);background:#1a060a;color:#fff;padding:.4rem .8rem;font:700 .85rem Orbitron,monospace}
+code{background:#1a0a0d;padding:0 .3rem;font-family:'Share Tech Mono',monospace}.hk{color:#ff6b75}.hs{color:#ffd37a}.hc{color:#777}.hn{color:#8fd}
+@media(max-width:640px){#pk{bottom:calc(5rem + env(safe-area-inset-bottom,0px))}}
+.btn,nav a{font-family:Lalezar,Vazirmatn,sans-serif;font-weight:400;letter-spacing:.02em}
+html[lang=fa] .band p{font-family:Lalezar,Vazirmatn,sans-serif;font-size:1.5rem;font-weight:400}
+.layer,.bgp{will-change:transform}#heroIn{will-change:transform,opacity}
+#xp{font:.78rem 'Share Tech Mono',monospace;color:#ff6b75;white-space:nowrap}
+.ok{color:#fff}.bad{background:#ff1e2d66;color:#fff}
+@media(max-width:640px){#xp{display:none}}
+#lk{width:min(250px,68vw);height:auto;overflow:visible;display:block}#lk *{transform-box:fill-box}
+#lk .sh{fill:none;stroke:#cfcfd4;stroke-width:12;stroke-linecap:round;transform-origin:0% 100%}
+#lk #body{fill:#1a0a0d;stroke:var(--red);stroke-width:3}#lk .kh{fill:var(--red)}
+#lk #hasp,#lk #chain,#lk #shield,#lk #ring,#lk #ok,#lk #pickb,#lk #pick{opacity:0}#lk #pick{transform-origin:0 0}
+.lv0{animation:fl 3s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-4px)}}
+.lv1 #pick{opacity:1;animation:pa1 2.6s infinite}.lv1 .sh{stroke-width:6;animation:sh1 2.6s infinite}.lv1 #body{stroke:#ff6b3d}
+@keyframes pa1{0%{transform:translate(50px,50px)}20%,30%{transform:translate(0,0)}35%{transform:rotate(6deg)}40%{transform:rotate(-6deg)}45%,60%{transform:rotate(5deg)}80%,100%{transform:translate(50px,50px)}}
+@keyframes sh1{0%,55%{transform:none}65%,85%{transform:translateY(-16px) rotate(-25deg)}100%{transform:none}}
+.lv2 #pick{opacity:1;animation:pa2 1.4s infinite}.lv2 .sh{stroke-width:9;animation:sh2 1.4s infinite}.lv2 #body{stroke:#ffb000}
+@keyframes pa2{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}@keyframes sh2{0%,100%{transform:none}50%{transform:translateY(-5px) rotate(-8deg)}}
+.lv3 #hasp{opacity:1}.lv3 #pick{opacity:1;animation:pa3 3s infinite}.lv3 #body{stroke:#ffe14d}
+@keyframes pa3{0%{transform:translate(50px,50px)}25%{transform:translate(0,0)}45%{transform:skewX(-25deg) rotate(12deg)}60%{transform:translate(8px,6px) skewX(-35deg) rotate(25deg)}80%,100%{transform:translate(60px,60px) rotate(50deg);opacity:.2}}
+.lv4 #hasp,.lv4 #chain{opacity:1}.lv4 #pick{opacity:1;animation:pa4 3s infinite}.lv4 #pickb{animation:pb4 3s infinite}.lv4 #body{stroke:#7dff6b}
+@keyframes pa4{0%{transform:translate(50px,50px)}25%,40%{transform:translate(0,0)}41%,100%{transform:translate(70px,70px) rotate(30deg);opacity:0}}
+@keyframes pb4{0%,40%{opacity:0}41%{opacity:1}100%{opacity:0;transform:translate(-10px,70px) rotate(120deg)}}
+.lv5{filter:drop-shadow(0 0 14px var(--red))}.lv5 #hasp,.lv5 #chain,.lv5 #shield,.lv5 #ring,.lv5 #ok{opacity:1}.lv5 .kh{opacity:0}.lv5 #body{stroke:#19ff7a}
+.lv5 #ring{transform-origin:center;animation:rg 8s linear infinite}.lv5 #shield{stroke-dasharray:600;animation:dr 1.2s ease-out}
+.lv5 #pick{opacity:1;animation:pa5 2.4s infinite}
+@keyframes rg{to{transform:rotate(360deg)}}@keyframes dr{from{stroke-dashoffset:600}to{stroke-dashoffset:0}}
+@keyframes pa5{0%{transform:translate(50px,50px)}30%{transform:translate(20px,20px)}40%{transform:translate(30px,30px)}100%{transform:translate(160px,-120px) rotate(540deg);opacity:0}}
+#pb{display:flex;gap:4px;width:min(250px,68vw);margin-top:.8rem}#pb i{flex:1;height:5px;background:var(--line);transition:.3s}#pb i.on{background:var(--red);box-shadow:0 0 8px var(--red)}
+#lockmsg{font:400 1.15rem Lalezar,Vazirmatn,sans-serif}
+@media(prefers-reduced-motion:reduce){#lk,#lk *{animation:none!important}.lv1 #pick,.lv2 #pick,.lv3 #pick,.lv4 #pick,.lv5 #pick{opacity:1}}
+.rsc{background:#fff;color:#111;padding:1.4rem;font-family:Vazirmatn,sans-serif;line-height:1.7}.rsc h2{font-family:Orbitron,Lalezar,sans-serif;color:#111;margin:0;direction:auto;text-align:start;text-shadow:none;font-size:1.6rem}.rsc h4{margin:.8rem 0 .2rem;border-bottom:1px solid #ccc}.rsc p{margin:.2rem 0}
+@media print{body *{visibility:hidden}#rsp,#rsp *{visibility:visible}#rsp{position:absolute;inset:0;opacity:1!important;transform:none!important}}
+canvas#bg2{position:fixed;inset:0;z-index:0;width:100%;height:100%}
+#nl a{white-space:nowrap}details.card>summary{cursor:pointer;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}details.card{margin-bottom:.6rem}
+#adminBtn[data-n]::after{content:' (' attr(data-n) ')';color:#ffd37a}#to a{color:#ff6b75;cursor:pointer;text-decoration:underline}#to small{color:var(--mut)}</style>
+</head>
+<body class="cc">
+<div id="cur">&lt;/&gt;</div>
+<canvas id="bg2"></canvas><canvas id="bg"></canvas>
+<button class="btn sm lb hide" id="lang1">EN</button>
+
+<div id="gate" class="hide"><div class="box"><h1 class="logo">Admin</h1><p class="sub" id="gLbl"></p>
+ <input id="gp" type="password" class="ltr"><div class="err" id="ge"></div><button class="btn" id="gOk">OK</button>
+ <p style="text-align:center"><button class="link" id="gBack" data-i="back"></button></p></div></div>
+
+<div id="site" class="hide">
+ <nav><img id="navImg" class="hide" alt=""><span class="logo" id="navLogo">Cs_Code</span><div id="nl">
+  <a href="#about" data-i="n_about"></a><a href="#services" data-i="n_serv"></a><a href="#projects" data-i="n_proj"></a><a href="#terminal" data-i="n_term"></a><a href="#news" data-i="n_news"></a></div>
+  <span id="xp"></span><button class="btn sm ghost" id="lang2">EN</button><button class="btn sm ghost hide" id="adminBtn" data-i="admin"></button><button class="btn sm" id="logout"></button><button class="btn sm ghost" id="mb">☰</button></nav>
+ <pre id="cp"></pre>
+ <header class="hero"><div class="layer" id="heroBg" data-s="0.2" style="opacity:.3;background-size:cover;background-position:center"></div>
+  <div class="layer" data-s="0.15"><div class="ring" style="width:520px;height:520px;top:12%;left:50%;margin-left:-260px"></div><div class="ring" style="width:320px;height:320px;top:26%;left:50%;margin-left:-160px;opacity:.6"></div></div>
+  <div class="layer" data-s="0.45"><div class="cl" style="top:22%;left:5%">model = torch.load('model.pt')
+result = model.predict(data)</div><div class="cl" style="top:70%;right:6%">def process_data(data):
+    return {'status': 'success'}</div></div>
+  <div style="position:relative" id="heroIn"><h1 id="heroTitle">Cs_Code</h1><div class="tag" id="heroTag"></div><p class="desc" id="heroDesc"></p><a href="#services"><button class="btn" data-i="cta"></button></a></div>
+ </header>
+ <div class="stats"><div class="rv"><b class="cnt" id="c1"></b><span data-i="st1"></span></div><div class="rv"><b class="cnt" id="c2"></b><span data-i="st2"></span></div><div class="rv"><b class="cnt" id="c3"></b><span data-i="st3"></span></div></div><div id="ad0" class="hide"></div>
+ <section class="s" id="join"><h2 class="dc" data-i="h_join"></h2>
+ <div class="two"><div class="rv" style="display:grid;place-items:center;align-content:center">
+  <svg id="lk" class="lv0" viewBox="0 0 200 220" aria-hidden="true">
+   <path id="shield" d="M100 6 L184 36 V110 C184 162 142 198 100 214 C58 198 16 162 16 110 V36 Z" fill="none" stroke="var(--red)" stroke-width="3"/>
+   <circle id="ring" cx="100" cy="112" r="92" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-dasharray="6 9"/>
+   <path class="sh" d="M70 94 V64 a30 30 0 0 1 60 0 V94"/>
+   <rect id="body" x="48" y="94" width="104" height="76" rx="10"/>
+   <g id="chain" stroke="#b5b5bb" stroke-width="5" stroke-dasharray="10 6" fill="none"><path d="M40 104 L160 160"/><path d="M160 104 L40 160"/></g>
+   <rect id="hasp" x="38" y="128" width="124" height="9" rx="3" fill="#6b6b73"/>
+   <circle class="kh" cx="100" cy="124" r="9"/><rect class="kh" x="96" y="126" width="8" height="22"/>
+   <path id="ok" d="M80 152 L95 165 L122 138" fill="none" stroke="#19ff7a" stroke-width="5" stroke-linecap="round"/>
+   <g id="pick"><path d="M100 126 L100 142 L116 160 L138 168" fill="none" stroke="#e4e4e8" stroke-width="3" stroke-linecap="round"/><rect x="134" y="164" width="30" height="9" rx="4" fill="#8a8a92" transform="rotate(14 150 168)"/></g>
+   <path id="pickb" d="M100 126 L108 136" stroke="#e4e4e8" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+  <div id="pb"><i></i><i></i><i></i><i></i><i></i></div><div id="lockmsg" style="margin-top:.6rem;text-align:center;min-height:1.8rem"></div></div>
+ <div class="card rv"><div id="jf"><div class="tabs"><button class="btn sm" id="jm1" data-i="jReg"></button><button class="btn sm ghost" id="jm2" data-i="jLogin"></button></div>
+  <label data-i="email"></label><input id="email" type="email" class="ltr" autocomplete="email"><label data-i="pass"></label><input id="pass" type="password" class="ltr" autocomplete="new-password"><div id="p2w"><label data-i="pass2"></label><input id="pass2" type="password" class="ltr" autocomplete="new-password"></div><div class="err" id="e3"></div><button class="btn" id="jgo" style="width:100%"></button></div>
+  <div id="jw" class="hide"><h3 data-i="welcome" style="font-family:Lalezar,Vazirmatn;font-weight:400"></h3><p id="jwe" class="ltr"></p></div></div></div></section>
+ <section class="s" id="about"><h2 class="dc" data-i="h_about"></h2><p class="rv" id="aboutText" style="max-width:720px"></p></section>
+ <div class="band" id="band1"><div class="bgp" data-s="0.25"></div><p class="rv" data-i="band1"></p></div>
+ <section class="s" id="services"><h2 class="dc" data-i="h_serv"></h2>
+  <div class="grid" id="svList"></div></section>
+ <section class="s" id="demo"><div class="two">
+  <div class="rv"><h2 class="dc" data-i="h_cv"></h2><canvas class="fr" id="cvc" width="600" height="300"></canvas></div>
+  <div class="rv"><h2 class="dc" data-i="h_mk"></h2><div id="mkt"></div><canvas class="fr" id="mkc" width="600" height="180" style="margin-top:.8rem"></canvas></div></div></section>
+ <div class="band" id="band2"><div class="bgp" data-s="-0.2"></div><p class="rv" data-i="band2"></p></div>
+ <section class="s" id="projects"><h2 class="dc" data-i="h_proj"></h2><div class="grid" id="projList"></div></section>
+ <section class="s" id="terminal"><h2 class="dc" data-i="h_term"></h2><div class="term rv" id="term"><div id="to"></div><div class="tl"><span id="ps">cs_code:~$</span><input id="ti" autocomplete="off" autocapitalize="off" spellcheck="false"></div></div><div class="chips" id="chips"></div></section>
+ <section class="s" id="tools"><h2 class="dc" data-i="h_tools"></h2><div class="card rv"><div class="tabs" id="tt"></div><textarea id="ti1" rows="5" class="ltr" spellcheck="false"></textarea><input id="ti2" class="ltr hide"><div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem"><button class="btn sm" id="tgo" data-i="tgo"></button><button class="btn sm ghost" id="tcp" data-i="copy"></button></div><pre class="term" id="tout" style="height:auto;min-height:90px;max-height:260px"></pre></div></section>
+ <section class="s" id="roi"><h2 class="dc" data-i="h_roi"></h2><div class="card rv"><div class="two"><div><label data-i="roiH"></label><input id="r1" type="number" value="10"><label data-i="roiC"></label><input id="r2" type="number" value="15"><label data-i="roiP"></label><input id="r3" type="number" value="2"><label data-i="roiA"></label><input id="r4" type="number" value="80"><label data-i="roiB"></label><input id="r5" type="number" value="2000"></div><pre class="term" id="rout" style="height:auto;white-space:pre-wrap"></pre></div></div></section>
+ <section class="s" id="typing"><h2 class="dc" data-i="h_type"></h2><div class="card rv"><pre id="tsn" class="pc" style="white-space:pre-wrap"></pre><textarea id="tsi" rows="3" class="ltr" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea><div class="mono" id="tsr" style="min-height:1.8rem"></div><button class="btn sm" id="tsb" data-i="tsNew"></button></div></section>
+ <section class="s" id="quiz"><h2 class="dc" data-i="h_quiz"></h2><div class="card rv" id="qz"></div></section>
+ <section class="s" id="lessons"><h2 class="dc" data-i="h_less"></h2><div class="card rv"><div style="height:6px;background:var(--line)"><i id="lsbi" style="display:block;height:100%;width:0;background:var(--red);transition:width .4s"></i></div><div class="tabs" id="lst" style="margin-top:1rem"></div><h3 id="lsh" style="font-family:Lalezar,Vazirmatn;font-weight:400;direction:inherit;text-align:start"></h3><p id="lsg"></p><textarea id="lsc" rows="7" class="ltr" spellcheck="false"></textarea><button class="btn sm" id="lsr" data-i="chk"></button><pre class="term" id="lso" style="height:auto;min-height:60px;margin-top:.8rem"></pre><div id="lcert" class="hide"></div></div></section>
+ <section class="s" id="bugs"><h2 class="dc" data-i="h_bug"></h2><div class="card rv"><p id="bgg"></p><textarea id="bgc" rows="6" class="ltr" spellcheck="false"></textarea><div style="display:flex;gap:.4rem;flex-wrap:wrap"><button class="btn sm" id="bgr" data-i="chk"></button><button class="btn sm ghost" id="bgn" data-i="blNext"></button></div><pre class="term" id="bgo" style="height:auto;min-height:60px;margin-top:.8rem"></pre></div></section>
+ <section class="s" id="review"><h2 class="dc" data-i="h_rev"></h2><div class="card rv"><textarea id="rvc" rows="7" class="ltr" spellcheck="false" data-p="rvPh"></textarea><button class="btn" id="rvg" data-i="rvGo"></button><div id="rvo" style="white-space:pre-wrap;margin-top:1rem"></div></div></section>
+ <section class="s" id="pomo"><h2 class="dc" data-i="h_pomo"></h2><div class="card rv" style="text-align:center"><div id="pmt" class="mono" style="font-size:clamp(2.5rem,12vw,5rem)">25:00</div><div id="pmm"></div><div style="display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:1rem 0"><button class="btn" id="pmg" data-i="pmGo"></button><button class="btn ghost" id="pmr" data-i="pmRs"></button><button class="btn ghost" id="pmx" data-i="pmMode"></button></div><div id="pms"></div></div></section>
+ <section class="s" id="vault"><h2 class="dc" data-i="h_vault"></h2><div class="card rv"><input id="vt" data-p="vtT"><input id="vg" class="ltr" data-p="vtG"><textarea id="vc" rows="4" class="ltr" spellcheck="false" data-p="vtC"></textarea><button class="btn sm" id="va" data-i="vtAdd"></button><input id="vq" class="ltr" data-p="vtQ" style="margin-top:1rem"><div id="vl"></div></div></section>
+ <section class="s" id="resume"><h2 class="dc" data-i="h_res"></h2><div class="two"><div class="card rv"><input id="rn1" data-p="rsName"><input id="rr1" data-p="rsRole"><input id="re1" class="ltr" data-p="rsEmail"><input id="rp1" class="ltr" data-p="rsPhone"><input id="rk1" data-p="rsSk"><textarea id="rx1" rows="3" data-p="rsExp"></textarea><textarea id="rj1" rows="3" data-p="rsPrj"></textarea><input id="rd1" data-p="rsEdu"><button class="btn sm" id="rpr" data-i="rsPrint"></button> <button class="btn sm ghost" id="rcp" data-i="rsCopy"></button></div><div id="rsp" class="rv"></div></div></section>
+ <section class="s" id="badges"><h2 class="dc" data-i="h_badge"></h2><div class="card rv"><div id="lvl" class="mono"></div><div style="height:8px;background:var(--line);margin:.5rem 0"><i id="lvb" style="display:block;height:100%;width:0;background:var(--red);transition:width .4s"></i></div><div id="wkl" class="mono"></div><div class="grid" id="bdg" style="margin-top:1rem"></div></div></section>
+ <section class="s" id="blog"><h2 class="dc" data-i="h_blog"></h2><div class="grid" id="blogList"></div></section>
+ <section class="s" id="play"><h2 class="dc" data-i="h_play"></h2><div class="two rv"><div><textarea id="pgc" rows="9" class="ltr" spellcheck="false"></textarea><button class="btn sm" id="pgr">▶ Run</button></div><pre class="term" id="pgo" style="min-height:190px"></pre></div></section>
+ <section class="s" id="globe"><h2 class="dc" data-i="h_globe"></h2>
+ <div class="two"><canvas id="glc" class="fr rv" width="700" height="520" style="touch-action:pan-y"></canvas>
+ <div class="card rv"><input id="gq" list="gcl" class="ltr" data-p="gPh" autocomplete="off"><datalist id="gcl"></datalist>
+  <div id="ginfo" class="mono" style="white-space:pre-wrap;min-height:7rem"></div>
+  <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.6rem 0"><button class="btn sm" id="gme" data-i="gMe"></button><button class="btn sm ghost" id="gcmp" data-i="gCmp"></button><button class="btn sm ghost" id="gauto">⟳</button><button class="btn sm ghost" id="gzi">+</button><button class="btn sm ghost" id="gzo">−</button></div>
+  <div id="gcm" class="mono" style="white-space:pre-wrap"></div></div></div></section>
+ <section class="s" id="est"><h2 class="dc" data-i="h_est"></h2><div class="card rv"><textarea id="esd" rows="3" data-p="estPh"></textarea><button class="btn" id="esb" data-i="estBtn"></button><div id="eso" style="margin-top:1rem;white-space:pre-wrap"></div></div></section>
+ <section class="s" id="game"><h2 class="dc" data-i="h_game"></h2><div class="two"><div class="rv"><canvas id="gmc" class="fr" width="420" height="320" style="touch-action:none"></canvas><div style="margin-top:.6rem"><button class="btn sm" id="gms" data-i="gStart"></button></div></div><div class="card rv"><h3>Top 10</h3><div id="lb"></div></div></div></section>
+ <section class="s" id="wall"><h2 class="dc" data-i="h_wall"></h2><div class="card rv"><input id="wn" maxlength="24" data-p="wnPh"><input id="wm" maxlength="140" data-p="wmPh"><button class="btn sm" id="wb" data-i="wBtn"></button></div><div id="wl" style="margin-top:1rem"></div></section>
+ <section class="s" id="news"><h2 class="dc" data-i="h_news"></h2><div class="grid" id="newsList"></div></section>
+ <section class="s" id="req"><h2 class="dc" data-i="h_req"></h2><div class="card rv" style="max-width:600px"><input id="rn" data-p="reqName"><input id="rc" class="ltr" data-p="reqContact"><textarea id="rd" rows="4" data-p="reqDesc"></textarea><button class="btn" id="rs" data-i="reqSend"></button></div><div id="thr" style="margin-top:1rem;max-width:600px"></div></section>
+ <div id="ad1" class="hide"></div><footer class="mono" id="footTxt"></footer>
+ <button id="fab">AI</button>
+ <div id="chat" class="hide"><header data-i="chatTitle"></header><div id="cst" style="padding:.3rem .8rem;font-size:.8rem;color:var(--mut)"></div><div id="cm"></div><div style="padding:0 .8rem"><button class="link" id="cmsg" data-i="msgTeam"></button></div><div class="cf"><input id="ci" data-p="chatPh"><button class="btn sm" id="cs" data-i="chatSend"></button></div></div>
+</div>
+
+<div id="admin" class="hide">
+ <nav><span class="logo">Cs_Code Admin</span><button class="btn sm" id="backSite" data-i="back"></button></nav>
+ <div class="tabs"><button class="btn sm" data-tab="t1">تنظیمات / Settings</button><button class="btn sm ghost" data-tab="t2">اخبار / News</button><button class="btn sm ghost" data-tab="t3">پروژه‌ها / Projects</button><button class="btn sm ghost" data-tab="t4">صندوق پیام / Inbox</button><button class="btn sm ghost" data-tab="t5">ظاهر / Look</button><button class="btn sm ghost" data-tab="t6">نوارها و تماس / Bands & contact</button><button class="btn sm ghost" data-tab="t7">خدمات / Services</button><button class="btn sm ghost" data-tab="t8">تبلیغات / Ads</button><button class="btn sm ghost" data-tab="t9">ترمینال و بکاپ / Terminal</button><button class="btn sm ghost" data-tab="t10">بلاگ / Blog</button><button class="btn sm ghost" data-tab="t11">موقعیت‌ها / Locations</button><button class="btn sm ghost" data-tab="t12">صفحه‌ساز / Page builder</button><button class="btn sm ghost" data-tab="t13">بلوک‌ها / Blocks</button></div>
+ <div id="t1" class="card">
+  <label>عنوان / Title</label><input id="a_title" class="ltr"><label>Tagline</label><input id="a_tag" class="ltr">
+  <label>توضیح فارسی</label><textarea id="a_dfa" rows="2"></textarea><label>Intro (English)</label><textarea id="a_den" rows="2" class="ltr"></textarea>
+  <label>درباره ما (فارسی)</label><textarea id="a_afa" rows="3"></textarea><label>About (English)</label><textarea id="a_aen" rows="3" class="ltr"></textarea>
+  <label>Footer</label><input id="a_foot"><label>آمار / Stats: lines, clients</label><div style="display:flex;gap:.5rem"><input id="a_s2" type="number"><input id="a_s3" type="number"></div>
+  <label>رنگ / Color</label><input id="a_color" type="color" style="height:46px;padding:2px"><button class="btn" id="saveSet">ذخیره / Save</button></div>
+ <div id="t2" class="card hide"><input id="n_t" placeholder="عنوان / Title"><textarea id="n_b" rows="3" placeholder="متن / Text"></textarea><button class="btn" id="addNews">انتشار / Publish</button><div id="adminNews" style="margin-top:1rem"></div></div>
+ <div id="t3" class="card hide"><input id="p_t" placeholder="عنوان / Title"><textarea id="p_d" rows="2" placeholder="توضیح / Description"></textarea><input id="p_g" class="ltr" placeholder="Tags: python, opencv"><input id="p_l" class="ltr" placeholder="https://..."><textarea id="p_c" rows="4" class="ltr" placeholder="Code sample (optional)"></textarea><input id="p_i" type="file" accept="image/*"><button class="btn" id="addProj">انتشار / Publish</button><div id="adminProj" style="margin-top:1rem"></div></div>
+ <div id="t4" class="card hide"><div id="reqList"></div></div>
+ <div id="t5" class="card hide"><label>رنگ پس‌زمینه / Background</label><input id="a_bg" type="color" style="height:46px;padding:2px">
+  <label>تصویر هیرو / Hero image</label><input id="f_hero" type="file" accept="image/*"><button class="btn sm ghost" data-clr="hero">× حذف</button>
+  <label style="display:block;margin-top:1rem">لوگو / Logo</label><input id="f_logo" type="file" accept="image/*"><button class="btn sm ghost" data-clr="logo">× حذف</button>
+  <label>پس‌زمینه / Background style</label><select id="bgm" style="width:100%;background:#0a0406;color:#fff;border:1px solid var(--line);padding:.7rem;margin:.4rem 0 1rem"><option value="cyber">Cyber (aurora + grid + code rain + hacker HUD)</option><option value="rain">Code rain</option><option value="grid">Neon grid</option><option value="off">Plain</option></select><label>شدت / Intensity</label><input id="bgi" type="range" min="10" max="100" style="padding:0"><div style="margin-top:1rem"><button class="btn" id="saveLook">ذخیره / Save</button></div></div>
+ <div id="t6" class="card hide"><div id="secs"></div>
+  <label>Band 1 (FA / EN)</label><input id="b1fa"><input id="b1en" class="ltr"><label>Band 2 (FA / EN)</label><input id="b2fa"><input id="b2en" class="ltr">
+  <label>Email / Telegram / Instagram / GitHub / Phone</label><input id="s_em" class="ltr" placeholder="email"><input id="s_tg" class="ltr" placeholder="telegram id"><input id="s_ig" class="ltr" placeholder="instagram id"><input id="s_gh" class="ltr" placeholder="github id"><input id="s_ph" class="ltr" placeholder="phone">
+  <label>نرخ ساعتی برای تخمین / Hourly rate (number)</label><input id="s_rate" type="number" class="ltr"><button class="btn" id="saveSec">ذخیره / Save</button></div>
+ <div id="t7" class="card hide"><input id="v_t" class="ltr" placeholder="Title"><input id="v_fa" placeholder="توضیح فارسی"><input id="v_en" class="ltr" placeholder="English description"><button class="btn" id="addSv">+ افزودن / Add</button><div id="adminSv" style="margin-top:1rem"></div></div>
+ <div id="t8" class="card hide"><div id="adsForm"></div><button class="btn" id="saveAds">ذخیره / Save</button></div>
+ <div id="t12" class="card hide"><p style="color:var(--mut)">ترتیب، نمایش، عنوان، توضیح و منوی هر بخش صفحه‌ی اصلی / Order, visibility, heading, intro and menu of every main-page section</p><div id="pbl"></div>
+ <h3 class="mono">Hero button & stats</h3><label>Button (EN / FA)</label><input id="o_ctaE" class="ltr"><input id="o_ctaF"><label>Button link (#section or https://…)</label><input id="o_ctaL" class="ltr" placeholder="#services">
+ <label>Stat 1 label (EN / FA)</label><input id="o_sl1e" class="ltr"><input id="o_sl1f"><label>Stat 2 label (EN / FA)</label><input id="o_sl2e" class="ltr"><input id="o_sl2f"><label>Stat 3 label (EN / FA)</label><input id="o_sl3e" class="ltr"><input id="o_sl3f">
+ <h3 class="mono">Options</h3><label>Pomodoro work / break (minutes)</label><div style="display:flex;gap:.5rem"><input id="o_pmW" type="number" placeholder="25"><input id="o_pmB" type="number" placeholder="5"></div><label>Bug-hunt game seconds</label><input id="o_gSec" type="number" placeholder="30">
+ <label style="display:block;margin-bottom:1rem"><input type="checkbox" id="o_chat" style="width:auto"> چت هوش مصنوعی / AI chat button</label><button class="btn" id="pbSave">ذخیره‌ی همه / Save all</button></div>
+ <div id="t13" class="card hide"><input id="bk_t" class="ltr" placeholder="Title (EN)"><input id="bk_tf" placeholder="عنوان فارسی"><textarea id="bk_b" rows="3" class="ltr" placeholder="Text (EN)"></textarea><textarea id="bk_bf" rows="3" placeholder="متن فارسی"></textarea><input id="bk_i" type="file" accept="image/*"><input id="bk_bt" class="ltr" placeholder="Button (EN)"><input id="bk_btf" placeholder="دکمه (فارسی)"><input id="bk_l" class="ltr" placeholder="https://..."><button class="btn" id="bk_add">+ افزودن بلوک / Add block</button><div id="adminBlk" style="margin-top:1rem"></div></div>
+ <div id="t11" class="card hide"><input id="lo_n" placeholder="نام / Name"><input id="lo_la" class="ltr" placeholder="Latitude e.g. 40.41"><input id="lo_lo" class="ltr" placeholder="Longitude e.g. 49.87"><input id="lo_tz" class="ltr" placeholder="Timezone e.g. Asia/Baku"><input id="lo_nt" placeholder="یادداشت / Note"><button class="btn" id="addLoc">+ افزودن / Add</button><div id="adminLoc" style="margin-top:1rem"></div></div>
+ <div id="t10" class="card hide"><input id="bl_t" placeholder="عنوان / Title"><textarea id="bl_b" rows="7" class="ltr" placeholder="Text. Code goes between triple backticks."></textarea><button class="btn" id="addPost">انتشار / Publish</button><div id="adminPost" style="margin-top:1rem"></div></div>
+ <div id="t9" class="card hide"><label>دستور سفارشی ترمینال / Custom terminal command</label><input id="c_n" class="ltr" placeholder="command"><textarea id="c_r" rows="2" placeholder="reply"></textarea><button class="btn" id="addCmd">+ افزودن / Add</button><div id="adminCmd" style="margin:1rem 0"></div>
+  <label>Backup (JSON)</label><textarea id="bk" rows="5" class="ltr"></textarea><button class="btn sm" id="bkOut">Export</button> <button class="btn sm ghost" id="bkIn">Import</button> <button class="btn sm ghost" id="bkReset">Reset</button></div>
+</div>
+
+<div id="boot" class="hide"><pre id="bootp"></pre><small data-i="bootSkip"></small></div>
+<div id="pal" class="hide"><div class="pbox"><input id="pq" data-p="palPh" autocomplete="off"><div id="pr"></div></div></div>
+<div id="ov" class="hide"><div class="box" style="width:min(720px,100%);max-height:85vh;overflow:auto;text-align:start"><button class="btn sm" id="ovx">×</button><div id="ovb"></div></div></div>
+<button id="pk">⌘K</button>
+<script>
+(function(){
+const $=id=>document.getElementById(id),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const mem={},store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):(k in mem?mem[k]:d)}catch(e){return k in mem?mem[k]:d}},set(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const T={authSubReg:['ثبت‌نام در Cs_Code','Sign up to Cs_Code'],authSubLogin:['ورود به حساب','Log in'],phoneLbl:['شماره موبایل خود را وارد کنید تا کد تأیید ارسال کنیم','Enter your phone number and we will send you a code'],sendCode:['ارسال کد تأیید','Send code'],hasAcc:['حساب دارید؟','Have an account?'],goLogin:['وارد شوید','Log in'],codeLbl:['کد ارسال‌شده به این شماره را وارد کنید:','Enter the code sent to'],verify:['تأیید کد','Verify'],resend:['ارسال دوباره','Resend'],editPh:['ویرایش شماره','Change number'],email:['ایمیل','Email'],pass:['رمز عبور (حداقل ۶ کاراکتر)','Password (min. 6 characters)'],pass2:['تکرار رمز عبور','Repeat password'],create:['ساخت حساب','Create account'],lid:['ایمیل یا شماره موبایل','Email or phone'],lpass:['رمز عبور','Password'],loginBtn:['ورود','Log in'],noAcc:['حساب ندارید؟','No account?'],goReg:['ثبت‌نام کنید','Sign up'],
+e_phone:['شماره باید با 09 شروع شود و ۱۱ رقم باشد.','Phone must start with 09 and have 11 digits.'],e_dup:['این شماره قبلاً ثبت‌نام کرده است.','This number is already registered.'],e_exp:['کد منقضی شده است. دوباره ارسال کنید.','Code expired. Send a new one.'],e_code:['کد واردشده درست نیست.','Wrong code.'],e_email:['ایمیل معتبر وارد کنید.','Enter a valid email.'],e_emaildup:['این ایمیل قبلاً استفاده شده است.','Email already in use.'],e_pass:['رمز عبور باید حداقل ۶ کاراکتر باشد.','Password must be at least 6 characters.'],e_match:['تکرار رمز عبور مطابقت ندارد.','Passwords do not match.'],e_login:['ایمیل/شماره یا رمز عبور اشتباه است.','Wrong credentials.'],demo:['حالت آزمایشی — کد تأیید شما: ','Demo mode — your code: '],
+n_about:['درباره ما','About'],n_serv:['خدمات','Services'],n_proj:['پروژه‌ها','Projects'],n_term:['ترمینال','Terminal'],n_news:['اخبار','News'],admin:['مدیریت','Admin'],logout:['خروج','Log out'],cta:['مشاهده خدمات','View services'],st1:['پروژه','Projects'],st2:['خط کد','Lines of code'],st3:['مشتری','Clients'],
+h_about:['درباره ما','About'],h_serv:['خدمات','Services'],h_proj:['پروژه‌ها','Projects'],h_term:['ترمینال','Terminal'],h_news:['اخبار','News'],h_req:['درخواست پروژه','Request a project'],h_mk:['بازار زنده (شبیه‌سازی)','Live market (simulated)'],h_cv:['دمو بینایی ماشین','Computer vision demo'],
+band1:['از خط کد تا خط تولید؛ هر فرایند تکراری را به یک سیستم هوشمند تبدیل می‌کنیم.','From a line of code to a production line, we turn repetitive work into smart systems.'],band2:['ایده‌ی شما را می‌شنویم و آن را می‌سازیم.','Bring us your idea. We will build it.'],
+sv1:['تشخیص اشیا، ردیابی و تحلیل تصویر و ویدیو.','Detection, tracking and analytics for images and video.'],sv2:['خودکارسازی گردش کار و حذف کارهای دستی.','Workflow automation that removes manual work.'],sv3:['تحلیل بازار، الگوریتم‌های معاملاتی و داشبورد مالی.','Market analysis, trading algorithms and finance dashboards.'],sv4:['طراحی و توسعه نرم‌افزار اختصاصی.','Custom software design and development.'],
+noProj:['هنوز پروژه‌ای منتشر نشده است.','No projects published yet.'],noNews:['هنوز خبری منتشر نشده است.','No news yet.'],vc:['مشاهده کد','View code'],hc:['بستن کد','Hide code'],visit:['باز کردن','Open'],
+reqName:['نام','Your name'],reqContact:['ایمیل یا شماره تماس','Email or phone'],reqDesc:['چه پروژه‌ای می‌خواهید؟','What do you need built?'],reqSend:['ارسال درخواست','Send request'],reqOk:['درخواست شما ثبت شد.','Request sent.'],reqErr:['همه‌ی فیلدها را پر کنید.','Fill in all fields.'],
+chatTitle:['پشتیبانی هوشمند','AI support'],chatPh:['سوال خود را بپرسید...','Ask a question...'],chatSend:['ارسال','Send'],chatHi:['سلام! درباره‌ی کدنویسی، خدمات ما یا استفاده از سایت بپرسید.','Hi! Ask about coding, our services or how to use this site.'],chatNA:['پشتیبانی هوشمند الان در دسترس نیست. از فرم درخواست پروژه استفاده کنید.','AI support is unavailable right now. Use the request form.'],chatWait:['در حال فکر کردن...','Thinking...'],
+noOwner:['فقط مالک سایت می‌تواند وارد پنل شود.','Only the site owner can open the panel.'],gSet:['یک رمز برای پنل مدیریت تعیین کنید','Set an admin panel password'],gEnter:['رمز پنل مدیریت را وارد کنید','Enter the admin password'],gBad:['رمز اشتباه است.','Wrong password.'],gShort:['رمز باید حداقل ۶ کاراکتر باشد.','Password must be at least 6 characters.'],back:['بازگشت','Back'],saved:['ذخیره شد.','Saved.'],noReq:['درخواستی نیست.','No requests.'],hack:['حالت هکر فعال/غیرفعال شد.','Hacker mode toggled.']};
+let lang=store.get('cs_lang','fa');const t=k=>T[k]?T[k][lang==='fa'?0:1]:k;
+const DEF={settings:{title:'Cs_Code',tag:'SMART AUTOMATION & SOFTWARE SOLUTIONS',dfa:'راهکارهای هوشمند اتوماسیون، بینایی ماشین و تحلیل مالی را با کدنویسی دقیق می‌سازیم.',den:'We build smart automation, computer vision and financial analytics with precise code.',afa:'Cs_Code یک تیم برنامه‌نویسی است که روی هوش مصنوعی، بینایی ماشین، اتوماسیون فرایندها و تحلیل داده‌های مالی کار می‌کند.',aen:'Cs_Code is a programming team working on AI, computer vision, process automation and financial data analytics.',foot:'© Cs_Code — Smart Automation',color:'#ff1e2d',s2:120000,s3:12,bg:'#050305',hero:'',logo:'',hide:{},b1fa:T.band1[0],b1en:T.band1[1],b2fa:T.band2[0],b2en:T.band2[1],em:'',tg:'',ig:'',gh:'',ph:''},news:[],projects:[],posts:[],locs:[],blocks:[],ads:[],cmds:[],services:[{t:'Computer Vision',dfa:T.sv1[0],den:T.sv1[1]},{t:'Robotic Process Automation',dfa:T.sv2[0],den:T.sv2[1]},{t:'Financial Analytics',dfa:T.sv3[0],den:T.sv3[1]},{t:'Software Solutions',dfa:T.sv4[0],den:T.sv4[1]}]};
+let C=JSON.parse(JSON.stringify(DEF)),DB=null,U=null,SM=null,AC='#ff1e2d',BG='5,3,5',unlocked=false;
+let users=store.get('cs_users',[]),session=store.get('cs_session',null),pending={};
+const fa2en=s=>s.replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+const hash=async x=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode('cs:'+x)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(m){const d=document.createElement('div');d.className='toast';d.textContent=m;document.body.appendChild(d);setTimeout(()=>d.remove(),5000)}
+
+/* data layer: shared db when available, localStorage otherwise */
+async function initCaps(){try{if(window.claude){DB=await claude.use('db');U=await claude.use('user')}}catch(e){}}
+async function loadC(){let d=null;try{if(DB){const s=await DB.doc('site/content').get();if(s.exists)d=s.data()}}catch(e){}
+ if(!d)d=store.get('cs_c',null);if(d){Object.assign(C.settings,d.settings||{});C.news=d.news||[];C.projects=d.projects||[];C.posts=d.posts||[];C.locs=d.locs||[];C.blocks=d.blocks||[];C.ads=d.ads||[];C.cmds=d.cmds||[];if(d.services)C.services=d.services}}
+async function saveC(){store.set('cs_c',C);try{if(DB)await DB.doc('site/content').set(C)}catch(e){toast('DB: '+(e.code||e.message))}}
+async function sendSms(p,c){toast(t('demo')+c);return true} /* replace with a real SMS API call on your server */
+
+/* i18n */
+function i18n(){document.documentElement.lang=lang;document.documentElement.dir=lang==='fa'?'rtl':'ltr';
+ document.querySelectorAll('[data-i]').forEach(e=>{const v=t(e.dataset.i);e.textContent=v;e.dataset.t=v});
+ document.querySelectorAll('[data-p]').forEach(e=>e.placeholder=t(e.dataset.p));
+ ['lang1','lang2'].forEach(i=>$(i).textContent=lang==='fa'?'EN':'FA');
+ applySettings();renderAll();authUI();par()}
+function applySettings(){const s=C.settings;document.title=s.title;$('navLogo').textContent=s.title;$('heroTitle').textContent=s.title;$('heroTag').textContent=s.tag;
+ $('heroDesc').textContent=lang==='fa'?s.dfa:s.den;$('aboutText').textContent=lang==='fa'?s.afa:s.aen;applyX(s);applyPage(s);
+ document.documentElement.style.setProperty('--red',s.color);AC=s.color}
+function renderAll(){renderX();renderY();renderG();renderBlk();renderBadges(false);vaultDraw();lsDraw(1);bugDraw(1);pmDraw();watch();
+ $('newsList').innerHTML=C.news.length?C.news.map(n=>`<div class="card rv"><h3 style="font-family:Lalezar,Vazirmatn;direction:rtl;text-align:start;font-weight:400;font-size:1.15rem">${esc(n.t)}</h3><p>${esc(n.b)}</p><small>${esc(n.d)}</small></div>`).join(''):`<p>${t('noNews')}</p>`;
+ $('projList').innerHTML=C.projects.length?C.projects.map((p,i)=>`<div class="card rv">${imgOk(p.img)?`<img class="pi" src="${imgOk(p.img)}" alt="">`:''}<h3>${esc(p.t)}</h3><p>${esc(p.d)}</p><div>${(p.g||'').split(',').filter(x=>x.trim()).map(g=>`<span class="tg">${esc(g.trim())}</span>`).join('')}</div><p>${/^https?:\/\//.test(p.l||'')?`<a class="link" href="${esc(p.l)}" target="_blank" rel="noopener">${t('visit')}</a> `:''}${p.c?`<button class="link" data-vc="${i}">${t('vc')}</button>`:''}</p>${p.c?`<pre class="pc hide" id="pc${i}">${esc(p.c)}</pre>`:''}</div>`).join(''):`<p>${t('noProj')}</p>`;
+ [[C.projects.length,'c1'],[C.settings.s2,'c2'],[C.settings.s3,'c3']].forEach(([n,id])=>{const e=$(id);e.dataset.n=n;delete e.dataset.d;e.textContent='0'});
+ $('adminNews').innerHTML=C.news.map((n,i)=>`<div class="row"><span>${esc(n.t)}</span><button class="btn sm ghost" data-dn="${i}">×</button></div>`).join('');
+ $('adminProj').innerHTML=C.projects.map((p,i)=>`<div class="row"><span>${esc(p.t)}</span><button class="btn sm ghost" data-dp="${i}">×</button></div>`).join('')}
+$('projList').onclick=e=>{const i=e.target.dataset.vc;if(i==null)return;const p=$('pc'+i);p.classList.toggle('hide');e.target.textContent=t(p.classList.contains('hide')?'vc':'hc')};
+function setLang(){lang=lang==='fa'?'en':'fa';store.set('cs_lang',lang);i18n()}
+$('lang1').onclick=$('lang2').onclick=setLang;
+
+/* views + inline signup/login (email + password, lock-strength animation) */
+Object.assign(T,{h_join:['ثبت‌نام','Join Cs_Code'],jReg:['ثبت‌نام','Sign up'],jLogin:['ورود','Log in'],signup:['ثبت‌نام','Sign up'],welcome:['خوش آمدی','Welcome'],e_weak:['رمز عبور خیلی ضعیف است.','Password is too weak.'],lk0:['رمز عبور خودت را بنویس…','Type a password…'],lk1:['😱 در یک ثانیه شکسته می‌شود','😱 Cracked in a second'],lk2:['😬 در چند دقیقه شکسته می‌شود','😬 Cracked in minutes'],lk3:['🙂 شکستنش ساعت‌ها طول می‌کشد','🙂 Takes hours to crack'],lk4:['💪 شکستنش سال‌ها طول می‌کشد','💪 Takes years to crack'],lk5:['🛡️ شکست‌ناپذیر!','🛡️ Unbreakable!'],loggedOut:['از حساب خارج شدی.','Logged out.']});
+function view(v){['gate','site','admin'].forEach(x=>$(x).classList.toggle('hide',x!==v));scrollTo(0,0);par()}
+function enterSite(){bootOnce();view('site');authUI()}
+let jmode='reg';
+function pwLevel(p){if(!p)return 0;const c=[/[a-z]/,/[A-Z]/,/\d/,/[^A-Za-z0-9]/].filter(r=>r.test(p)).length,n=p.length;
+ if(n<6||/^(123456|password|qwerty|111111|12345678|123456789|abc123|admin|letmein|iloveyou)/i.test(p)||/^(.)\1+$/.test(p))return 1;if(n<8||c<2)return 2;if(n<10||c<3)return 3;if(n<12||c<4)return 4;return 5}
+function lockUpdate(){const lv=jmode==='reg'?pwLevel($('pass').value):0;$('lk').setAttribute('class','lv'+lv);$('lockmsg').textContent=t('lk'+lv);[...$('pb').children].forEach((e,i)=>e.classList.toggle('on',i<lv))}
+function authUI(){const me=users.find(u=>u.email===session);$('logout').textContent=t(me?'logout':'signup');$('jf').classList.toggle('hide',!!me);$('jw').classList.toggle('hide',!me);if(me)$('jwe').textContent=me.email;
+ $('jm1').classList.toggle('ghost',jmode!=='reg');$('jm2').classList.toggle('ghost',jmode==='reg');$('p2w').classList.toggle('hide',jmode!=='reg');$('jgo').textContent=t(jmode==='reg'?'jReg':'jLogin');lockUpdate()}
+$('jm1').onclick=()=>{jmode='reg';$('e3').textContent='';authUI()};$('jm2').onclick=()=>{jmode='login';$('e3').textContent='';authUI()};
+$('pass').oninput=lockUpdate;
+$('jgo').onclick=async()=>{const em=$('email').value.trim().toLowerCase(),p=$('pass').value,e=$('e3');e.textContent='';
+ if(!/^\S+@\S+\.\S+$/.test(em))return e.textContent=t('e_email');
+ if(jmode==='reg'){if(users.some(u=>u.email===em))return e.textContent=t('e_emaildup');if(pwLevel(p)<3)return e.textContent=t('e_weak');if(p!==$('pass2').value)return e.textContent=t('e_match');users.push({email:em,h:await hash(p)});store.set('cs_users',users)}
+ else{const h=await hash(p);if(!users.some(u=>u.email===em&&u.h===h))return e.textContent=t('e_login')}
+ session=em;store.set('cs_session',em);$('pass').value=$('pass2').value='';authUI();toast(t('welcome')+' '+em)};
+$('logout').onclick=()=>{if(session){session=null;store.set('cs_session',null);unlocked=false;authUI();toast(t('loggedOut'))}else $('join').scrollIntoView({behavior:'smooth'})};
+async function adminAccess(){try{if(DB&&U&&await U.canEdit()){$('adminBtn').classList.remove('hide');inboxBadge()}}catch(e){}}
+addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='a'){e.preventDefault();$('adminBtn').click()}});
+
+/* admin gate: owner check + password (hash kept privately in the db when available) */
+async function hpath(){const id=await U.id();return id?DB.doc('data/users/'+id+'/cfg'):null}
+async function getH(){try{if(DB&&U){const r=await hpath();if(r){const s=await r.get();return s.exists?s.data().h:null}}}catch(e){}return store.get('cs_ah',null)}
+async function setH(h){try{if(DB&&U){const r=await hpath();if(r){await r.set({h});return}}}catch(e){}store.set('cs_ah',h)}
+let gMode='enter';
+$('adminBtn').onclick=async()=>{
+ try{if(DB&&U&&!(await U.canEdit()))return}catch(e){}
+ if(unlocked)return openAdmin();
+ gMode=(await getH())?'enter':'set';$('gLbl').textContent=t(gMode==='set'?'gSet':'gEnter');$('gp').value='';$('ge').textContent='';view('gate')};
+$('gOk').onclick=async()=>{const p=$('gp').value,h=await hash('adm:'+p);
+ if(gMode==='set'){if(p.length<6)return $('ge').textContent=t('gShort');await setH(h)}else if(h!==await getH())return $('ge').textContent=t('gBad');
+ unlocked=true;openAdmin()};
+$('gp').onkeydown=e=>{if(e.key==='Enter')$('gOk').click()};
+$('gBack').onclick=()=>view('site');$('backSite').onclick=()=>view('site');
+function openAdmin(){const s=C.settings;$('a_title').value=s.title;$('a_tag').value=s.tag;$('a_dfa').value=s.dfa;$('a_den').value=s.den;$('a_afa').value=s.afa;$('a_aen').value=s.aen;$('a_foot').value=s.foot;$('a_s2').value=s.s2;$('a_s3').value=s.s3;$('a_color').value=s.color;renderAll();loadInbox();fillAdmin2();pbModel();pbDraw();fillOpts();view('admin')}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{['t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12','t13'].forEach(x=>$(x).classList.toggle('hide',x!==b.dataset.tab));document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('ghost',x!==b))});
+$('saveSet').onclick=async()=>{C.settings={...C.settings,title:$('a_title').value||'Cs_Code',tag:$('a_tag').value,dfa:$('a_dfa').value,den:$('a_den').value,afa:$('a_afa').value,aen:$('a_aen').value,foot:$('a_foot').value,s2:+$('a_s2').value||0,s3:+$('a_s3').value||0,color:$('a_color').value};await saveC();applySettings();renderAll();toast(t('saved'))};
+$('addNews').onclick=async()=>{const a=$('n_t').value.trim(),b=$('n_b').value.trim();if(!a||!b)return;C.news.unshift({t:a,b,d:new Date().toLocaleDateString(lang==='fa'?'fa-IR':'en-US')});$('n_t').value=$('n_b').value='';await saveC();renderAll();toast(t('saved'))};
+$('addProj').onclick=async()=>{const a=$('p_t').value.trim();if(!a)return;C.projects.unshift({t:a,d:$('p_d').value,g:$('p_g').value,l:$('p_l').value.trim(),c:$('p_c').value,img:pimg});pimg='';$('p_i').value='';['p_t','p_d','p_g','p_l','p_c'].forEach(i=>$(i).value='');await saveC();renderAll();toast(t('saved'))};
+$('adminNews').onclick=async e=>{const i=e.target.dataset.dn;if(i==null)return;C.news.splice(+i,1);await saveC();renderAll()};
+$('adminProj').onclick=async e=>{const i=e.target.dataset.dp;if(i==null)return;C.projects.splice(+i,1);await saveC();renderAll()};
+async function loadReq(){let r=[];try{if(DB){const s=await DB.collection('requests').get();r=s.docs.map(d=>d.data())}else r=store.get('cs_req',[])}catch(e){r=store.get('cs_req',[])}
+ $('reqList').innerHTML=r.length?r.map(x=>`<div class="row" style="display:block"><b>${esc(x.n)}</b> · <span class="ltr">${esc(x.c)}</span> · <small>${esc(x.d)}</small><br>${esc(x.m)}</div>`).join(''):t('noReq')}
+$('rs').onclick=()=>{const n=$('rn').value.trim(),c=$('rc').value.trim(),m=$('rd').value.trim(),S=C.settings;if(!n||!c||!m)return toast(t('reqErr'));
+ const body=m+'\n\n— '+n+' / '+c,u=S.em?'mailto:'+S.em+'?subject='+encodeURIComponent(S.title+' project request')+'&body='+encodeURIComponent(body):S.tg?'https://t.me/'+encodeURIComponent(S.tg)+'?text='+encodeURIComponent(body):'';
+ if(!u)return toast(L('مدیر هنوز راه ارتباطی (ایمیل/تلگرام) تنظیم نکرده است.','The admin has not set an email/Telegram contact yet.'));
+ const l=document.createElement('a');l.href=u;l.target='_blank';l.rel='noopener';document.body.appendChild(l);l.click();l.remove();toast(t('reqOk'))};
+
+/* extras: images, sections, ads, services, commands, backup */
+const qs=s=>document.querySelector(s),imgOk=s=>/^data:image\/(jpeg|png|webp);base64,/.test(s||'')?s:'';
+let pimg='';
+const SECL=[['stats','آمار / Stats'],['about','درباره / About'],['bands','نوارها / Bands'],['services','خدمات / Services'],['demo','دمو و بازار / Demo & market'],['projects','پروژه‌ها / Projects'],['terminal','ترمینال / Terminal'],['news','اخبار / News'],['req','فرم درخواست / Request form'],['chat','چت هوش مصنوعی / AI chat'],['blog','بلاگ / Blog'],['play','زمین بازی / Playground'],['globe','کره / Globe'],['est','تخمین / Estimator'],['game','بازی / Game'],['wall','دیوار / Wall'],['tools','جعبه‌ابزار / Toolbox'],['roi','ماشین‌حساب / ROI'],['typing','تایپ / Typing'],['quiz','چالش روزانه / Quiz'],['lessons','درس‌ها / Lessons'],['bugs','باگ / Bug'],['review','بازبین کد / Review'],['pomo','تمرکز / Focus'],['vault','انبار اسنیپت / Vault'],['resume','رزومه / Resume'],['badges','نشان‌ها / Badges']];
+const SECS={stats:()=>[qs('.stats')],about:()=>[$('about')],bands:()=>[...document.querySelectorAll('.band')],services:()=>[$('services')],demo:()=>[$('demo')],projects:()=>[$('projects')],terminal:()=>[$('terminal')],news:()=>[$('news')],req:()=>[$('req')],chat:()=>[$('fab'),$('chat')],blog:()=>[$('blog')],play:()=>[$('play')],globe:()=>[$('globe')],est:()=>[$('est')],game:()=>[$('game')],wall:()=>[$('wall')],tools:()=>[$('tools')],roi:()=>[$('roi')],typing:()=>[$('typing')],quiz:()=>[$('quiz')],lessons:()=>[$('lessons')],bugs:()=>[$('bugs')],review:()=>[$('review')],pomo:()=>[$('pomo')],vault:()=>[$('vault')],resume:()=>[$('resume')],badges:()=>[$('badges')]};
+function applyX(s){
+ document.documentElement.style.setProperty('--bg',s.bg||'#050305');BG=[1,3,5].map(i=>parseInt((s.bg||'#050305').slice(i,i+2),16)).join(',');
+ const lg=imgOk(s.logo);$('navImg').classList.toggle('hide',!lg);if(lg)$('navImg').src=lg;
+ $('heroBg').style.backgroundImage=imgOk(s.hero)?`url("${imgOk(s.hero)}")`:'none';
+ $('band1').querySelector('p').textContent=lang==='fa'?s.b1fa:s.b1en;$('band2').querySelector('p').textContent=lang==='fa'?s.b2fa:s.b2en;
+ Object.keys(SECS).forEach(k=>SECS[k]().forEach(e=>e.style.display=(s.hide||{})[k]?'none':''));
+ const so=[['em','mailto:','✉ '],['tg','https://t.me/','Telegram'],['ig','https://instagram.com/','Instagram'],['gh','https://github.com/','GitHub'],['ph','tel:','☎ ']].filter(x=>s[x[0]]).map(x=>`<a href="${x[1]}${esc(encodeURIComponent(s[x[0]]).replace(/%40/g,'@').replace(/%2B/g,'+'))}" target="_blank" rel="noopener">${x[0]==='em'||x[0]==='ph'?x[2]+esc(s[x[0]]):x[2]}</a>`).join(' · ');
+ $('footTxt').innerHTML='<div>'+esc(s.foot)+'</div><div class="soc">'+so+'</div>'}
+function renderX(){
+ $('svList').innerHTML=C.services.map(x=>`<div class="card rv"><h3>${esc(x.t)}</h3><p>${esc(lang==='fa'?x.dfa:x.den)}</p></div>`).join('');
+ $('adminSv').innerHTML=C.services.map((x,i)=>`<div class="row"><span>${esc(x.t)}</span><button class="btn sm ghost" data-dsv="${i}">×</button></div>`).join('');
+ $('adminCmd').innerHTML=C.cmds.map((x,i)=>`<div class="row"><span class="ltr">${esc(x.n)}</span><button class="btn sm ghost" data-dcm="${i}">×</button></div>`).join('');
+ [0,1].forEach(i=>{const a=C.ads[i],e=$('ad'+i);if(!a||!a.on||!(imgOk(a.img)||a.fa||a.en)){e.classList.add('hide');e.innerHTML='';return}
+  e.classList.remove('hide');const tx=lang==='fa'?a.fa:a.en,ln=/^https?:\/\//.test(a.l||''),tg=ln?'a href="'+esc(a.l)+'" target="_blank" rel="noopener sponsored"':'div';
+  e.innerHTML=`<${tg} class="adb">${imgOk(a.img)?`<img src="${imgOk(a.img)}" alt="">`:''}${tx?`<span>${esc(tx)}</span>`:''}</${ln?'a':'div'}>`})}
+function fillAdmin2(){const s=C.settings;$('a_bg').value=s.bg||'#050305';['b1fa','b1en','b2fa','b2en'].forEach(k=>$(k).value=s[k]||'');['em','tg','ig','gh','ph'].forEach(k=>$('s_'+k).value=s[k]||'');$('s_rate').value=s.rate||'';
+ 
+ $('adsForm').innerHTML=[0,1].map(i=>{const a=C.ads[i]||{};return `<h3 class="mono">Ad ${i+1}</h3><label><input type="checkbox" id="ad_on${i}" ${a.on?'checked':''} style="width:auto"> فعال / Enabled</label><input id="ad_fa${i}" placeholder="متن فارسی" value="${esc(a.fa||'')}"><input id="ad_en${i}" class="ltr" placeholder="English text" value="${esc(a.en||'')}"><input id="ad_l${i}" class="ltr" placeholder="https://..." value="${esc(a.l||'')}"><input type="file" accept="image/*" data-adimg="${i}">`}).join('<hr>')}
+const pick=(f,max,q,mime)=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);ok(c.toDataURL(mime||'image/jpeg',q))};im.onerror=no;im.src=r.result};r.onerror=no;r.readAsDataURL(f)});
+$('admin').addEventListener('change',async e=>{const x=e.target;if(x.type!=='file'||!x.files[0])return;let d;
+ try{d=await pick(x.files[0],x.id==='f_logo'?220:x.id==='f_hero'?1400:1000,.7,x.id==='f_logo'?'image/png':'image/jpeg')}catch(er){return toast('Image error')}
+ if(d.length>700000)return toast('Image too large — pick a smaller one');
+ if(x.id==='bk_i'){bimg=d;return toast('✓')}if(x.id==='p_i'){pimg=d;return toast('✓')}
+ if(x.id==='f_hero')C.settings.hero=d;else if(x.id==='f_logo')C.settings.logo=d;else if(x.dataset.adimg!=null){const i=+x.dataset.adimg;C.ads[i]=Object.assign(C.ads[i]||{},{img:d})}
+ await saveC();applySettings();renderAll();toast(t('saved'))});
+$('t5').onclick=async e=>{const k=e.target.dataset.clr;if(!k)return;C.settings[k]='';await saveC();applySettings();toast(t('saved'))};
+$('saveLook').onclick=async()=>{C.settings.bg=$('a_bg').value;C.settings.bgm=$('bgm').value;C.settings.bgi=+$('bgi').value;await saveC();applySettings();toast(t('saved'))};
+$('saveSec').onclick=async()=>{const s=C.settings;['b1fa','b1en','b2fa','b2en'].forEach(k=>s[k]=$(k).value);['em','tg','ig','gh','ph'].forEach(k=>s[k]=$('s_'+k).value.trim());s.rate=+$('s_rate').value||0;await saveC();applySettings();toast(t('saved'))};
+$('saveAds').onclick=async()=>{C.ads=[0,1].map(i=>({on:$('ad_on'+i).checked,fa:$('ad_fa'+i).value,en:$('ad_en'+i).value,l:$('ad_l'+i).value.trim(),img:(C.ads[i]||{}).img||''}));await saveC();renderAll();toast(t('saved'))};
+$('addSv').onclick=async()=>{const a=$('v_t').value.trim();if(!a)return;C.services.push({t:a,dfa:$('v_fa').value,den:$('v_en').value});['v_t','v_fa','v_en'].forEach(i=>$(i).value='');await saveC();renderAll()};
+$('addCmd').onclick=async()=>{const n=$('c_n').value.trim().toLowerCase().replace(/\s+/g,'-'),r=$('c_r').value;if(!n||!r)return;C.cmds.push({n,r});$('c_n').value=$('c_r').value='';await saveC();renderAll()};
+$('adminSv').onclick=async e=>{const i=e.target.dataset.dsv;if(i==null)return;C.services.splice(+i,1);await saveC();renderAll()};
+$('adminCmd').onclick=async e=>{const i=e.target.dataset.dcm;if(i==null)return;C.cmds.splice(+i,1);await saveC();renderAll()};
+$('bkOut').onclick=()=>{$('bk').value=JSON.stringify(C)};
+$('bkIn').onclick=async()=>{try{const d=JSON.parse($('bk').value);if(!d||!d.settings)throw 0;Object.assign(C.settings,d.settings);C.news=d.news||[];C.projects=d.projects||[];C.posts=d.posts||[];C.locs=d.locs||[];C.blocks=d.blocks||[];C.ads=d.ads||[];C.cmds=d.cmds||[];if(d.services)C.services=d.services;await saveC();applySettings();renderAll();toast(t('saved'))}catch(e){toast('JSON error')}};
+let rs=0;$('bkReset').onclick=async()=>{if(!rs){rs=1;$('bkReset').textContent='Sure?';setTimeout(()=>{rs=0;$('bkReset').textContent='Reset'},4000);return}rs=0;$('bkReset').textContent='Reset';C=JSON.parse(JSON.stringify(DEF));await saveC();applySettings();renderAll();toast(t('saved'))};
+$('mb').onclick=()=>$('nl').parentElement.classList.toggle('open');$('nl').onclick=e=>{if(e.target.tagName==='A')$('nl').parentElement.classList.remove('open')};
+
+/* terminal: virtual filesystem + real-feeling shell */
+const out=(s,c)=>{const d=document.createElement('div');d.textContent=s;if(c)d.style.color=c;$('to').appendChild(d);$('term').scrollTop=1e9};
+const L=(a,b)=>lang==='fa'?a:b,slug=s=>s.toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g,'-').replace(/^-|-$/g,'')||'x';
+let cwd=[],th=[],hi=0;
+function tree(){const s=C.settings,sv={},pj={},nw={};C.services.forEach(x=>sv[slug(x.t)+'.txt']=lang==='fa'?x.dfa:x.den);C.projects.forEach(p=>pj[slug(p.t)+'.md']='# '+p.t+'\n'+p.d+'\ntags: '+(p.g||'-')+'\nlink: '+(p.l||'-'));C.news.forEach((n,i)=>nw[(i+1)+'-'+slug(n.t)+'.txt']=n.t+'\n'+n.b+'\n'+n.d);
+ return {'about.txt':lang==='fa'?s.afa:s.aen,'contact.txt':[s.em&&'email: '+s.em,s.tg&&'telegram: @'+s.tg,s.gh&&'github: '+s.gh,s.ph&&'phone: '+s.ph].filter(Boolean).join('\n')||L('از فرم درخواست پروژه استفاده کنید.','Use the request form.'),'README.md':'# '+s.title+'\n'+s.tag,services:sv,projects:pj,news:nw,'.secret':{'.env':'API_KEY=nice_try_hacker','todo.txt':'1. world domination\n2. coffee'}}}
+const node=p=>{let n=tree();for(const k of p){if(typeof n!=='object'||!(k in n))return undefined;n=n[k]}return n};
+const rp=a=>{const p=a.startsWith('/')||a.startsWith('~')?[]:[...cwd];for(const k of a.split('/')){if(!k||k==='.'||k==='~')continue;if(k==='..')p.pop();else p.push(k)}return p};
+const ps=()=>{$('ps').textContent='cs_code:'+(cwd.length?'~/'+cwd.join('/'):'~')+'$'};
+const SEC={about:'about',services:'services',projects:'projects',terminal:'terminal',news:'news',request:'req',contact:'req'};
+const PAL={red:'#ff1e2d',green:'#19ff7a',blue:'#2d8cff',amber:'#ffb000',purple:'#b44dff',cyan:'#00e5ff'};
+const CMD={
+ help:()=>'help ls cd pwd cat tree echo whoami hostname date uname neofetch history clear open theme lang git ping curl man cowsay fortune matrix top sudo rm exit',
+ ls:a=>{const f=a.filter(x=>x[0]!=='-'),fl=a.join(''),n=node(rp(f[0]||'.'));if(n===undefined)return 'ls: no such file or directory';if(typeof n!=='object')return f[0];return Object.keys(n).filter(k=>fl.includes('a')||k[0]!=='.').map(k=>(fl.includes('l')?(typeof n[k]==='object'?'drwxr-xr-x ':'-rw-r--r-- ')+'cs_code ':'')+k+(typeof n[k]==='object'?'/':'')).join(fl.includes('l')?'\n':'  ')||'(empty)'},
+ cd:a=>{if(!a[0]){cwd=[];ps();return''}const p=rp(a[0]),n=node(p);if(typeof n!=='object')return 'cd: '+a[0]+': '+(n===undefined?'No such directory':'Not a directory');cwd=p;ps();return''},
+ pwd:()=>'/home/cs_code'+(cwd.length?'/'+cwd.join('/'):''),
+ cat:a=>{if(!a[0])return 'cat: missing file';const n=node(rp(a[0]));return n===undefined?'cat: '+a[0]+': No such file':typeof n==='object'?'cat: '+a[0]+': Is a directory':n},
+ tree:()=>{const w=(n,pre)=>Object.keys(n).filter(k=>k[0]!=='.').map((k,i,ar)=>{const l=i===ar.length-1,o=typeof n[k]==='object';return pre+(l?'└── ':'├── ')+k+(o?'/':'')+(o?'\n'+w(n[k],pre+(l?'    ':'│   ')):'')}).join('\n');return '.\n'+w(node(cwd)||{},'')},
+ echo:a=>a.join(' '),whoami:()=>'guest',hostname:()=>C.settings.title.toLowerCase(),date:()=>new Date().toString(),uname:()=>'Cs_Code OS 1.0 x86_64 GNU/Web',
+ neofetch:()=>['guest@'+C.settings.title.toLowerCase(),'----------------','OS: Cs_Code OS (web)','Shell: cs-sh 2.0','Projects: '+C.projects.length,'Services: '+C.services.length,'Language: '+lang,'Theme: '+AC].join('\n'),
+ history:()=>th.map((c,i)=>(i+1)+'  '+c).join('\n'),
+ open:a=>{const k=SEC[a[0]];if(!k)return 'usage: open <about|services|projects|news|terminal|request>';$(k).scrollIntoView({behavior:'smooth'});return 'opening '+a[0]+'...'},
+ theme:a=>{const c=PAL[a[0]]||(/^#[0-9a-f]{6}$/i.test(a[0]||'')?a[0]:null);if(!c)return 'theme <'+Object.keys(PAL).join('|')+'|#hex>';document.documentElement.style.setProperty('--red',c);AC=c;return 'theme -> '+c},
+ lang:()=>{setLang();return'OK'},
+ git:a=>a[0]==='log'?(C.news.map((n,i)=>'commit '+(0xa1b2c3+i*7919).toString(16)+'\n    '+n.t+'  ('+n.d+')').join('\n\n')||'no commits yet'):a[0]==='status'?'On branch main\nnothing to commit, working tree clean':'usage: git log | git status',
+ ping:a=>{const h=a[0]||'cs_code';return [1,2,3].map(i=>'64 bytes from '+h+': icmp_seq='+i+' ttl=64 time='+(8+Math.random()*20).toFixed(1)+' ms').join('\n')},
+ curl:()=>'{"service":"'+C.settings.title+'","status":"ok","projects":'+C.projects.length+'}',
+ man:a=>a[0]?'No manual entry for '+a[0]+'. Try: help':'What manual page do you want?',
+ cowsay:a=>{const m=a.join(' ')||'moo',b='-'.repeat(m.length+2);return ' '+b+'\n< '+m+' >\n '+b+'\n        \\   ^__^\n         \\  (oo)\\_______\n            (__)\\       )\\/\\\n                ||----w |\n                ||     ||'},
+ fortune:()=>['There are 10 types of people: those who understand binary and those who do not.','It works on my machine.','A bug is just an undocumented feature.','sudo make me a sandwich.'][Math.random()*4|0],
+ matrix:()=>{document.body.classList.toggle('hack');AC=document.body.classList.contains('hack')?'#19ff7a':C.settings.color;return 'wake up, neo...'},
+ top:()=>'PID  CMD             CPU\n 1   cs-sh          0.1\n 7   vision-worker   '+(20+Math.random()*30).toFixed(1)+'\n 9   rpa-bot         '+(5+Math.random()*10).toFixed(1)+'\n11   market-feed     '+(2+Math.random()*5).toFixed(1),
+ sudo:a=>a.join(' ')==='hire cs_code'?'[sudo] authenticating... OK\n'+L('بهترین تصمیم امروزت بود. فرم درخواست پروژه منتظر توست.','Best decision of your day. The request form is waiting.'):'guest is not in the sudoers file. This incident will be reported.',
+ rm:a=>a.join(' ').includes('-rf')?'nice try :)  permission denied':'rm: permission denied',
+ exit:()=>{$('logout').click();return''}};
+function run(raw){const line=raw.trim();out($('ps').textContent+' '+line,'#fff');if(!line)return;th.push(line);hi=th.length;
+ if(line==='clear'){$('to').textContent='';return}
+ const [c,...a]=line.split(/\s+/),cu=C.cmds.find(x=>x.n===c);let r;try{r=cu?cu.r:Object.prototype.hasOwnProperty.call(CMD,c)?CMD[c](a,line):null}catch(e){r='error: '+(e.message||e)}
+ if(r===null){const sg=sug(c);r={h:'<span style="color:#ff6b75">'+esc(c)+': '+L('دستور پیدا نشد','command not found')+'</span>'+(sg?' — '+L('منظورت ','did you mean ')+clk(sg)+'؟':'')+' · '+clk('help')}}
+ Promise.resolve(r).then(v=>{if(v&&v.h)outH(v.h);else if(v)out(v)}).catch(e=>out('error: '+(e&&e.message||e)))}
+$('ti').onkeydown=e=>{const i=e.target;if(e.key==='Enter'){const v=i.value;i.value='';run(v)}
+ else if(e.key==='ArrowUp'){e.preventDefault();if(hi>0)i.value=th[--hi]||''}
+ else if(e.key==='ArrowDown'){e.preventDefault();hi=Math.min(th.length,hi+1);i.value=th[hi]||''}
+ else if(e.key==='Tab'){e.preventDefault();const p=i.value.split(/\s+/),w=p.pop(),sl=w.lastIndexOf('/')+1,base=w.slice(0,sl),pre=w.slice(sl);
+  const n=p.length?node(rp(base||'.')):null,pool=p.length?(n&&typeof n==='object'?Object.keys(n):[]):[...Object.keys(CMD),...C.cmds.map(x=>x.n)],m=pool.filter(k=>k.startsWith(pre));
+  if(m.length===1){p.push(base+m[0]);i.value=p.join(' ')+(p.length===1?' ':'')}else if(m.length>1)out(m.join('  '))}
+ else if(e.ctrlKey&&e.key==='l'){e.preventDefault();$('to').textContent=''}};
+$('term').onclick=()=>$('ti').focus({preventScroll:true});
+$('chips').innerHTML=['help','ls','cat about.txt','tree','neofetch','stats','cal','fortune','hack'].map(c=>`<button class="btn sm ghost" data-c="${c}">${c}</button>`).join('');
+$('chips').onclick=e=>{const c=e.target.dataset.c;if(c)run(c)};
+
+
+
+/* terminal v3: many more commands, clickable help, did-you-mean, async commands + support inbox */
+Object.assign(T,{msgTeam:['💬 پیام به تیم (پاسخ می‌گیری)','💬 Message the team (get a reply)'],aiWait:['…','…'],aiOn:['🟢 متصل به هوش مصنوعی خودت — با حساب Claude خودت کار می‌کند (بار اول اجازه می‌پرسد)','🟢 Connected to your own AI — runs on your Claude account (asks permission on first message)'],aiOff:['🔴 هوش مصنوعی در دسترس نیست؛ پاسخ‌های ساده فعال است','🔴 AI unavailable — basic answers only'],h_req:['پیام به ما / درخواست پروژه','Message us / Request a project'],reqSend:['ارسال پیام','Send message'],reqDesc:['پیام یا پروژه‌ات را بنویس…','Write your message or project…'],reqOk:['پیام ارسال شد.','Message sent.']});
+const BOOT=Date.now(),DOC={},CAT={files:[],system:[],tools:[],site:[],support:[],fun:[]};
+const CATN={files:'📁 Files / فایل‌ها',system:'⚙️ System / سیستم',tools:'🧰 Tools / ابزار',site:'🌐 Site / سایت',support:'💬 Support / پشتیبانی',fun:'🎮 Fun / سرگرمی'};
+function outH(h){const d=document.createElement('div');d.innerHTML=h;$('to').appendChild(d);$('term').scrollTop=1e9}
+$('to').onclick=e=>{const c=e.target.dataset&&e.target.dataset.run;if(c){run(c);$('ti').focus({preventScroll:true})}};
+const doc=(cat,n,fa,en,usage)=>{DOC[n]=[fa,en,usage||n];CAT[cat].push(n)};
+const def=(cat,n,fa,en,fn,usage)=>{CMD[n]=fn;doc(cat,n,fa,en,usage)};
+[['files','ls','فایل‌ها را فهرست کن','list files','ls [-la] [dir]'],['files','cd','تغییر پوشه','change directory','cd <dir>'],['files','pwd','مسیر فعلی','print working directory'],['files','cat','نمایش فایل','print a file','cat <file>'],['files','tree','نمای درختی','directory tree'],
+ ['system','help','فهرست دستورها','list commands','help [cmd]'],['system','man','راهنمای دستور','manual for a command','man <cmd>'],['system','whoami','کاربر فعلی','current user'],['system','hostname','نام میزبان','host name'],['system','date','تاریخ و ساعت','date and time'],['system','uname','اطلاعات سیستم','system info'],['system','neofetch','خلاصه‌ی سیستم','system summary'],['system','history','تاریخچه','command history','history [-c]'],['system','top','فرایندها','processes'],
+ ['tools','git','git log / status','git log | git status','git log'],['tools','ping','پینگ','ping a host','ping <host>'],['tools','curl','درخواست HTTP (نمایشی)','HTTP request (demo)','curl <url>'],
+ ['site','open','رفتن به یک بخش','jump to a section','open <section>'],['site','theme','تغییر رنگ','change accent color','theme <red|green|blue|amber|purple|cyan|#hex>'],['site','lang','تغییر زبان','switch language'],['site','sound','صدای کلیدها','keyboard sounds','sound on|off'],['site','palette','پالت دستور','command palette'],['site','exit','خروج از حساب','log out'],
+ ['fun','cowsay','گاو سخنگو','talking cow','cowsay <text>'],['fun','fortune','جمله‌ی شانسی','random quip'],['fun','matrix','حالت ماتریکس','matrix mode'],['fun','sudo','سودو!','sudo (try: sudo hire cs_code)'],['fun','rm','حذف (ممنوع)','remove (denied)']].forEach(x=>doc(...x));
+function lev(a,b){const d=Array.from({length:a.length+1},(_,i)=>[i,...Array(b.length).fill(0)]);for(let j=1;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]}
+function sug(c){let b=null,bd=3;[...Object.keys(CMD),...C.cmds.map(x=>x.n)].forEach(k=>{const d=lev(c,k);if(d<bd){bd=d;b=k}});return b}
+function* walk(n,p){for(const k of Object.keys(n)){const v=n[k];if(typeof v==='object')yield* walk(v,p+k+'/');else yield [p+k,v]}}
+const rest=(line,c)=>line.replace(new RegExp('^'+c+'\\s*'),'').trim(),clk=n=>'<a data-run="'+n+'">'+n+'</a>';
+CMD.help=a=>a[0]?CMD.man(a):{h:'<b>'+L('دستورها — روی هر کدام کلیک کن؛ help &lt;cmd&gt; برای توضیح','Commands — click one; help &lt;cmd&gt; for details')+'</b><br>'+Object.keys(CAT).map(c=>'<span style="color:#fff">'+CATN[c]+'</span><br>&nbsp;&nbsp;'+CAT[c].map(clk).join('  ')).join('<br>')};
+CMD.man=a=>{const n=a[0];if(!n)return L('کدام دستور؟ مثال: man grep','Which command? e.g. man grep');const d=DOC[n];return d?n+' — '+L(d[0],d[1])+'\nusage: '+d[2]:'No manual entry for '+n};
+CMD.history=a=>{if(a[0]==='-c'){th.length=0;hi=0;return 'history cleared'}return th.map((c,i)=>(i+1)+'  '+c).join('\n')};
+const ENV=()=>({USER:session||'guest',HOME:'/home/cs_code',LANG:lang,SHELL:'/bin/cs-sh',THEME:AC,PWD:'/home/cs_code'+(cwd.length?'/'+cwd.join('/'):'')});
+CMD.echo=a=>a.join(' ').replace(/\$(\w+)/g,(m,k)=>ENV()[k]??'');CMD.whoami=()=>session||'guest';
+const ro=()=>'read-only filesystem (this is a showroom, not a server 😄)';
+def('files','head','چند خط اول','first lines','head [-n N] <file>',a=>{const i=a.indexOf('-n'),n=i>=0?+a[i+1]||10:10,f=a.filter((x,j)=>x[0]!=='-'&&j!==i+1)[0],v=f&&node(rp(f));return typeof v==='string'?v.split('\n').slice(0,n).join('\n'):'head: '+(f||'?')+': No such file'});
+def('files','tail','چند خط آخر','last lines','tail [-n N] <file>',a=>{const i=a.indexOf('-n'),n=i>=0?+a[i+1]||10:10,f=a.filter((x,j)=>x[0]!=='-'&&j!==i+1)[0],v=f&&node(rp(f));return typeof v==='string'?v.split('\n').slice(-n).join('\n'):'tail: '+(f||'?')+': No such file'});
+def('files','wc','شمارش خط و کلمه','count lines/words/chars','wc <file>',a=>{const v=a[0]&&node(rp(a[0]));return typeof v==='string'?v.split('\n').length+' lines  '+(v.trim().split(/\s+/).filter(Boolean).length)+' words  '+v.length+' chars  '+a[0]:'wc: '+(a[0]||'?')+': No such file'});
+def('files','grep','جستجوی متن در فایل‌ها','search text in files','grep <pattern> [file|dir]',a=>{if(!a[0])return 'usage: grep <pattern> [file|dir]';let re;try{re=new RegExp(a[0],'i')}catch(e){return 'grep: bad pattern'}const base=a[1]?rp(a[1]):cwd,nn=node(base);if(nn===undefined)return 'grep: '+a[1]+': No such file';
+ const fs=typeof nn==='string'?[[a[1],nn]]:[...walk(nn,base.length?base.join('/')+'/':'')],o=[];fs.forEach(([p,tx])=>tx.split('\n').forEach((l,i)=>{if(re.test(l))o.push(p+':'+(i+1)+': '+l)}));return o.join('\n')||'(no matches)'});
+def('files','find','پیدا کردن فایل','find files by name','find <name>',a=>{const q=(a[0]||'').toLowerCase();if(!q)return 'usage: find <name>';return [...walk(node([]),'')].map(x=>x[0]).filter(x=>x.toLowerCase().includes(q)).join('\n')||'(nothing found)'});
+def('files','file','نوع فایل','file type','file <name>',a=>{const v=a[0]&&node(rp(a[0]));return v===undefined?'file: '+(a[0]||'?')+': No such file':a[0]+': '+(typeof v==='object'?'directory':'UTF-8 text')});
+def('files','stat','جزئیات فایل','file details','stat <name>',a=>{const v=a[0]&&node(rp(a[0]));return v===undefined?'stat: '+(a[0]||'?')+': No such file':'File: '+a[0]+'\nType: '+(typeof v==='object'?'directory':'regular file')+'\nSize: '+(typeof v==='object'?Object.keys(v).length+' entries':v.length+' bytes')});
+['touch','mkdir','cp','mv'].forEach(n=>def('files',n,'فقط‌خواندنی','read-only',ro));
+def('system','uptime','مدت فعالیت','uptime','uptime',()=>{const m=(Date.now()-BOOT)/6e4|0;return new Date().toLocaleTimeString()+' up '+m+' min, 1 user, load average: 0.12, 0.08, 0.05'});
+def('system','free','حافظه','memory','free',()=>{const m=performance.memory;const u=m?Math.round(m.usedJSHeapSize/1048576):212,t2=m?Math.round(m.jsHeapSizeLimit/1048576):4096;return '              total   used   free\nMem(MB):   '+String(t2).padStart(7)+String(u).padStart(7)+String(t2-u).padStart(7)});
+def('system','df','فضای دیسک','disk usage','df',()=>'Filesystem   Size  Used  Avail  Use%\ncs-code:/     1.0G  312M   712M   31%');
+def('system','ps','فهرست پردازش‌ها','process list','ps',()=>'PID TTY   CMD\n  1 pts/0 cs-sh\n 42 pts/0 vision-worker\n 77 pts/0 rpa-bot\n 90 pts/0 market-feed');
+def('system','env','متغیرهای محیطی','environment','env',()=>Object.entries(ENV()).map(([k,v])=>k+'='+v).join('\n'));
+def('system','which','مسیر دستور','locate a command','which <cmd>',a=>CMD.hasOwnProperty(a[0])?'/usr/bin/'+a[0]:(a[0]||'?')+' not found');
+def('system','cal','تقویم ماه','calendar','cal',()=>{const d=new Date(),f=new Date(d.getFullYear(),d.getMonth(),1).getDay(),n=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();let s=d.toLocaleString('en-US',{month:'long',year:'numeric'}).padStart(16)+'\nSu Mo Tu We Th Fr Sa\n'+'   '.repeat(f);for(let i=1;i<=n;i++){s+=String(i).padStart(2)+(i===d.getDate()?'*':' ');if((f+i)%7===0)s+='\n'}return s});
+def('system','time','ساعت','current time','time',()=>new Date().toLocaleTimeString());
+function calcEval(src){const tk=src.replace(/\^/g,'**').match(/\d*\.?\d+(?:e[+-]?\d+)?|[a-z]+|\*\*|[-+*/%(),]/gi);if(!tk)throw 0;let i=0;const F={sqrt:Math.sqrt,sin:Math.sin,cos:Math.cos,tan:Math.tan,abs:Math.abs,log:Math.log,floor:Math.floor,ceil:Math.ceil,round:Math.round,pow:Math.pow,min:Math.min,max:Math.max},peek=()=>tk[i],eat=()=>tk[i++];
+ function prim(){const t=eat();if(t===undefined)throw 0;if(t==='('){const v=add();if(eat()!==')')throw 0;return v}if(t==='-')return -pw();if(t==='+')return pw();
+  if(/^[a-z]+$/i.test(t)){const n=t.toLowerCase();if(n==='pi')return Math.PI;if(n==='e')return Math.E;const f=F[n];if(!f||eat()!=='(')throw 0;const a=[];if(peek()!==')'){do{a.push(add())}while(peek()===','&&eat())}if(eat()!==')')throw 0;return f(...a)}
+  const v=parseFloat(t);if(isNaN(v))throw 0;return v}
+ function pw(){const b=prim();if(peek()==='**'){eat();return b**pw()}return b}
+ function mul(){let v=pw();while(['*','/','%'].includes(peek())){const o=eat(),r=pw();v=o==='*'?v*r:o==='/'?v/r:v%r}return v}
+ function add(){let v=mul();while(peek()==='+'||peek()==='-'){const o=eat(),r=mul();v=o==='+'?v+r:v-r}return v}
+ const r=add();if(i<tk.length)throw 0;return r}
+def('tools','calc','ماشین‌حساب (امن)','safe calculator','calc 2*(3+4)',(a,line)=>{try{return String(calcEval(rest(line,'calc')))}catch(x){return 'usage: calc <expression>  e.g. calc sqrt(16)+2^3'}});
+def('tools','js','اجرای جاوااسکریپت','run JavaScript (sandboxed)','js <code>',(a,line)=>{const c=rest(line,'js');return c?runJS(c).then(o=>o||'(no output)'):'usage: js console.log(2**10)'});
+def('tools','node','اجرای جاوااسکریپت','run JavaScript (alias of js)','node -e <code>',(a,line)=>CMD.js(a,'js '+line.replace(/^node\s+(-e\s+)?/,'')));
+def('tools','uuid','تولید UUID','generate UUIDs','uuid [n]',a=>TOOLS.UUID.f(a[0]||'1'));
+def('tools','rand','عدد تصادفی','random number','rand [max]',a=>String(Math.floor(Math.random()*(+a[0]||100))));
+def('tools','hash','هش SHA','SHA hashes','hash <text>',(a,line)=>TOOLS.Hash.f(rest(line,'hash')));
+def('tools','tool','اجرای ابزار جعبه‌ابزار','run a toolbox tool','tool <Name> <input>   (Regex: tool Regex text :: /pattern/)',(a,line)=>{const m=rest(line,'tool').match(/^(\S+)\s*([\s\S]*)$/);if(!m)return 'usage: tool <'+Object.keys(TOOLS).join('|')+'> <input>';const k=Object.keys(TOOLS).find(x=>x.toLowerCase()===m[1].toLowerCase());if(!k)return 'tool: unknown — '+Object.keys(TOOLS).join(', ');const [i1,i2]=m[2].split(' :: ');return Promise.resolve().then(()=>TOOLS[k].f(i1,i2||'')).catch(()=>'⚠ invalid input')});
+def('tools','tz','ساعت شهرهای جهان','world clock','tz [city]',a=>{const q=a.join(' ').toLowerCase(),P=allPts(),r=q?P.filter(x=>x.n.toLowerCase().includes(q)):['Tehran','London','New York','Tokyo','Sydney'].map(n=>P.find(x=>x.n===n)).filter(Boolean);return r.map(c=>(c.n+'            ').slice(0,13)+fmt(c.tz,{hour:'2-digit',minute:'2-digit',hour12:false})+'  UTC'+(tzOff(c.tz)>=0?'+':'-')+Math.abs(tzOff(c.tz)/60)).join('\n')||'tz: not found'});
+def('tools','npm','نصب بسته (نمایشی)','install packages (demo)','npm install <pkg>',()=>'added 1337 packages in 0.4s\n0 vulnerabilities (we hope)');
+def('tools','docker','کانتینرها (نمایشی)','containers (demo)','docker ps',()=>'CONTAINER ID  IMAGE         STATUS\na1b2c3d4e5f6  cs-code:web   Up 3 days');
+def('tools','ssh','اتصال (نمایشی)','connect (demo)','ssh <host>',()=>'Permission denied (publickey).');
+def('site','news','فهرست اخبار','list news','news',()=>C.news.map(n=>'• '+n.t+'  ('+n.d+')').join('\n')||t('noNews'));
+def('site','projects','فهرست پروژه‌ها','list projects','projects',()=>C.projects.map(p=>'• '+p.t+(p.g?'  ['+p.g+']':'')).join('\n')||t('noProj'));
+def('site','services','فهرست خدمات','list services','services',()=>C.services.map(x=>'• '+x.t).join('\n'));
+def('site','contact','راه‌های ارتباط','contact info','contact',()=>node(['contact.txt']));
+def('site','signup','رفتن به ثبت‌نام','jump to sign up','signup',()=>{$('join').scrollIntoView({behavior:'smooth'});return 'opening sign-up…'});
+def('site','stats','آمار و سطح من','my level and stats','stats',()=>{const d=xpd(),s=sts();return 'LV'+(Math.floor(Math.sqrt(d.xp/20))+1)+'  XP '+d.xp+'  streak '+d.st+'🔥\nbadges '+store.get('cs_bd',[]).length+'/'+BD.length+'\nlessons '+store.get('cs_ls',[]).length+'/10  tools '+(s.tools||0)+'  bugs '+(s.bugs||0)+'  pomodoros '+(s.pomo||0)});
+def('site','badges','نشان‌ها','badges','badges',()=>{const sb=store.get('cs_bd',[]);return BD.map(([k,n,ic,en,fa],i)=>(sb.includes(i)?'✅ ':'⬜ ')+ic+' '+L(fa,en)+'  ('+k+' ≥ '+n+')').join('\n')});
+def('site','pomodoro','تایمر تمرکز','focus timer','pomodoro start|pause|reset|status',a=>{const x=a[0]||'status';if(x==='start'&&!pm.run)$('pmg').click();else if(x==='pause'&&pm.run)$('pmg').click();else if(x==='reset')$('pmr').click();return (pm.w?'🍅 ':'☕ ')+String(pm.left/60|0).padStart(2,'0')+':'+String(pm.left%60).padStart(2,'0')+(pm.run?' running':' paused')});
+def('site','bg','سبک پس‌زمینه (فقط برای خودت)','background style (just for you)','bg <cyber|rain|grid|off>',a=>{if(!['cyber','rain','grid','off'].includes(a[0]))return 'usage: bg <cyber|rain|grid|off>';bgo=a[0];store.set('cs_bgo',a[0]);if(a[0]==='grid'||a[0]==='off')cx.clearRect(0,0,cv.width,cv.height);return 'background -> '+a[0]});
+def('site','reboot','نمایش دوباره‌ی بوت','replay boot screen','reboot',()=>{boot();return ''});
+def('site','signout','خروج از حساب','log out','signout',()=>{if(!session)return 'not logged in';$('logout').click();return 'logged out'});
+def('support','ai','سوال از هوش مصنوعی خودت','ask your own AI','ai <question>',(a,line)=>{const q=rest(line,'ai');if(!q)return 'usage: ai <question>';const d=document.createElement('div');$('to').appendChild(d);d.textContent='…';
+ (async()=>{try{const SM=await getSM();if(!SM)throw{code:'na'};const r=await SM('You are the Cs_Code terminal assistant running on the visitor\'s own Claude. Be concise (max 8 lines), plain text, no markdown. Reply in '+(lang==='fa'?'Persian':'English')+'.\n\nQuestion: '+q,{cache:false,onText:({text})=>{d.textContent=text;$('term').scrollTop=1e9}});d.textContent=r.text}catch(e){d.textContent=faq(q)}})();return ''});
+def('support','msg','پیام به تیم','message the team','msg <text>',(a,line)=>{const m=rest(line,'msg');if(!m)return 'usage: msg <text>';return sendMsg(m,session||'terminal',session||'','terminal').then(ok=>ok?L('✓ پیام ارسال شد. پاسخ را با دستور inbox ببین.','✓ sent. See replies with: inbox'):L('ارسال نشد (حساب فقط‌خواندنی). از فرم «پیام به ما» استفاده کن.','Could not send (read-only account). Use the Message-us form.'))});
+def('support','inbox','پیام‌ها و پاسخ‌های من','my messages and replies','inbox',()=>{subReplies();const l=store.get('cs_msgs',[]),r=new Map(myRep.map(x=>[x.id,x]));return l.map(m=>'> '+m.m+'\n'+(r.get(m.id)?'↩ '+r.get(m.id).m:'… '+L('در انتظار پاسخ','awaiting reply'))).join('\n\n')||L('هنوز پیامی نفرستادی. با msg <متن> بفرست.','No messages yet. Send one with: msg <text>')});
+def('support','support','باز کردن چت پشتیبانی','open the support chat','support',()=>{if($('chat').classList.contains('hide'))$('fab').click();return 'support chat opened'});
+def('fun','hack','هک نمایشی','fake hacking','hack',()=>{['[*] resolving target…','[*] bypassing firewall ████░░░░ 40%','[*] injecting payload ██████░░ 75%','[*] cracking hash ████████ 100%','[+] ACCESS GRANTED — just kidding 😄'].forEach((l,i)=>setTimeout(()=>out(l,i===4?'#19ff7a':undefined),i*600));return ''});
+def('fun','python','پایتون؟','python?','python',()=>'Python lives elsewhere — try: js console.log("hi")');
+
+/* support inbox: users message the team, admin replies; replies stream back */
+let myRep=[],repFirst=true,subDone=false;
+function renderThread(){const sent=store.get('cs_msgs',[]),rid=new Map(myRep.map(r=>[r.id,r])),used=new Set();
+ let h=sent.map(m=>{const r=rid.get(m.id);if(r)used.add(m.id);return `<div class="m u">${esc(m.m)}</div>`+(r?`<div class="m b"><b>${L('پشتیبانی','Support')}:</b> ${esc(r.m)}</div>`:`<small style="color:var(--mut)">${L('در انتظار پاسخ…','Awaiting reply…')}</small>`)}).join('');
+ h+=myRep.filter(r=>!used.has(r.id)).map(r=>`<div class="m u" style="opacity:.6">${esc(r.q||'')}</div><div class="m b"><b>${L('پشتیبانی','Support')}:</b> ${esc(r.m)}</div>`).join('');$('thr').innerHTML=h}
+async function subReplies(){if(!DB||!U||subDone)return;subDone=true;try{const uid=await U.id();DB.collection('replies').where('u','==',uid).onSnapshot(s=>{if(!repFirst)s.docChanges().forEach(c=>{if(c.type==='added')toast('💬 '+L('پاسخ جدید از پشتیبانی','New reply from support'))});repFirst=false;myRep=s.docs.map(d=>({id:d.id,...d.data()}));renderThread()},()=>{})}catch(e){subDone=false}}
+async function sendMsg(m,n,c,kind){let id=null;try{if(!DB||!U)throw 0;const uid=await U.id(),ref=await DB.collection('inbox').add({u:uid,n:(n||session||'guest').slice(0,60),c:(c||session||'').slice(0,80),m:m.slice(0,1500),t:Date.now(),k:kind||'form'});id=ref.id}catch(e){}
+ if(id){const l=store.get('cs_msgs',[]);l.unshift({id,m:m.slice(0,300),t:Date.now()});store.set('cs_msgs',l.slice(0,30));renderThread();subReplies();return true}return false}
+$('rs').onclick=async()=>{const n=$('rn').value.trim(),c=$('rc').value.trim(),m=$('rd').value.trim(),S=C.settings;if(!n||!c||!m)return toast(t('reqErr'));
+ if(await sendMsg(m,n,c,'form')){$('rn').value=$('rc').value=$('rd').value='';return toast(t('reqOk')+' '+L('پاسخ در همین بخش نمایش داده می‌شود.','Replies will appear in this section.'))}
+ const body=m+'\n\n— '+n+' / '+c,u=S.em?'mailto:'+S.em+'?subject='+encodeURIComponent(S.title+' message')+'&body='+encodeURIComponent(body):S.tg?'https://t.me/'+encodeURIComponent(S.tg)+'?text='+encodeURIComponent(body):'';
+ if(!u)return toast(L('ارسال مستقیم ممکن نشد و راه ارتباطی تنظیم نشده است.','Could not send directly and no contact channel is set.'));
+ const l=document.createElement('a');l.href=u;l.target='_blank';l.rel='noopener';document.body.appendChild(l);l.click();l.remove();toast(L('حساب شما اجازه‌ی ارسال مستقیم ندارد؛ ایمیل/تلگرام باز شد.','Your account cannot post directly; opening email/Telegram instead.'))};
+$('cmsg').onclick=()=>{$('chat').classList.add('hide');$('req').scrollIntoView({behavior:'smooth'});setTimeout(()=>$('rd').focus({preventScroll:true}),600)};
+async function chatStatus(){$('cst').textContent=t('aiWait');const SM=await getSM();$('cst').textContent=SM?t('aiOn'):t('aiOff')}
+/* admin inbox */
+async function inboxBadge(){try{const [a,b]=await Promise.all([DB.collection('inbox').get(),DB.collection('replies').get()]),rep=new Set(b.docs.map(d=>d.id)),n=a.docs.filter(d=>!rep.has(d.id)).length;if(n)$('adminBtn').dataset.n=n;else delete $('adminBtn').dataset.n}catch(e){}}
+async function loadInbox(){const box=$('reqList');let a=[];const rp=new Map();
+ try{if(!DB)throw 0;const [x,y]=await Promise.all([DB.collection('inbox').orderBy('t','desc').limit(100).get(),DB.collection('replies').get()]);a=x.docs.map(d=>({id:d.id,...d.data()}));y.docs.forEach(d=>rp.set(d.id,d.data()))}catch(e){box.textContent=L('صندوق پیام فقط با دیتابیس مشترک کار می‌کند.','The inbox needs the shared database.');return}
+ box.innerHTML=a.map(m=>{const r=rp.get(m.id);return `<div class="card" data-mid="${esc(m.id)}" data-u="${esc(m.u||'')}" style="margin-bottom:.8rem"><b>${esc(m.n||'—')}</b> · <span class="ltr">${esc(m.c||'')}</span> · <small>${new Date(m.t||0).toLocaleString()}</small> ${r?'✅':'🆕'}<p style="white-space:pre-wrap">${esc(m.m)}</p>${r?`<div class="m b"><b>↩</b> ${esc(r.m)}</div>`:''}<textarea rows="2" placeholder="پاسخ / Reply"></textarea><button class="btn sm" data-rp="1">${r?'ویرایش پاسخ / Update reply':'ارسال پاسخ / Send reply'}</button> <button class="btn sm ghost" data-md="1">×</button></div>`}).join('')||L('پیامی نیست.','No messages.');inboxBadge()}
+$('reqList').onclick=async e=>{const c=e.target.closest('[data-mid]');if(!c)return;const id=c.dataset.mid;
+ if(e.target.dataset.rp){const tx=c.querySelector('textarea').value.trim();if(!tx)return;try{const msg=(await DB.collection('inbox').doc(id).get()).data()||{};await DB.collection('replies').doc(id).set({u:c.dataset.u,q:String(msg.m||'').slice(0,200),m:tx,t:Date.now()});toast(t('saved'));loadInbox()}catch(er){toast('Error: '+(er.code||''))}}
+ else if(e.target.dataset.md){try{await DB.collection('inbox').doc(id).delete();await DB.collection('replies').doc(id).delete()}catch(er){}loadInbox()}};
+welcome();
+function welcome(){outH('<span style="color:#fff">Cs_Code terminal</span> — '+L('سایت را مثل یک سیستم واقعی بگرد.','explore this site like a real system.')+'<br>'+L('شروع سریع: ','Quick start: ')+['help','ls','cat about.txt','neofetch','stats'].map(clk).join(' · ')+'<br><small>'+L('روی هر دستور کلیک کن · Tab = تکمیل · ↑↓ = تاریخچه · Ctrl+L = پاک کردن','Click any command · Tab = autocomplete · ↑↓ = history · Ctrl+L = clear')+'</small>')}
+
+/* chat: real AI via sample, with an offline FAQ fallback */
+Object.assign(T,{h_blog:['آکادمی','Academy'],h_play:['زمین بازی کد','Code playground'],h_globe:['شبکه‌ی جهانی','Global network'],h_est:['تخمین پروژه با هوش مصنوعی','AI project estimate'],h_game:['شکارچی باگ','Bug hunter'],h_wall:['دیوار هکرها','Hacker wall'],estPh:['پروژه‌ات را توضیح بده...','Describe your project...'],estBtn:['تخمین بزن','Estimate'],gStart:['شروع (۳۰ ثانیه)','Start (30s)'],wnPh:['نام مستعار','Nickname'],wmPh:['یک خط بنویس...','Write a line...'],wBtn:['ارسال','Post'],noPost:['هنوز مطلبی نیست.','No posts yet.'],palPh:['جستجو یا اجرای دستور...','Search or run a command...'],bootSkip:['برای رد کردن کلیک کنید','click to skip']});
+let hist=[],SMp=null;
+function add(c,x){const d=document.createElement('div');d.className='m '+c;d.textContent=x;$('cm').appendChild(d);$('cm').scrollTop=1e9;return d}
+const getSM=()=>SMp||(SMp=(window.claude?claude.use('sample'):Promise.resolve(null)).catch(()=>null));
+function faq(q){const s=C.settings,m=[[/خدمت|service|what do you|چه کار/i,C.services.map(x=>'• '+x.t).join('\n')],[/ثبت|sign|account|حساب/i,L('از صفحه‌ی ورود با شماره موبایل و کد تأیید ثبت‌نام کنید.','Sign up from the entry page with your phone number and the code.')],[/درخواست|request|price|قیمت|هزینه|cost|hire/i,L('از بخش «تخمین پروژه» یا فرم «درخواست پروژه» استفاده کنید.','Use the AI estimate or the "Request a project" form.')],[/ترمینال|terminal|command|دستور/i,L('در بخش ترمینال بنویسید help.','Open the terminal section and type help.')],[/تماس|contact|email|ایمیل|telegram|تلگرام/i,[s.em,s.tg&&'@'+s.tg].filter(Boolean).join(' · ')||L('از فرم درخواست استفاده کنید.','Use the request form.')]],h=m.find(x=>x[0].test(q));
+ return h?h[1]:L('الان هوش مصنوعی در دسترس نیست. درباره‌ی خدمات، ثبت‌نام، قیمت یا تماس می‌تونم کمک کنم.','AI is offline right now. I can still help with services, sign-up, pricing or contact.')}
+async function ask(q){add('u',q);const b=add('b',t('chatWait'));hist.push('User: '+q);
+ try{const SM=await getSM();if(!SM)throw{code:'na'};const s=C.settings;
+  const p=`You are the support assistant on the website of "${s.title}", a programming and automation studio. Services: ${C.services.map(x=>x.t).join(', ')}. Published projects: ${C.projects.map(x=>x.t).join(', ')||'none yet'}. Help with programming questions, technical guidance and how to use the site (sign-up, project estimate, request form, terminal commands, playground, bug-hunt game, Ctrl+K palette). Stay on programming, AI, automation and this site; politely decline unrelated topics. Reply in the user's language, be concise, put code in fenced blocks.\n\nConversation:\n${hist.slice(-12).join('\n')}\nAssistant:`;
+  const r=await SM(p,{cache:false,onText:({text})=>{b.textContent=text;$('cm').scrollTop=1e9}});b.textContent=r.text||faq(q);hist.push('Assistant: '+b.textContent)}
+ catch(e){hist.pop();const c=e&&e.code;SMp=null;b.textContent=c==='not_granted'?L('اجازه‌ی هوش مصنوعی داده نشد. دوباره بفرستید و تأیید کنید.','Permission not granted. Send again and approve the prompt.'):c==='rate_limited'?L('درخواست‌ها زیاد است؛ چند ثانیه بعد دوباره امتحان کنید.','Too many requests, try again shortly.'):faq(q)}}
+const send=()=>{const v=$('ci').value.trim();if(!v)return;$('ci').value='';ask(v)};
+$('fab').onclick=()=>{const c=$('chat');c.classList.toggle('hide');if(!c.classList.contains('hide')){if(!$('cm').children.length)add('b',t('chatHi'));chatStatus()}};
+$('cs').onclick=send;$('ci').onkeydown=e=>{if(e.key==='Enter')send()};
+
+/* boot screen */
+const BL=['CS_CODE BIOS v1.0','Checking memory.......... OK','Loading vision-core....... OK','Loading rpa-engine........ OK','Connecting market-feed.... OK','Mounting /home/cs_code.... OK','Welcome, guest.'];
+let booted=false;
+function bootOnce(){if(booted)return;booted=true;try{if(sessionStorage.getItem('cs_b'))return;sessionStorage.setItem('cs_b','1')}catch(e){}boot()}
+function boot(){if(RM)return;const o=$('boot'),p=$('bootp');o.classList.remove('hide');p.textContent='';let i=0,done=false;const end=()=>{if(done)return;done=true;o.style.opacity=0;setTimeout(()=>{o.classList.add('hide');o.style.opacity=1},400)};o.onclick=end;(function n(){if(done)return;if(i<BL.length){p.textContent+=BL[i++]+'\n';setTimeout(n,230)}else setTimeout(end,500)})()}
+
+/* keyboard sounds */
+let snd=false,ac=null;
+function click(){if(!snd)return;try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.type='square';o.frequency.value=600+Math.random()*300;g.gain.value=.03;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+.025)}catch(e){}}
+$('ti').addEventListener('keydown',click);
+CMD.sound=a=>{snd=a[0]!=='off';return 'sound '+(snd?'on':'off')};CMD.palette=()=>{openPal();return''};
+Object.assign(SEC,{blog:'blog',play:'play',globe:'globe',estimate:'est',game:'game',wall:'wall',tools:'tools',roi:'roi',typing:'typing',quiz:'quiz',lessons:'lessons',bug:'bugs',review:'review',pomodoro:'pomo',vault:'vault',resume:'resume',badges:'badges'});
+$('chips').insertAdjacentHTML('beforeend','<button class="btn sm ghost" data-c="sound on">🔊</button>');
+
+/* command palette (Ctrl+K or /) */
+let pi=0,pl=[];
+const items=()=>[...[['about','n_about'],['services','n_serv'],['projects','n_proj'],['terminal','n_term'],['tools','h_tools'],['roi','h_roi'],['typing','h_type'],['quiz','h_quiz'],['lessons','h_less'],['bugs','h_bug'],['review','h_rev'],['pomo','h_pomo'],['vault','h_vault'],['resume','h_res'],['badges','h_badge'],['blog','h_blog'],['play','h_play'],['globe','h_globe'],['est','h_est'],['game','h_game'],['wall','h_wall'],['news','n_news'],['req','h_req']].map(([id,k])=>({l:'→ '+t(k),f:()=>$(id).scrollIntoView({behavior:'smooth'})})),{l:'🌐 EN / FA',f:setLang},{l:'🤖 AI',f:()=>$('fab').click()},{l:'💻 matrix',f:()=>CMD.matrix()},{l:'⏻ boot',f:boot}];
+function drawPal(){const q=$('pq').value.toLowerCase();pl=items().filter(x=>x.l.toLowerCase().includes(q));pi=Math.min(pi,Math.max(0,pl.length-1));$('pr').innerHTML=pl.map((x,i)=>`<div class="pi2${i===pi?' on':''}" data-i="${i}">${x.l}</div>`).join('')}
+function openPal(){$('pal').classList.remove('hide');$('pq').value='';pi=0;drawPal();$('pq').focus()}
+const closePal=()=>$('pal').classList.add('hide');
+function runPal(i){const x=pl[i];closePal();if(x)x.f()}
+$('pq').oninput=()=>{pi=0;drawPal()};$('pr').onclick=e=>{const i=e.target.dataset.i;if(i!=null)runPal(+i)};$('pal').onclick=e=>{if(e.target===$('pal'))closePal()};$('pk').onclick=openPal;
+$('pq').onkeydown=e=>{if(e.key==='Escape')closePal();else if(e.key==='Enter')runPal(pi);else if(e.key==='ArrowDown'){e.preventDefault();pi=Math.min(pl.length-1,pi+1);drawPal()}else if(e.key==='ArrowUp'){e.preventDefault();pi=Math.max(0,pi-1);drawPal()}};
+addEventListener('keydown',e=>{if($('site').classList.contains('hide'))return;if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openPal()}else if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){e.preventDefault();openPal()}});
+
+/* playground: sandboxed iframe */
+$('pgr').onclick=()=>{const o=$('pgo');o.textContent='';const f=document.createElement('iframe');f.sandbox='allow-scripts';f.hidden=true;
+ const h=m=>{if(m.source===f.contentWindow&&m.data&&typeof m.data.pg==='string'){o.textContent+=m.data.pg+'\n'}};addEventListener('message',h);
+ f.srcdoc='<script>const L=(...a)=>parent.postMessage({pg:a.map(x=>typeof x==="object"?JSON.stringify(x):String(x)).join(" ")},"*");console.log=L;console.error=L;try{'+$('pgc').value.replace(/<\/script/gi,'<\\/script')+'}catch(e){L("Error: "+e.message)}<\/script>';
+ document.body.appendChild(f);setTimeout(()=>{removeEventListener('message',h);f.remove();if(!o.textContent)o.textContent='(no output)'},2500)};
+
+/* academy blog with code highlighting */
+function hl(c){let o='',i=0;c.replace(/(#.*|\/\/.*)|('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")|\b(def|class|return|import|from|if|else|elif|for|while|const|let|var|function|print|in|True|False|None|async|await)\b|(\b\d+\b)/g,(m,cm,st,kw,nu,ix)=>{o+=esc(c.slice(i,ix))+'<span class="'+(cm?'hc':st?'hs':kw?'hk':'hn')+'">'+esc(m)+'</span>';i=ix+m.length;return m});return o+esc(c.slice(i))}
+const md=s=>s.split(/```[\w-]*\n?([\s\S]*?)```/).map((p,i)=>i%2?`<pre class="pc">${hl(p)}</pre>`:esc(p).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\n/g,'<br>')).join('');
+function renderY(){
+ $('blogList').innerHTML=C.posts.length?C.posts.map((p,i)=>`<div class="card rv" data-post="${i}" style="cursor:pointer"><h3 style="font-family:Lalezar,Vazirmatn;direction:rtl;text-align:start;font-weight:400;font-size:1.15rem">${esc(p.t)}</h3><p>${esc(p.b.replace(/```[\s\S]*?```/g,'').slice(0,110))}…</p><small>${esc(p.d)}</small></div>`).join(''):`<p>${t('noPost')}</p>`;
+ $('adminPost').innerHTML=C.posts.map((p,i)=>`<div class="row"><span>${esc(p.t)}</span><button class="btn sm ghost" data-dpo="${i}">×</button></div>`).join('')}
+$('blogList').onclick=e=>{const c=e.target.closest('[data-post]');if(!c)return;const p=C.posts[+c.dataset.post];$('ovb').innerHTML='<h3 style="margin-top:0">'+esc(p.t)+'</h3>'+md(p.b);$('ov').classList.remove('hide')};
+$('ovx').onclick=()=>$('ov').classList.add('hide');$('ov').onclick=e=>{if(e.target===$('ov'))$('ov').classList.add('hide')};
+$('addPost').onclick=async()=>{const a=$('bl_t').value.trim(),b=$('bl_b').value.trim();if(!a||!b)return;C.posts.unshift({t:a,b,d:new Date().toLocaleDateString(lang==='fa'?'fa-IR':'en-US')});$('bl_t').value=$('bl_b').value='';await saveC();renderAll();toast(t('saved'))};
+$('adminPost').onclick=async e=>{const i=e.target.dataset.dpo;if(i==null)return;C.posts.splice(+i,1);await saveC();renderAll()};
+
+/* practical globe: world clock, day/night terminator, meeting planner, custom locations */
+Object.assign(T,{h_globe:['نقشه‌ی زمان جهانی','World time map'],gPh:['جستجوی شهر…','Search a city…'],gMe:['موقعیت من','My location'],gCmp:['مقایسه‌ی دو شهر','Compare two cities']});
+const CITIES=[['Tehran',35.69,51.39,'Asia/Tehran'],['Baku',40.41,49.87,'Asia/Baku'],['Istanbul',41.01,28.98,'Europe/Istanbul'],['Dubai',25.2,55.27,'Asia/Dubai'],['Moscow',55.75,37.62,'Europe/Moscow'],['London',51.51,-.13,'Europe/London'],['Paris',48.86,2.35,'Europe/Paris'],['Berlin',52.52,13.4,'Europe/Berlin'],['Cairo',30.04,31.24,'Africa/Cairo'],['Lagos',6.52,3.38,'Africa/Lagos'],['Johannesburg',-26.2,28.05,'Africa/Johannesburg'],['Mumbai',19.08,72.88,'Asia/Kolkata'],['Singapore',1.35,103.82,'Asia/Singapore'],['Shanghai',31.23,121.47,'Asia/Shanghai'],['Seoul',37.57,126.98,'Asia/Seoul'],['Tokyo',35.68,139.69,'Asia/Tokyo'],['Sydney',-33.87,151.21,'Australia/Sydney'],['Auckland',-36.85,174.76,'Pacific/Auckland'],['Los Angeles',34.05,-118.24,'America/Los_Angeles'],['Chicago',41.88,-87.63,'America/Chicago'],['New York',40.71,-74.01,'America/New_York'],['Toronto',43.65,-79.38,'America/Toronto'],['Mexico City',19.43,-99.13,'America/Mexico_City'],['Sao Paulo',-23.55,-46.63,'America/Sao_Paulo']].map(([n,la,lo,tz])=>({n,la:la*Math.PI/180,lo:lo*Math.PI/180,tz}));
+const allPts=()=>[...CITIES,...C.locs.map(x=>({n:x.n,la:x.la*Math.PI/180,lo:x.lo*Math.PI/180,tz:x.tz,nt:x.nt,own:1}))];
+const tzOff=tz=>{const d=new Date(),p=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric'}).formatToParts(d).map(x=>[x.type,x.value]));return (Date.UTC(p.year,p.month-1,p.day,p.hour,p.minute,p.second)-Math.floor(d/1000)*1000)/6e4};
+const hm=m=>{m=((Math.round(m)%1440)+1440)%1440;return String(m/60|0).padStart(2,'0')+':'+String(m%60).padStart(2,'0')};
+const fmt=(tz,o)=>new Intl.DateTimeFormat(lang==='fa'?'fa-IR':'en-GB',Object.assign({timeZone:tz},o)).format(new Date());
+const GL=$('glc'),GX=GL.getContext('2d');let gRot=0,gTilt=.4,gZ=1,gSel=null,gCmpOn=false,gCmpA=null,gAuto=true,gDrag=false,gMoved=0,gLast=[0,0],gFly=null,gPts=[],gv=false;
+const gp=(la,lo)=>{const l=lo+gRot,x=Math.cos(la)*Math.sin(l),y=Math.sin(la),z=Math.cos(la)*Math.cos(l);return[x,y*Math.cos(gTilt)-z*Math.sin(gTilt),y*Math.sin(gTilt)+z*Math.cos(gTilt)]};
+function sun(){const d=new Date(),doy=(d-Date.UTC(d.getUTCFullYear(),0,0))/864e5;return[-23.44*Math.cos(2*Math.PI*(doy+10)/365)*Math.PI/180,-(d.getUTCHours()+d.getUTCMinutes()/60-12)*15*Math.PI/180]}
+/* Earth: simplified continent outlines (lon,lat pairs, hand-digitised, ~100 km accuracy). With the zip build you can drop a Natural Earth GeoJSON at public/data/land.geojson for exact shapes. */
+const RAW_LAND=[
+[-5.9,35.8,-2,35.1,-0.6,35.7,3,36.8,10.2,37.2,11,37,10.1,33.9,13.2,32.9,15,32.4,19,30.3,20,32.1,24,32,29.9,31.2,32.3,31.3,32.6,30,33.9,27.3,35.5,24,37.2,19.6,39.5,15.6,43.1,11.6,51.3,11.8,51,10.4,45.3,2,39.7,-4,39.3,-6.8,40.5,-11,40.6,-15,34.9,-19.8,32.6,-26,31,-29.9,25.6,-34,20,-34.8,18.4,-34,17.9,-32,14.5,-22.9,11.8,-17.2,13.2,-8.8,12.2,-6,9.5,-1,9.5,3.8,6,4.3,3.4,6.4,0,5.6,-4,5.2,-7.5,4.4,-13.2,8.4,-13.7,9.5,-15.6,11.9,-17.5,14.7,-16.5,19,-17,20.9,-15,23.7,-13.2,27.1,-9.6,30.4,-7.6,33.6],
+[-5.4,36.1,-6.3,36.5,-7.4,37.2,-9,37,-9.4,38.7,-8.7,41.1,-9.3,43,-8,43.7,-3,43.4,-1.5,43.4,-1.2,45.5,-4.7,48.4,-1.5,48.7,-1.6,49.7,1.5,50.5,3.2,51.4,4.5,52.8,6.8,53.5,8.5,55,8.1,56.8,10.6,57.7,10.5,56.2,9.8,54.8,11,54,14,54,18.5,54.7,21,55,21,56,21.5,57.5,24,57,24.5,58.4,24.8,59.4,30.3,59.9,28,60.5,25,60.2,22,60.4,21.5,61.5,21.4,63,25.4,65,24.1,65.8,22,65.5,20.3,63.8,17.5,62.5,17.3,60.7,18.9,59.3,16.5,57,16,56.2,13,55.5,11.9,57.7,10.7,59.9,8,58,5.5,58.9,5.3,60.4,6.5,62.5,10.4,63.4,14,67,16,68.5,19,70,25.8,71.1,30,70,33,69.3,41,66.5,44,66.2,44,68.5,54,68.5,68,69,68,72,80,73,90,75.5,104,77.7,113,74,127,73.5,140,72.5,160,70,170,70,180,68.9,190,66.1,187,64.5,179.5,62.3,172,61,163,59.7,162,56,160,53,156.7,50.9,155.6,55,156.5,57.5,153,59.3,143,59.4,140,57.8,137,54.5,140.5,52,140.3,48.5,138,46,135,43.3,131.9,43.1,129.5,41,129.4,37,129,35.1,126.5,34.5,126.5,37.3,125,39.5,124.4,39.9,121.6,38.9,121.8,40.9,119.3,39.9,117.7,38.9,118.9,37.4,122.5,37.2,120.3,36,119.3,35.1,121.9,30.9,122,29.5,120.5,27,119.6,26,117.5,23.6,114.2,22.3,110.5,21.2,108.5,21.6,107,20.8,105.8,19,107.6,16.4,108.2,16,109.3,13.2,109.2,11.5,106.8,10.3,104.8,8.6,104.8,10.4,103,11.4,102.3,12.2,100.9,13.4,99.9,12,99.2,10,100.3,8,101.5,6.8,102.5,6.2,103.4,4,103.4,2.4,104.2,1.4,103.5,1.3,102.2,2.2,101.3,3,100.4,5.3,98.5,8.3,98.3,10,98.6,12.5,97.6,16.5,96.2,16.5,94.2,16,94.4,18.5,92.3,20.8,91.8,22.3,89,21.8,88.3,21.5,86.8,20.5,83.3,17.7,80.3,13,79.8,10.3,77.5,8.1,76.2,9.9,73.8,15.5,72.8,19,72.6,21,70.3,20.7,69,22.2,68.5,23.4,67,24.8,62,25.2,57.5,25.7,56.5,27,54.5,26.7,51.5,27.9,50.8,29,48.7,30,48,29.4,49.5,27,51.2,26,51.6,25.3,52,24.1,54.4,24.4,56.4,26.2,56.8,24.6,58.6,23.6,59.8,22.5,58.5,20.5,57.7,19,54,17,52,15.6,49,14.8,45,12.8,43.3,12.7,42.8,15.5,42.5,16.9,39.2,21.5,37,25.5,35,28,34.9,29.5,34.6,28.1,34.25,27.75,33.5,28.3,32.6,29.9,32.35,31.25,34.3,31.4,35,32.8,35.5,33.9,35.9,35.5,36.2,36.7,34.5,36.8,30.7,36.9,27.5,36.7,27,38.4,26.2,40,26,40.8,24,40.8,23,40.6,23.7,38.5,24,37.9,22.8,36.5,22.4,36.4,21.5,36.8,21,38.3,20.2,39.7,19.4,41.8,19,42.2,18.1,42.6,15.9,43.5,13.9,44.9,13.7,45.6,12.3,45.4,13.5,43.6,16.1,41.9,16.9,41.1,18.5,40.1,17,39.1,16.6,38,15.65,38,15.7,40,14.3,40.8,12.2,41.8,10.3,43.5,8.9,44.4,7.3,43.7,5.4,43.3,3.5,43.4,3,42.2,2.2,41.4,0.9,40.7,-0.3,39.5,0.2,38.7,-1,37.6,-2.5,36.8,-4.4,36.7],
+[-168,65.6,-166,68.3,-163,69.7,-156.5,71.3,-141,69.7,-135,69,-128,70,-115,68,-108,68,-95,70,-94.5,72,-91,69,-86,68,-83,68,-86,66,-90,64,-94.2,58.8,-92.5,57,-88,56.5,-82.3,55,-82,52.9,-80.5,51.3,-79,52.5,-78.8,54.5,-77,56.5,-77.5,59,-78,62.3,-73,62.4,-70,61,-68,58.5,-65,60.2,-62,57.5,-61.5,56.4,-58,54.5,-56,52.5,-55.7,51.5,-60,50.3,-66,50.2,-64,49.2,-64.8,48,-65,46.9,-64.3,46,-61,45.7,-60,46.3,-60.5,45.5,-63.5,44.6,-66,43.6,-67,44.5,-70.2,43.6,-70.9,42.3,-70,41.8,-71.5,41.4,-74,40.5,-74,39.5,-75,38.5,-76,37,-75.5,35.2,-77,34.5,-79.9,32.7,-81,31.9,-81.3,30.3,-80.5,28.5,-80.1,25.8,-81,25.1,-82.2,26.5,-82.7,27.8,-83.7,29.9,-85.3,29.7,-88,30.3,-89.3,29,-91,29.3,-94.8,29.3,-97.1,27.8,-97.2,25.9,-97.8,22.2,-96.1,19.2,-94.7,18.2,-90.5,19.8,-90.5,21,-87,21.5,-87.5,19.5,-88.2,17.5,-87,15.8,-83.3,15,-83.5,12,-83.6,10.9,-83,9.5,-81,9,-79.5,9.5,-77.5,8.7,-79.5,8.9,-80.9,7.3,-83,8.3,-85.7,10,-87.5,12.8,-90.5,13.9,-93.5,15.9,-99.9,16.8,-105.5,19.7,-106.4,23.2,-109.5,25.5,-111,27.9,-114.7,31.7,-114.5,30,-112.3,28.8,-111,26,-110.3,24.2,-109.7,22.9,-112,25,-114.5,27.8,-115.8,30,-116.6,31.9,-117.2,32.7,-118.4,33.8,-120.5,34.5,-121.9,36.6,-122.5,37.8,-124.4,40.4,-124,43,-124,46.2,-124.7,48.4,-123.2,49.3,-125,50,-130,54,-134,57,-137,58.5,-141,60,-146,60.8,-151,59.5,-153,59,-157,56.5,-162,55.2,-164.5,54.8,-158,58.7,-162,59.9,-165,61.5,-161,64.5,-166,65.5],
+[-77.4,8.7,-76,9.5,-75.5,10.4,-73,11.5,-71.5,12.4,-71.2,11.8,-69.5,11.5,-67,10.6,-64,10.5,-62,10.7,-60.8,8.6,-58,6.8,-55,5.8,-52,4.8,-50,1.5,-49,0,-47,-0.9,-44,-2.5,-38.5,-3.7,-35,-5.2,-34.9,-8,-38.5,-13,-39,-17.8,-43,-23,-46.3,-24,-48.5,-27.6,-50,-30.5,-56.2,-34.9,-58.4,-34.5,-62,-39,-63.5,-42.5,-65.5,-45,-67.5,-46,-68.3,-50,-69,-51.6,-68.3,-52.5,-66,-55,-67.2,-55.9,-71,-54.8,-74.5,-52,-75.5,-48,-73.8,-44,-73.5,-41,-73.4,-39.8,-73.1,-36.8,-71.6,-33,-71.5,-30,-70.4,-26,-70.2,-22,-70.3,-18.5,-72,-17,-76.2,-14,-77.1,-12,-79,-7.5,-81.2,-5.8,-81.2,-4.2,-80,-2.5,-80.5,-0.5,-79,1.5,-77.2,3.8,-77.4,6.5],
+[-180,-78,-150,-77,-120,-74,-90,-72,-70,-68,-60,-64,-57,-63,-60,-72,-30,-75,0,-70,30,-69,60,-67,90,-66,120,-66,150,-70,180,-78,180,-90,-180,-90],
+[-73,78.4,-60,81.5,-40,83.5,-20,82,-18,80,-20,76,-22,72,-26,70,-32,68,-38,65.5,-42,62,-44,60,-48,61,-51,64,-54,67,-55,70,-60,76,-67,76.5],
+[-24,65.5,-22,66.4,-16,66.5,-13.5,65,-15,64.3,-19,63.4,-22.7,63.9,-22,64.6],
+[-5.6,50,-3,50.6,1.3,51.2,1.7,52.7,0,53.5,-1.5,55,-2,56,-2.5,57.5,-3.5,58.6,-5,58.6,-6,57.5,-5.5,56,-5,55,-3,54.8,-3,53.4,-4.5,53.3,-4.2,52.2,-5.2,51.7,-3,51.4,-4.2,51],
+[-10,52,-9.5,54,-8,55.3,-6,55.2,-6,53.5,-6.3,52.2,-8.5,51.6],
+[130.9,34,132.5,35.5,135.5,35.7,137,37,139.5,38.5,140,40.7,141.5,41.4,141.5,38.5,140.8,36,139.8,35,137,34.6,135.2,33.7,133,34],
+[140,41.5,140.5,43.2,141.5,45.4,145.5,43.3,143,42,141,41.8],
+[129.8,33,131,33.9,131.9,32.8,131,31.2,130.2,31.3,129.8,32.7],
+[95.3,5.6,98,4,100.5,2,103,0.5,104.5,-1.5,105.8,-4,104.5,-5.9,102,-4,100,-1.5,98.7,1.5,97,3.5],
+[109,1.5,111,1.7,113,3.2,116,6.9,119,5.3,117.7,1,116.5,-1.5,116,-3.8,113,-3.3,110.3,-2.9,109,-0.5],
+[105.2,-6.8,108,-6.3,111,-6.5,114.5,-7.8,114,-8.7,108,-7.8,105.5,-6.9],
+[119.4,-5.5,119.5,-3,118.9,-1,119.8,0.8,120.5,1.2,124.9,1.5,122,0.3,120.6,-0.8,122.6,-1.3,123.3,-4.5,121.5,-4.2,121.5,-2.8,120.8,-5.5],
+[131,-0.9,134,-0.8,138,-1.7,141,-2.6,145,-4.3,147.5,-6.1,150.5,-10.3,147,-10,143.5,-8.5,141,-9.1,138,-8.3,137.8,-5.5,134,-3.5,132.5,-2.8],
+[120.4,18.5,122.2,18.5,121.8,16,122,14.2,124,12.8,122.3,13.5,120.6,14,119.9,16],
+[122,7,123.6,8.5,125.5,9.8,126.5,7.5,125.5,5.7,124,6.2],
+[120.1,23,121.9,25.1,121.5,23,120.8,21.9],
+[79.8,9.5,81.8,7.5,81.2,6.2,80,6],
+[113.2,-22,114.2,-26,115,-33.5,118,-35,123.5,-34,129,-31.6,131.5,-31.5,134,-32.7,137.5,-33,138,-35.6,139.7,-36.8,141,-38.3,144.9,-37.9,146.3,-39,149.9,-37.5,151.2,-33.9,153.1,-30.5,153.5,-28,153,-25.5,150.8,-22.8,149,-20.3,146.2,-18.9,145.4,-15,143.5,-14,142.5,-10.7,141.6,-13,140.8,-17.5,139,-17,136.7,-15.8,136.8,-12,132.5,-11.3,130.8,-12.4,129.5,-14.9,126.5,-14.2,125,-15.3,122.2,-17.5,121,-19.6,118.5,-20.4,116,-20.7],
+[144.7,-40.7,148.3,-40.9,148,-43,146,-43.6,145.2,-42],
+[172.7,-34.4,175,-36.5,178.5,-37.7,177,-39.3,175.2,-41.6,174.7,-39.3,173.8,-39.2,174.8,-37],
+[172.7,-40.5,174.3,-41.7,173,-43.9,171.2,-44.3,170.7,-45.9,168.4,-46.6,166.5,-46,168,-44.2,171.5,-41.8],
+[49.3,-12,50.5,-15.5,49.4,-18,47.5,-24.5,45.1,-25.6,43.7,-23.5,44.4,-20,44,-17,46.5,-15.5,48,-13.5],
+[-85,21.9,-82,23.1,-79.5,22.5,-77,21,-74.2,20.3,-77.7,19.9,-80,21.7],
+[-74.4,18.3,-72.8,19.9,-70,19.8,-68.4,18.6,-71,17.9],
+[-80,73.7,-70,72,-61,69.5,-62,66.5,-65,62.5,-71,63,-77,64.5,-74,67.5,-80,70,-86,70,-88,72],
+[-118,71,-110,73,-105,73,-101,70,-107,68.8,-114,69],
+[-90,76.5,-80,76.4,-75,79,-65,82,-80,83,-90,81,-92,79],
+[-59.3,47.7,-56,51.6,-55.5,51.5,-53,49.5,-52.7,47.5,-55,46.9],
+[11,78.5,16,80,25,80.5,27,79,20,77,14,77],
+[51.5,71.5,55,73.5,60,76.5,68,77,58,74,55,71],
+[142,46,143.5,49,142.8,54,141.7,52],
+[108.7,19.2,110,20.1,111,19.6,109.7,18.2],
+[12.4,38,15.6,38.3,15.1,36.7,12.4,37.6],
+[8.2,39,9.7,39.2,9.6,41,8.2,40.9],
+[23.5,35.4,26.3,35.2,24,35.1],
+[32.3,35,34.6,35.7,33,34.6]];
+const RAW_WATER=[
+[28.9,41.2,31.5,41.2,35,42,36.3,41.3,39.7,41,41.6,41.6,41.5,42.5,39.7,43.6,37.8,44.7,36.5,45.3,33,45.4,31,46.6,30.7,46.5,29.7,45.2,28.7,44.2,27.9,43.2,27.5,42.5],
+[47,44.8,49,46.3,51.2,47,53,46.5,53.2,44.5,51.3,43.2,52.6,41.7,53,40,54,37.4,51,36.7,49.2,37.6,48.8,38.8,49.8,40.4,48.5,41.8,47.6,43]];
+const D=Math.PI/180,mkP=a=>{const r=[];for(let i=0;i<a.length;i+=2)r.push([a[i+1]*D,a[i]*D]);return r};
+let LR=RAW_LAND.map(mkP);const WR=RAW_WATER.map(mkP);
+function setLand(rings){LR=rings.map(r=>r.map(([lo,la])=>[la*D,lo*D]))}
+if(window.__CS_SERVER)fetch('/data/land.geojson').then(r=>r.ok?r.json():null).then(g=>{if(!g||!g.features)return;const rings=[];g.features.forEach(f=>{const G=f.geometry;if(!G)return;if(G.type==='Polygon')rings.push(G.coordinates[0]);else if(G.type==='MultiPolygon')G.coordinates.forEach(p=>rings.push(p[0]))});if(rings.length>20)setLand(rings)}).catch(()=>{});
+function fillPoly(ring,R,X,Y){const P=ring.map(([la,lo])=>gp(la,lo)),o=[];
+ for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length];if(a[2]>=0)o.push({p:a});if((a[2]>=0)!==(b[2]>=0)){const t=a[2]/(a[2]-b[2]),mx=a[0]+(b[0]-a[0])*t,my=a[1]+(b[1]-a[1])*t,n=Math.hypot(mx,my)||1;o.push({p:[mx/n,my/n,0],t:a[2]>=0?'x':'e'})}}
+ if(o.length<3)return;const q=[];o.forEach((e,i)=>{q.push(e.p);const nx=o[(i+1)%o.length];if(e.t==='x'&&nx.t==='e'){const a1=Math.atan2(e.p[1],e.p[0]);let d=Math.atan2(nx.p[1],nx.p[0])-a1;d=Math.atan2(Math.sin(d),Math.cos(d));const st=Math.max(1,Math.ceil(Math.abs(d)/.12));for(let k=1;k<st;k++)q.push([Math.cos(a1+d*k/st),Math.sin(a1+d*k/st),0])}});
+ GX.beginPath();q.forEach((p,i)=>GX[i?'lineTo':'moveTo'](X+p[0]*R,Y-p[1]*R));GX.closePath();GX.fill();GX.stroke()}
+function drawGlobe(){const W=GL.width,H=GL.height,R=H*.4*gZ,X=W/2,Y=H/2,[dec,slon]=sun(),S=gp(dec,slon),phi=Math.atan2(-S[1],S[0]);GX.clearRect(0,0,W,H);
+ let g=GX.createRadialGradient(X,Y,R*.96,X,Y,R*1.2);g.addColorStop(0,hexA(AC,.5));g.addColorStop(1,hexA(AC,0));GX.fillStyle=g;GX.beginPath();GX.arc(X,Y,R*1.2,0,7);GX.fill();
+ g=GX.createRadialGradient(X-R*.35,Y-R*.35,R*.1,X,Y,R);g.addColorStop(0,'#2a060b');g.addColorStop(1,'#060102');GX.fillStyle=g;GX.beginPath();GX.arc(X,Y,R,0,7);GX.fill();
+ GX.save();GX.beginPath();GX.arc(X,Y,R,0,7);GX.clip();
+ const line=(f,n)=>{let pv=null;for(let i=0;i<=n;i++){const q=f(i/n),p=gp(q[0],q[1]);if(pv&&p[2]>-.05&&pv[2]>-.05){GX.beginPath();GX.moveTo(X+pv[0]*R,Y-pv[1]*R);GX.lineTo(X+p[0]*R,Y-p[1]*R);GX.stroke()}pv=p}};
+ GX.lineWidth=1;GX.strokeStyle=hexA(AC,.13);for(let k=0;k<12;k++)line(u=>[(u-.5)*Math.PI,k*Math.PI/6],30);for(let k=-2;k<=2;k++)line(u=>[k*Math.PI/6,u*6.283],60);
+ GX.fillStyle=hexA(AC,.32);GX.strokeStyle=hexA(AC,.95);GX.lineWidth=1.2;LR.forEach(r=>fillPoly(r,R,X,Y));
+ GX.fillStyle='#070102';GX.strokeStyle=hexA(AC,.55);WR.forEach(r=>fillPoly(r,R,X,Y));
+ const pt=(u,v)=>[X+R*(u*Math.cos(phi)-v*Math.sin(phi)),Y+R*(u*Math.sin(phi)+v*Math.cos(phi))];
+ GX.fillStyle='rgba(0,0,0,.6)';GX.beginPath();
+ for(let k=0;k<=36;k++){const v=1-2*k/36,p=pt(-S[2]*Math.sqrt(Math.max(0,1-v*v)),v);k?GX.lineTo(p[0],p[1]):GX.moveTo(p[0],p[1])}
+ GX.save();GX.strokeStyle='rgba(255,255,255,.6)';GX.setLineDash([4,5]);GX.lineWidth=1.2;GX.stroke();GX.restore();
+ for(let k=0;k<=36;k++){const t=Math.PI*(1-k/36),p=pt(-Math.sin(t),Math.cos(t));GX.lineTo(p[0],p[1])}
+ GX.closePath();GX.fill();GX.restore();
+ GX.strokeStyle=hexA(AC,.9);GX.lineWidth=2;GX.beginPath();GX.arc(X,Y,R,0,7);GX.stroke();
+ gPts=[];GX.font='11px Share Tech Mono,monospace';
+ allPts().forEach(c=>{const p=gp(c.la,c.lo);if(p[2]<0)return;const x=X+p[0]*R,y=Y-p[1]*R,day=Math.sin(c.la)*Math.sin(dec)+Math.cos(c.la)*Math.cos(dec)*Math.cos(c.lo-slon)>0,sel=gSel===c||gCmpA===c;gPts.push({c,x,y});
+  GX.globalAlpha=.5+.5*p[2];GX.fillStyle=day?'#fff':AC;GX.beginPath();GX.arc(x,y,c.own||sel?5:3,0,7);GX.fill();
+  if(c.own||sel){GX.strokeStyle=AC;GX.globalAlpha=1;GX.lineWidth=1.5;GX.beginPath();GX.arc(x,y,9+(performance.now()/200%1)*6,0,7);GX.stroke();GX.fillStyle='#fff';GX.fillText((c.own?'★ ':'')+c.n,x+10,y+4)}});GX.globalAlpha=1}
+function gInfo(){const c=gSel;if(!c){$('ginfo').textContent=L('روی یک شهر کلیک کن یا جستجو کن. خط سفید خط روز و شب است.','Click a city or search. The white dashed line is the day/night border.');return}
+ const off=tzOff(c.tz),n=new Date(),h=((n.getUTCHours()*60+n.getUTCMinutes()+off)/60+24)%24;
+ $('ginfo').textContent=(c.own?'★ ':'')+c.n+'\n'+fmt(c.tz,{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})+'  '+fmt(c.tz,{weekday:'short',day:'numeric',month:'short'})+'\nUTC'+(off>=0?'+':'−')+Math.abs(off/60).toFixed(off%60?1:0)+'  '+(h>=6&&h<19?'☀':'🌙')+'\n'+(h>=9&&h<18?L('✅ ساعت کاری (۹–۱۸)','✅ business hours (9–18)'):L('⏸ خارج از ساعت کاری','⏸ outside business hours'))+(c.nt?'\n'+c.nt:'')}
+function cmp(a,b){const oa=tzOff(a.tz),ob=tzOff(b.tz),d=ob-oa;let best=null;
+ for(const s of [-1440,0,1440]){const lo=Math.max(540-oa,540-ob+s),hi=Math.min(1080-oa,1080-ob+s);if(hi>lo&&(!best||hi-lo>best[1]-best[0]))best=[lo,hi]}
+ $('gcm').textContent=a.n+' ⇄ '+b.n+'\n'+L('اختلاف ساعت: ','Time difference: ')+(d>=0?'+':'−')+Math.abs(d/60)+'h\n'+(best?L('بهترین زمان تماس: ','Best time to talk: ')+'\n'+a.n+' '+hm(best[0]+oa)+'–'+hm(best[1]+oa)+'\n'+b.n+' '+hm(best[0]+ob)+'–'+hm(best[1]+ob):L('ساعت کاری همپوشانی ندارد.','No overlapping business hours.'));addXP(2)}
+function pickC(c){if(gCmpOn&&gCmpA&&gCmpA!==c){cmp(gCmpA,c);gCmpOn=false;gCmpA=null}else if(gCmpOn&&!gCmpA){gCmpA=c;$('gcm').textContent=L('شهر دوم را انتخاب کن…','Now pick the second city…')}
+ gSel=c;gFly={rot:-c.lo,tilt:Math.max(-1.2,Math.min(1.2,c.la))};gInfo()}
+const gPos=e=>{const r=GL.getBoundingClientRect();return[(e.clientX-r.left)*GL.width/r.width,(e.clientY-r.top)*GL.height/r.height]};
+GL.addEventListener('pointerdown',e=>{gDrag=true;gMoved=0;gLast=[e.clientX,e.clientY];gFly=null;GL.setPointerCapture(e.pointerId)});
+GL.addEventListener('pointermove',e=>{if(!gDrag)return;const dx=e.clientX-gLast[0],dy=e.clientY-gLast[1];gMoved+=Math.abs(dx)+Math.abs(dy);gRot+=dx*.008/gZ;gTilt=Math.max(-1.2,Math.min(1.2,gTilt+dy*.006));gLast=[e.clientX,e.clientY]});
+GL.addEventListener('pointerup',e=>{gDrag=false;if(gMoved<5){const[x,y]=gPos(e);let b=null,bd=24;gPts.forEach(p=>{const d=Math.hypot(p.x-x,p.y-y);if(d<bd){bd=d;b=p.c}});if(b)pickC(b)}});
+GL.addEventListener('pointercancel',()=>gDrag=false);
+GL.addEventListener('wheel',e=>{e.preventDefault();gZ=Math.max(.6,Math.min(1.7,gZ*(e.deltaY<0?1.08:.92)))},{passive:false});
+$('gq').oninput=()=>{const q=$('gq').value.trim().toLowerCase(),c=allPts().find(x=>x.n.toLowerCase()===q);if(c)pickC(c)};
+$('gme').onclick=()=>{const tz=Intl.DateTimeFormat().resolvedOptions().timeZone,o=tzOff(tz),P=allPts(),c=P.find(x=>x.tz===tz)||P.reduce((m,x)=>Math.abs(tzOff(x.tz)-o)<Math.abs(tzOff(m.tz)-o)?x:m);pickC(c);toast(tz)};
+$('gcmp').onclick=()=>{gCmpOn=!gCmpOn;gCmpA=null;$('gcm').textContent=gCmpOn?L('شهر اول را انتخاب کن…','Pick the first city…'):''};
+$('gauto').onclick=()=>{gAuto=!gAuto};$('gzi').onclick=()=>gZ=Math.min(1.7,gZ*1.15);$('gzo').onclick=()=>gZ=Math.max(.6,gZ*.87);
+function renderG(){$('gcl').innerHTML=allPts().map(x=>`<option value="${esc(x.n)}">`).join('');$('adminLoc').innerHTML=C.locs.map((x,i)=>`<div class="row"><span>★ ${esc(x.n)} · ${esc(x.tz)}</span><button class="btn sm ghost" data-dlc="${i}">×</button></div>`).join('')}
+$('addLoc').onclick=async()=>{const n=$('lo_n').value.trim(),la=+$('lo_la').value,lo=+$('lo_lo').value,tz=$('lo_tz').value.trim();if(!n||isNaN(la)||isNaN(lo)||Math.abs(la)>90||Math.abs(lo)>180)return toast('lat / lon ?');try{tzOff(tz)}catch(e){return toast('Timezone? e.g. Asia/Baku')}
+ C.locs.push({n,la,lo,tz,nt:$('lo_nt').value});['lo_n','lo_la','lo_lo','lo_tz','lo_nt'].forEach(i=>$(i).value='');await saveC();renderAll();toast(t('saved'))};
+$('adminLoc').onclick=async e=>{const i=e.target.dataset.dlc;if(i==null)return;C.locs.splice(+i,1);await saveC();renderAll()};
+new IntersectionObserver(es=>gv=es[0].isIntersecting).observe(GL);setInterval(gInfo,1000);
+(function glp(){if(gv){if(gFly){const df=((gFly.rot-gRot+Math.PI)%6.2832+6.2832)%6.2832-Math.PI;gRot+=df*.12;gTilt+=(gFly.tilt-gTilt)*.12;if(Math.abs(df)<.003&&Math.abs(gFly.tilt-gTilt)<.003)gFly=null}else if(!gDrag&&gAuto&&!RM&&!gSel)gRot+=.003;drawGlobe()}requestAnimationFrame(glp)})();
+
+/* AI project estimator */
+$('esb').onclick=async()=>{const d=$('esd').value.trim();if(!d)return;const o=$('eso');o.textContent=t('chatWait');
+ try{const SM=await getSM();if(!SM)throw{code:'na'};
+  const r=await SM.json(`You are a senior software estimator. Estimate this project. Reply ONLY with JSON: {"title":string,"complexity":1-5,"hours_min":integer,"hours_max":integer,"stack":[string],"milestones":[string],"notes":string}. Write all text values in ${lang==='fa'?'Persian':'English'}. Project: ${d}`,{cache:false});
+  const rate=+C.settings.rate||0,pr=rate?`\n${L('هزینه‌ی تقریبی','Rough cost')}: ${(r.hours_min*rate).toLocaleString()} – ${(r.hours_max*rate).toLocaleString()}`:'';
+  o.textContent=`${r.title}\n${L('پیچیدگی','Complexity')}: ${r.complexity}/5\n${L('ساعت کار','Hours')}: ${r.hours_min}–${r.hours_max}${pr}\n${L('تکنولوژی','Stack')}: ${(r.stack||[]).join(', ')}\n\n${(r.milestones||[]).map((m,i)=>(i+1)+'. '+m).join('\n')}\n\n${r.notes||''}`}
+ catch(e){o.textContent=t('chatNA')}};
+
+/* bug-hunt game + leaderboard */
+const gm=$('gmc'),mx=gm.getContext('2d');let G_={run:false};
+const nick=()=>$('wn').value.trim()||store.get('cs_nick','')||('guest'+(100+Math.random()*900|0));
+function gTick(now){const g=G_;if(!g.run)return;const dt=Math.min(.05,(now-g.last)/1000);g.last=now;g.left-=dt;g.sp-=dt;
+ if(g.sp<=0){g.sp=Math.max(.25,.7-(30-g.left)*.015);g.bugs.push({x:Math.random()*400+10,y:-20,vx:(Math.random()-.5)*80,vy:40*(1+Math.random()*1.5+(30-g.left)/15)})}
+ mx.fillStyle='#0a0609';mx.fillRect(0,0,420,320);mx.font='11px Share Tech Mono';mx.textAlign='left';mx.fillStyle='#ff1e2d33';for(let i=0;i<20;i++)mx.fillText('if(bug) fix();',(i*97)%330,(i*53)%300+14);
+ mx.font='26px serif';mx.textAlign='center';g.bugs=g.bugs.filter(b=>{b.x+=b.vx*dt;b.y+=b.vy*dt;if(b.x<10||b.x>410)b.vx*=-1;mx.fillText('🐞',b.x,b.y+9);return b.y<340});
+ mx.textAlign='left';mx.fillStyle='#fff';mx.font='14px Share Tech Mono';mx.fillText('⏱ '+Math.max(0,g.left).toFixed(1)+'   🐞 '+g.score,10,20);
+ if(g.left<=0){g.run=false;gEnd(g.score);return}requestAnimationFrame(gTick)}
+$('gms').onclick=()=>{if(G_.run)return;G_={run:true,bugs:[],score:0,left:+C.settings.gSec||30,last:performance.now(),sp:0};requestAnimationFrame(gTick)};
+gm.addEventListener('pointerdown',e=>{if(!G_.run)return;const r=gm.getBoundingClientRect(),x=(e.clientX-r.left)*420/r.width,y=(e.clientY-r.top)*320/r.height,i=G_.bugs.findIndex(b=>Math.hypot(b.x-x,b.y-y)<26);if(i>=0){G_.bugs.splice(i,1);G_.score++;click()}});
+async function gEnd(sc){toast(L('امتیاز شما: ','Your score: ')+sc);addXP(sc);stat('game',sc,'max');const n=nick();store.set('cs_nick',n);
+ try{if(DB){let id=(U&&await U.id())||store.get('cs_uid',null);if(!id){id='u'+Math.random().toString(36).slice(2,10);store.set('cs_uid',id)}const r=DB.collection('scores').doc(id),s=await r.get();if(!s.exists||s.data().s<sc)await r.set({n,s:sc,t:Date.now()})}
+  else{const l=store.get('cs_sc',[]);l.push({n,s:sc});l.sort((a,b)=>b.s-a.s);store.set('cs_sc',l.slice(0,10))}}catch(e){}
+ renderLB()}
+async function renderLB(){let l=[];try{l=DB?(await DB.collection('scores').orderBy('s','desc').limit(10).get()).docs.map(d=>d.data()):store.get('cs_sc',[])}catch(e){l=store.get('cs_sc',[])}
+ $('lb').innerHTML=l.map((x,i)=>`<div class="mr"><span>${i+1}. ${esc(x.n)}</span><b>${+x.s||0}</b></div>`).join('')||'—'}
+
+/* hacker wall */
+let lastPost=0;
+async function renderWall(){let l=[],adm=false;try{l=DB?(await DB.collection('wall').orderBy('t','desc').limit(30).get()).docs.map(d=>({id:d.id,...d.data()})):store.get('cs_wall',[])}catch(e){l=store.get('cs_wall',[])}
+ try{adm=!!(DB&&U&&await U.canEdit())}catch(e){}
+ $('wl').innerHTML=l.map(x=>`<div class="row"><span><b>${esc(x.n)}</b> › ${esc(x.m)}</span>${adm&&x.id?`<button class="btn sm ghost" data-wd="${x.id}">×</button>`:''}</div>`).join('')||'—'}
+$('wb').onclick=async()=>{const n=nick(),m=$('wm').value.trim();if(!m||Date.now()-lastPost<15000)return;lastPost=Date.now();store.set('cs_nick',n);
+ try{if(DB)await DB.collection('wall').add({n:n.slice(0,24),m:m.slice(0,140),t:Date.now()});else{const l=store.get('cs_wall',[]);l.unshift({n,m});store.set('cs_wall',l.slice(0,30))}}catch(e){return toast('Error: '+(e.code||''))}
+ $('wm').value='';renderWall()};
+$('wl').onclick=async e=>{const id=e.target.dataset.wd;if(!id)return;try{await DB.collection('wall').doc(id).delete()}catch(er){}renderWall()};
+function initFeatures(){initX();$('pgc').value="// JavaScript — press Run\nconst sq = n => n * n;\nconsole.log([1, 2, 3, 4].map(sq));";renderLB();renderWall();renderAll()}
+
+
+/* cursor + konami */
+const cur=$('cur');if(matchMedia('(hover:hover)').matches){addEventListener('mousemove',e=>{cur.style.transform='translate('+(e.clientX-4)+'px,'+(e.clientY-4)+'px)'});
+ addEventListener('mouseover',e=>{const h=e.target.closest&&e.target.closest('a,button,input,textarea');cur.classList.toggle('h',!!h);cur.textContent=h?'{ }':'</>'})}else{cur.remove();document.body.classList.remove('cc')}
+const KS=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];let kp=0;
+addEventListener('keydown',e=>{kp=e.key===KS[kp]?kp+1:(e.key===KS[0]?1:0);if(kp===KS.length){kp=0;document.body.classList.toggle('hack');AC=document.body.classList.contains('hack')?'#19ff7a':C.settings.color;toast(t('hack'))}});
+
+/* scroll engine: parallax, typed code, progressive reveal, counters */
+const CODE=`import torch
+from cs_code import vision, rpa
+
+model = torch.load('model.pt')
+
+def detect(frame):
+    boxes = model.predict(frame)
+    return vision.track(boxes)
+
+def automate(flow):
+    for step in flow.steps:
+        rpa.run(step)
+    return {'status': 'success'}
+
+if __name__ == '__main__':
+    automate(load_flow())
+    print('deployed')`,G2='01<>{}/_#;=';
+/* smooth scroll engine: batched reads, IntersectionObserver-driven reveal, eased parallax */
+const layers=[...document.querySelectorAll('[data-s]')];let LP=[],dirty=true,sy=scrollY,smOn=false,HH=0,lastN=-1,pend=false,cvv=false;
+const act=new Set(),seen=new WeakSet(),cl=v=>Math.min(1,Math.max(0,v)),scr=s=>[...s].map(c=>c===' '?' ':G2[Math.random()*G2.length|0]).join('');
+function calc(){dirty=false;HH=document.documentElement.scrollHeight-innerHeight;LP=layers.map(l=>{const r=l.parentElement.getBoundingClientRect();return r.top+scrollY+r.height/2})}
+function fin(el,done){done=done||RM;if(el.classList.contains('rv')){el.style.opacity=done?1:0;el.style.transform=done?'':'translate3d(0,50px,0)'}else if(el.dataset.t!=null)el.textContent=done?el.dataset.t:scr(el.dataset.t)}
+const io=new IntersectionObserver(es=>{es.forEach(e=>{const el=e.target;if(e.isIntersecting)act.add(el);else{act.delete(el);fin(el,e.boundingClientRect.top<0)}});if(!pend){pend=true;requestAnimationFrame(()=>{pend=false;par()})}});
+function watch(){document.querySelectorAll('.rv,.dc').forEach(e=>{if(!seen.has(e)){seen.add(e);io.observe(e)}})}
+new ResizeObserver(()=>{dirty=true;if(!pend){pend=true;requestAnimationFrame(()=>{pend=false;par()})}}).observe($('site'));
+addEventListener('resize',()=>dirty=true);
+new IntersectionObserver(es=>cvv=es[0].isIntersecting).observe($('cvc'));
+function par(){if($('site').classList.contains('hide'))return;if(dirty)calc();const vh=innerHeight;if(!smOn)sy=scrollY;
+ act.forEach(e=>{if(!e.isConnected)act.delete(e)});
+ const rs=[...act].map(e=>[e,e.getBoundingClientRect().top]),cn=[...document.querySelectorAll('.cnt:not([data-d])')].map(e=>[e,e.getBoundingClientRect().top]);
+ layers.forEach((l,i)=>{const d=LP[i]-(sy+vh/2);if(Math.abs(d)<vh*2)l.style.transform=`translate3d(0,${-d*parseFloat(l.dataset.s)}px,0)`});
+ const h=$('heroIn');if(sy<vh*1.2){h.style.transform=`translate3d(0,${sy*.3}px,0)`;h.style.opacity=cl(1-sy/(vh*.85))}else h.style.opacity=0;
+ const n=Math.floor(CODE.length*cl((HH>0?sy/HH:0)*1.2))+6;if(n!==lastN){lastN=n;$('cp').textContent=CODE.slice(0,n)+'█'}
+ rs.forEach(([e,top])=>{if(e.classList.contains('rv')){const p=RM?1:cl((vh*.95-top)/(vh*.3));e.style.opacity=p;e.style.transform=p<1?`translate3d(0,${(1-p)*50}px,0)`:''}
+  else{const s=e.dataset.t||'',p=RM?1:cl((vh*.9-top)/(vh*.25));if(p>=1){if(e.textContent!==s)e.textContent=s}else{const k=Math.floor(p*s.length);e.textContent=s.slice(0,k)+scr(s.slice(k))}}});
+ cn.forEach(([e,top])=>{if(top>vh*.95)return;e.dataset.d=1;const n=+e.dataset.n,s0=performance.now();(function f(now){const p=Math.min(1,(now-s0)/1200);e.textContent=Math.round(n*p).toLocaleString(lang==='fa'?'fa-IR':'en-US');if(p<1)requestAnimationFrame(f)})(s0)})}
+function sloop(){sy+=(scrollY-sy)*(RM?1:.14);if(Math.abs(scrollY-sy)<.4)sy=scrollY;par();if(sy!==scrollY)requestAnimationFrame(sloop);else smOn=false}
+addEventListener('scroll',()=>{if(!smOn){smOn=true;requestAnimationFrame(sloop)}},{passive:true});
+
+/* engagement features: toolbox, ROI, typing test, daily quiz, XP */
+Object.assign(T,{h_tools:['جعبه‌ابزار برنامه‌نویس','Dev toolbox'],h_roi:['ماشین‌حساب صرفه‌جویی اتوماسیون','Automation savings calculator'],roiH:['ساعت کار تکراری در هفته (هر نفر)','Repetitive hours per week (per person)'],roiC:['هزینه‌ی هر ساعت','Cost per hour'],roiP:['تعداد نفرات','People'],roiA:['درصد قابل اتوماسیون','% automatable'],roiB:['هزینه‌ی ساخت اتوماسیون','Build cost'],h_type:['تست سرعت تایپ کد','Code typing test'],tsNew:['متن جدید','New snippet'],h_quiz:['چالش روزانه','Daily challenge'],tgo:['اجرا','Run'],copy:['کپی','Copy']});
+const xpd=()=>store.get('cs_xp',{xp:0,st:0,last:''});
+function showXP(){const d=xpd();$('xp').textContent=d.xp?'LV'+(Math.floor(Math.sqrt(d.xp/20))+1)+' · '+d.xp+'XP · 🔥'+d.st:''}
+function addXP(n){n=Math.round(n);if(n<=0)return;const d=xpd(),td=new Date().toDateString();if(d.last!==td){d.st=d.last===new Date(Date.now()-864e5).toDateString()?d.st+1:1;d.last=td}d.xp+=n;store.set('cs_xp',d);weekAdd(n);showXP();renderBadges(true);toast('+'+n+' XP')}
+const hx=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''),u8=x=>decodeURIComponent(escape(atob(x.replace(/-/g,'+').replace(/_/g,'/'))));
+const TOOLS={
+ JSON:{ph:'{"a":1,"b":[2,3]}',f:v=>JSON.stringify(JSON.parse(v),null,2)},
+ Base64:{ph:'text or base64',f:v=>{try{return u8(v.trim())}catch(e){return btoa(unescape(encodeURIComponent(v)))}}},
+ JWT:{ph:'eyJhbGciOi...',f:v=>{const p=v.trim().split('.');if(p.length<2)throw 0;return JSON.stringify(JSON.parse(u8(p[0])),null,2)+'\n'+JSON.stringify(JSON.parse(u8(p[1])),null,2)}},
+ Hash:{ph:'text',f:async v=>{const h=n=>crypto.subtle.digest(n,new TextEncoder().encode(v));return 'SHA-1   '+hx(await h('SHA-1'))+'\nSHA-256 '+hx(await h('SHA-256'))+'\nSHA-512 '+hx(await h('SHA-512'))}},
+ Time:{ph:'1700000000  or  2026-01-01',f:v=>{v=v.trim();const d=/^\d+$/.test(v)?new Date(v.length>11?+v:v*1000):new Date(v);if(isNaN(d))throw 0;return d.toISOString()+'\n'+d.toString()+'\nunix: '+Math.floor(d/1000)}},
+ UUID:{ph:'count (1-20)',f:v=>Array.from({length:Math.min(20,+v||1)},()=>crypto.randomUUID()).join('\n')},
+ Password:{ph:'length (8-64)',f:v=>{const n=Math.min(64,Math.max(8,+v||16)),c='abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%^&*';return [...crypto.getRandomValues(new Uint32Array(n))].map(x=>c[x%c.length]).join('')}},
+ Regex:{two:1,ph:'text to search',ph2:'pattern, e.g. /\\d+/g',f:(v,p)=>{const m=p.match(/^\/(.*)\/([a-z]*)$/s),re=m?new RegExp(m[1],m[2].includes('g')?m[2]:m[2]+'g'):new RegExp(p,'g');return [...v.matchAll(re)].map(x=>x.index+': '+x[0]).join('\n')||'no match'}},
+ Color:{ph:'#ff1e2d  or  rgb(255,30,45)',f:v=>{let r,g,b,m;v=v.trim();if(m=v.match(/^#?([0-9a-f]{6})$/i)){const n=parseInt(m[1],16);r=n>>16;g=n>>8&255;b=n&255}else if(m=v.match(/(\d+)\D+(\d+)\D+(\d+)/)){r=+m[1];g=+m[2];b=+m[3]}else throw 0;
+  const R=r/255,G=g/255,B=b/255,mx=Math.max(R,G,B),mn=Math.min(R,G,B),l=(mx+mn)/2,d=mx-mn;let h=0,s=0;if(d){s=d/(1-Math.abs(2*l-1));h=mx===R?((G-B)/d)%6:mx===G?(B-R)/d+2:(R-G)/d+4;h=(h*60+360)%360}
+  return '#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('')+'\nrgb('+r+', '+g+', '+b+')\nhsl('+Math.round(h)+', '+Math.round(s*100)+'%, '+Math.round(l*100)+'%)'}}};
+let tool='JSON';
+function drawTabs(){$('tt').innerHTML=Object.keys(TOOLS).map(k=>`<button class="btn sm${k===tool?'':' ghost'}" data-tl="${k}">${k}</button>`).join('');const d=TOOLS[tool];$('ti2').classList.toggle('hide',!d.two);$('ti1').placeholder=d.ph;$('ti2').placeholder=d.ph2||''}
+$('tt').onclick=e=>{const k=e.target.dataset.tl;if(k){tool=k;drawTabs()}};
+$('tgo').onclick=async()=>{try{$('tout').textContent=await TOOLS[tool].f($('ti1').value,$('ti2').value);addXP(2);stat('tools')}catch(e){$('tout').textContent='⚠ '+L('ورودی نامعتبر است','Invalid input')}};
+$('tcp').onclick=()=>{const v=$('tout').textContent,a=document.createElement('textarea');a.value=v;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();toast(L('کپی شد','Copied'))};
+function roi(){const g=i=>+$('r'+i).value||0,mh=g(1)*g(3)*4.33*g(4)/100,sv=mh*g(2),pb=sv?g(5)/sv:0;$('rout').textContent=[L('ساعت صرفه‌جویی ماهانه: ','Hours saved / month: ')+mh.toFixed(1),L('صرفه‌جویی ماهانه: ','Monthly savings: ')+Math.round(sv).toLocaleString(),L('صرفه‌جویی سالانه: ','Yearly savings: ')+Math.round(sv*12).toLocaleString(),L('بازگشت سرمایه: ','Payback: ')+(pb?pb.toFixed(1)+L(' ماه',' months'):'—')].join('\n')}
+['r1','r2','r3','r4','r5'].forEach(i=>$(i).oninput=roi);
+const SN=['const sum = (a, b) => a + b;','for i in range(10): print(i)','git commit -m "fix: null check"','SELECT * FROM users WHERE id = 1;','def add(x, y):\n    return x + y','docker run -p 8080:80 nginx','async function load() { await fetch(url); }','if (!user) throw new Error("not found");'];
+let sn='',t0=0,terr=0,tlen=0;
+function tr(){const v=$('tsi').value;$('tsn').innerHTML=[...sn].map((c,i)=>i<v.length?`<span class="${v[i]===c?'ok':'bad'}">${esc(c)}</span>`:esc(c)).join('')}
+function tNew(){sn=SN[Math.random()*SN.length|0];$('tsi').value='';t0=0;terr=0;tlen=0;$('tsr').textContent='';tr()}
+$('tsi').oninput=()=>{const v=$('tsi').value;if(!t0)t0=performance.now();if(v.length>tlen&&v[v.length-1]!==sn[v.length-1])terr++;tlen=v.length;tr();
+ if(v===sn){const w=sn.length/5/((performance.now()-t0)/6e4),acc=Math.round(100*sn.length/(sn.length+terr));$('tsr').textContent=Math.round(w)+' WPM · '+acc+'%';addXP(5+w/3);stat('wpm',Math.round(w),'max');tlen=0}};
+$('tsb').onclick=tNew;
+const QZ=[['typeof null in JavaScript?',['"null"','"object"','"undefined"','"number"'],1,'A historical quirk: typeof null is "object".'],['0.1 + 0.2 === 0.3 in JavaScript?',['true','false','error','undefined'],1,'Floating-point rounding: the sum is 0.30000000000000004.'],['Python: len({1, 2, 2, 3})?',['4','3','2','error'],1,'Sets drop duplicates, so 3.'],['Undo last commit but keep changes staged?',['git revert HEAD','git reset --hard HEAD~1','git reset --soft HEAD~1','git stash'],2,'--soft moves HEAD back and keeps the index.'],['HTTP status for "Not Found"?',['200','301','404','500'],2,'404 means the resource was not found.'],['Binary search time complexity?',['O(n)','O(log n)','O(n log n)','O(1)'],1,'Each step halves the search space.'],['JavaScript: [] + [] equals?',['0','[]','""','undefined'],2,'Both arrays become empty strings, so the result is "".'],['SQL: filter groups after GROUP BY?',['WHERE','HAVING','FILTER','LIMIT'],1,'HAVING filters aggregated groups; WHERE filters rows.'],['Python: bool("False")?',['False','True','error','None'],1,'Any non-empty string is truthy.'],['Which Python type is immutable?',['list','dict','tuple','set'],2,'Tuples cannot be modified after creation.'],['CSS flex: align items along the main axis?',['align-items','justify-content','place-self','flex-flow'],1,'justify-content works on the main axis.'],['Linux: list files including hidden ones?',['ls -a','ls -h','ls -r','ls -x'],0,'-a shows entries starting with a dot.']];
+let qset=[],qn=0,qok=0;
+function qShow(){const q=qset[qn];if(!q){store.set('cs_qd',new Date().toDateString());$('qz').innerHTML='<p>'+L('چالش امروز تمام شد. فردا برگرد! 🔥','Today\'s challenge is done. Come back tomorrow! 🔥')+(qok?' ('+qok+'/3)':'')+'</p>';return}
+ $('qz').innerHTML=`<p class="mono ltr">${qn+1}/3 — ${esc(q[0])}</p>`+q[1].map((o,i)=>`<button class="btn sm ghost" style="display:block;margin:.4rem 0" data-qa="${i}">${esc(o)}</button>`).join('')+'<p id="qe" class="ltr"></p>'}
+$('qz').onclick=e=>{const a=e.target.dataset.qa;if(a==null||$('qe').textContent)return;const q=qset[qn],ok=+a===q[2];if(ok){qok++;addXP(10);stat('quiz')}$('qe').textContent=(ok?'✓ ':'✗ ')+q[3];setTimeout(()=>{qn++;qShow()},2200)};
+function initX(){adminAccess();extraInit();subReplies();drawTabs();roi();tNew();const d=Math.floor(Date.now()/864e5);qset=[0,1,2].map(k=>QZ[(d*3+k)%QZ.length]);qn=store.get('cs_qd')===new Date().toDateString()?3:0;qShow();showXP();watch()}
+
+
+/* batch 3: lessons, bug challenge, AI review, pomodoro, vault, resume, badges, more tools */
+Object.assign(T,{h_less:['درس‌های جاوااسکریپت','JavaScript lessons'],h_bug:['باگ رو پیدا کن','Find the bug'],h_rev:['بازبین کد با هوش مصنوعی','AI code review'],h_pomo:['تایمر تمرکز','Focus timer'],h_vault:['انبار اسنیپت من','My snippet vault'],h_res:['رزومه‌ساز','Resume builder'],h_badge:['نشان‌ها و پیشرفت','Badges & progress'],chk:['اجرا و بررسی','Run & check'],blNext:['باگ دیگر','Another bug'],rvPh:['کدت را اینجا بچسبان…','Paste your code here…'],rvGo:['بازبینی کن','Review'],pmGo:['شروع','Start'],pmPause:['توقف','Pause'],pmRs:['ریست','Reset'],pmMode:['تغییر حالت','Switch mode'],vtT:['عنوان','Title'],vtG:['برچسب‌ها (با کاما)','Tags (comma-separated)'],vtC:['کد','Code'],vtAdd:['ذخیره','Save'],vtQ:['جستجو…','Search…'],rsName:['نام کامل','Full name'],rsRole:['عنوان شغلی','Job title'],rsEmail:['ایمیل','Email'],rsPhone:['تلفن','Phone'],rsSk:['مهارت‌ها (با کاما)','Skills (comma-separated)'],rsExp:['سوابق کاری','Experience'],rsPrj:['پروژه‌ها','Projects'],rsEdu:['تحصیلات','Education'],rsPrint:['چاپ / ذخیره PDF','Print / Save PDF'],rsCopy:['کپی متن','Copy text']});
+function runJS(code,ms=900){return new Promise(ok=>{const out=[],f=document.createElement('iframe');f.sandbox='allow-scripts';f.hidden=true;
+ const h=m=>{if(m.source===f.contentWindow&&m.data&&typeof m.data.pg==='string')out.push(m.data.pg)};addEventListener('message',h);
+ f.srcdoc='<script>const L=(...a)=>parent.postMessage({pg:a.map(x=>typeof x==="object"?JSON.stringify(x):String(x)).join(" ")},"*");console.log=L;console.error=L;try{'+code.replace(/<\/script/gi,'<\\/script')+'}catch(e){L("Error: "+e.message)}<\/script>';
+ document.body.appendChild(f);setTimeout(()=>{removeEventListener('message',h);f.remove();ok(out.join('\n'))},ms)})}
+/* stats + badges */
+const BD=[['tools',1,'🔧','First tool','اولین ابزار'],['tools',25,'🧰','Toolsmith','ابزارساز'],['lessons',1,'📘','Student','دانشجو'],['lessons',10,'🎓','Graduate','فارغ‌التحصیل'],['pomo',4,'🍅','Focused','متمرکز'],['bugs',3,'🐛','Bug squasher','باگ‌کش'],['wpm',40,'⌨️','Speedster','سریع‌تایپ'],['game',25,'🐞','Hunter','شکارچی'],['streak',3,'🔥','On fire','پرحرارت'],['reviews',1,'🔍','Reviewer','بازبین']];
+const sts=()=>store.get('cs_stats',{}),weekId=()=>Math.floor((Date.now()/864e5+3)/7);
+const sval=k=>k==='streak'?xpd().st:sts()[k]||0;
+function stat(k,v=1,m='add'){const s=sts();s[k]=m==='max'?Math.max(s[k]||0,v):m==='set'?v:(s[k]||0)+v;store.set('cs_stats',s);renderBadges(true)}
+function weekAdd(n){const w=store.get('cs_week',{w:0,xp:0});if(w.w!==weekId()){w.w=weekId();w.xp=0}w.xp+=n;store.set('cs_week',w)}
+function renderBadges(announce){const sb=store.get('cs_bd',[]);let ch=0;BD.forEach(([k,n,ic,en,fa],i)=>{if(sval(k)>=n&&!sb.includes(i)){sb.push(i);ch=1;if(announce)toast('🏅 '+L(fa,en))}});if(ch)store.set('cs_bd',sb);
+ $('bdg').innerHTML=BD.map(([k,n,ic,en,fa],i)=>`<div class="card" style="opacity:${sb.includes(i)?1:.35}"><h3 style="font-family:Lalezar,Vazirmatn;font-weight:400;direction:inherit;text-align:start">${ic} ${L(fa,en)}</h3><small>${k} ≥ ${n}</small></div>`).join('');
+ const d=xpd(),lv=Math.floor(Math.sqrt(d.xp/20))+1,a=20*(lv-1)**2,b=20*lv*lv;$('lvl').textContent='LV'+lv+' · '+d.xp+' XP · 🔥'+d.st;$('lvb').style.width=Math.min(100,100*(d.xp-a)/(b-a))+'%';
+ const w=store.get('cs_week',{w:0,xp:0});$('wkl').textContent=L('هدف هفتگی: ','Weekly goal: ')+(w.w===weekId()?w.xp:0)+' / 200 XP'}
+/* more tools */
+const cf=(f,v,mn)=>f.split(',').some(p=>{let[r,st]=p.split('/');st=+st||1;if(r==='*')return (v-mn)%st===0;let a,b;if(r.includes('-'))[a,b]=r.split('-').map(Number);else a=b=+r;return v>=a&&v<=b&&(v-a)%st===0});
+TOOLS.Cron={ph:'*/15 9-17 * * 1-5',f:v=>{const f=v.trim().split(/\s+/);if(f.length!==5)throw 0;const N=['minute','hour','day of month','month','day of week'];let d=new Date();d.setSeconds(0,0);const o=[];
+ for(let i=0;i<527040&&o.length<3;i++){d=new Date(d.getTime()+6e4);const dm=cf(f[2],d.getDate(),1),dw=cf(f[4],d.getDay(),0)||(d.getDay()===0&&cf(f[4],7,0)),day=f[2]!=='*'&&f[4]!=='*'?dm||dw:dm&&dw;if(cf(f[0],d.getMinutes(),0)&&cf(f[1],d.getHours(),0)&&cf(f[3],d.getMonth()+1,1)&&day)o.push(d.toString())}
+ return f.map((x,i)=>N[i]+': '+x).join('\n')+'\n\nnext runs:\n'+(o.join('\n')||'none in the next year')}};
+TOOLS.Chmod={ph:'755  or  rwxr-xr--',f:v=>{v=v.trim();const R=['---','--x','-w-','-wx','r--','r-x','rw-','rwx'];if(/^[0-7]{3}$/.test(v))return [...v].map(d=>R[d]).join('')+'\n'+['owner','group','others'].map((n,i)=>n+': '+R[v[i]]).join('\n');
+ if(/^[r-][w-][x-][r-][w-][x-][r-][w-][x-]$/.test(v))return [0,3,6].map(i=>(v[i]==='r'?4:0)+(v[i+1]==='w'?2:0)+(v[i+2]==='x'?1:0)).join('');throw 0}};
+TOOLS.CIDR={ph:'192.168.1.10/24',f:v=>{const m=v.trim().match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)\/(\d+)$/);if(!m)throw 0;const o=m.slice(1,5).map(Number),b=+m[5];if(o.some(x=>x>255)||b>32)throw 0;
+ const ip=((o[0]<<24)|(o[1]<<16)|(o[2]<<8)|o[3])>>>0,mask=b?(0xFFFFFFFF<<(32-b))>>>0:0,net=(ip&mask)>>>0,bc=(net|~mask)>>>0,s=x=>[x>>>24,x>>16&255,x>>8&255,x&255].join('.');
+ return 'Network   '+s(net)+'/'+b+'\nMask      '+s(mask)+'\nBroadcast '+s(bc)+'\nFirst     '+s(b>=31?net:net+1)+'\nLast      '+s(b>=31?bc:bc-1)+'\nHosts     '+(b>=31?2**(32-b):Math.max(0,2**(32-b)-2))}};
+TOOLS.Diff={ph:'text A\n---\ntext B',f:v=>{const p=v.split(/\n---\n/);if(p.length<2)throw 0;const A=p[0].split('\n'),B=p[1].split('\n'),d=Array.from({length:A.length+1},()=>Array(B.length+1).fill(0));
+ for(let i=A.length-1;i>=0;i--)for(let j=B.length-1;j>=0;j--)d[i][j]=A[i]===B[j]?d[i+1][j+1]+1:Math.max(d[i+1][j],d[i][j+1]);let i=0,j=0;const o=[];
+ while(i<A.length&&j<B.length){if(A[i]===B[j]){o.push('  '+A[i]);i++;j++}else if(d[i+1][j]>=d[i][j+1])o.push('- '+A[i++]);else o.push('+ '+B[j++])}while(i<A.length)o.push('- '+A[i++]);while(j<B.length)o.push('+ '+B[j++]);return o.join('\n')}};
+/* JavaScript lessons */
+const LS=[['Hello, world','سلام دنیا','Print exactly: Hello, Cs_Code!','دقیقاً این را چاپ کن: Hello, Cs_Code!','// print: Hello, Cs_Code!\nconsole.log("");','Hello, Cs_Code!'],
+['Variables','متغیرها','Print x multiplied by y.','حاصل‌ضرب x در y را چاپ کن.','let x = 5;\nlet y = 7;\n// print x * y\n','35'],
+['Strings','رشته‌ها','Print the text in UPPERCASE.','متن را با حروف بزرگ چاپ کن.','const s = "cs_code";\n// print s in UPPERCASE\n','CS_CODE'],
+['Arrays','آرایه‌ها','Print how many items the array has.','تعداد عضوهای آرایه را چاپ کن.','const a = [3, 1, 4, 1, 5];\n// print the length\n','5'],
+['map','map','Print every number doubled (an array).','هر عدد را دو برابر کن و آرایه را چاپ کن.','const a = [1, 2, 3];\nconsole.log(a.map());','[2,4,6]'],
+['filter','filter','Print only the even numbers.','فقط عددهای زوج را چاپ کن.','const a = [1, 2, 3, 4, 5, 6];\nconsole.log(a.filter());','[2,4,6]'],
+['Functions','تابع‌ها','Write add(a, b) so it prints 5.','تابع add(a, b) را بنویس تا 5 چاپ شود.','function add(a, b) {\n  \n}\nconsole.log(add(2, 3));','5'],
+['Objects','آبجکت‌ها','Print the age from the object.','سن را از آبجکت چاپ کن.','const user = { name: "Sara", age: 22 };\n// print the age\n','22'],
+['Loops','حلقه‌ها','Print the sum of 1 to 10.','مجموع ۱ تا ۱۰ را چاپ کن.','let sum = 0;\n// add 1..10 with a loop\nconsole.log(sum);','55'],
+['reduce','reduce','Print the sum using reduce.','مجموع را با reduce چاپ کن.','const a = [10, 20, 30];\nconsole.log(a.reduce());','60']];
+let lsi=0;const lsd=()=>store.get('cs_ls',[]);
+function lsDraw(keep){const d=lsd(),x=LS[lsi];$('lst').innerHTML=LS.map((_,i)=>`<button class="btn sm${i===lsi?'':' ghost'}" data-li="${i}">${d.includes(i)?'✓':i+1}</button>`).join('');
+ $('lsh').textContent=(lsi+1)+'. '+L(x[1],x[0]);$('lsg').textContent=L(x[3],x[2]);if(!keep||!$('lsc').value){$('lsc').value=x[4];$('lso').textContent=''}$('lsbi').style.width=d.length*10+'%';
+ $('lcert').classList.toggle('hide',d.length<LS.length);if(d.length>=LS.length)$('lcert').innerHTML=`<div class="card" style="text-align:center;border:2px solid var(--red);margin-top:1rem"><h3 style="font-family:Lalezar,Vazirmatn;font-weight:400;direction:inherit;text-align:center">🎓 ${L('گواهی پایان دوره','Certificate of completion')}</h3><p>${esc(session||nick())} — ${L('درس‌های جاوااسکریپت Cs_Code','Cs_Code JavaScript lessons')}</p><small>${new Date().toLocaleDateString(lang==='fa'?'fa-IR':'en-US')}</small></div>`}
+$('lst').onclick=e=>{const i=e.target.dataset.li;if(i!=null){lsi=+i;lsDraw()}};
+$('lsr').onclick=async()=>{$('lso').textContent='…';const o=(await runJS($('lsc').value)).trim(),x=LS[lsi];$('lso').textContent=o||'(no output)';
+ if(o===x[5]){const d=lsd();if(!d.includes(lsi)){d.push(lsi);store.set('cs_ls',d);addXP(15);stat('lessons',d.length,'set')}$('lso').textContent+='\n✅ '+L('درسته!','Correct!');if(lsi<LS.length-1){lsi++;setTimeout(lsDraw,900)}else lsDraw(1)}
+ else $('lso').textContent+='\n❌ '+L('خروجی درست نیست.','Not quite.')};
+/* find the bug */
+const BUGS=[['Loop runs one step too far — the sum should be 6.','حلقه یک قدم بیشتر می‌رود — جمع باید 6 شود.','function sum(arr){let t=0;for(let i=0;i<=arr.length;i++){t+=arr[i]}return t}\nconsole.log(sum([1,2,3]));','6'],
+['map returns undefined — expected [2,4,6].','map مقداری برنمی‌گرداند — خروجی باید [2,4,6] باشد.','const nums=[1,2,3];\nconsole.log(nums.map(n=>{n*2}));','[2,4,6]'],
+['String concatenation instead of math — expected 8.','به‌جای جمع، رشته‌ها چسبیده‌اند — خروجی باید 8 باشد.','const a="5";\nconsole.log(a+3);','8'],
+['typeof [] is "object" — make it print true.','typeof آرایه "object" است — کاری کن true چاپ شود.','console.log(typeof [] === "array");','true'],
+['Only the first letter should change — expected Hello.','فقط حرف اول باید عوض شود — خروجی باید Hello باشد.','const s="hello";\nconsole.log(s[0].toUpperCase()+s.slice(0));','Hello'],
+['Default sort compares strings — expected [1,9,10].','sort پیش‌فرض رشته‌ای مقایسه می‌کند — خروجی باید [1,9,10] باشد.','console.log([10,9,1].sort());','[1,9,10]'],
+['Floating point! Make it print true.','اعداد اعشاری! کاری کن true چاپ شود.','console.log(0.1+0.2===0.3);','true'],
+['Automatic semicolon insertion strikes — expected {"ok":true}.','ورود خودکار سمی‌کالن! خروجی باید {"ok":true} باشد.','const f=()=>{\n  return\n  {ok:true}\n};\nconsole.log(f());','{"ok":true}']];
+let bgi=Math.floor(Date.now()/864e5)%BUGS.length;
+function bugDraw(keep){const x=BUGS[bgi];$('bgg').textContent=(bgi+1)+'/'+BUGS.length+' — '+L(x[1],x[0]);if(!keep||!$('bgc').value){$('bgc').value=x[2];$('bgo').textContent=''}}
+$('bgn').onclick=()=>{bgi=(bgi+1)%BUGS.length;$('bgc').value='';bugDraw()};
+$('bgr').onclick=async()=>{$('bgo').textContent='…';const o=(await runJS($('bgc').value)).trim(),x=BUGS[bgi];$('bgo').textContent=o||'(no output)';
+ if(o===x[3]){$('bgo').textContent+='\n✅ '+L('باگ رفع شد!','Bug fixed!');const k='cs_bg'+bgi,td=new Date().toDateString();if(store.get(k)!==td){store.set(k,td);addXP(15);stat('bugs')}}else $('bgo').textContent+='\n❌ '+L('هنوز درست نیست.','Not fixed yet.')};
+/* AI code review (with offline lint fallback) */
+function lint(c){const r=[[/\beval\(/,'eval() is dangerous','eval() خطرناک است'],[/innerHTML\s*=/,'innerHTML can cause XSS','innerHTML می‌تواند XSS ایجاد کند'],[/\bvar\s/,'prefer let/const over var','به‌جای var از let/const استفاده کن'],[/[^=!<>]==[^=]/,'use === instead of ==','به‌جای == از === استفاده کن'],[/console\.log/,'remove console.log before shipping','console.log را قبل از انتشار حذف کن'],[/(password|secret|api[_-]?key)\s*[:=]\s*['"]/i,'hard-coded secret','رمز یا کلید داخل کد نوشته شده'],[/catch\s*\(\w*\)\s*\{\s*\}/,'empty catch hides errors','catch خالی خطا را پنهان می‌کند'],[/TODO|FIXME/,'unfinished TODO','کار نیمه‌تمام (TODO)']];
+ return r.filter(x=>x[0].test(c)).map(x=>'• '+L(x[2],x[1])).join('\n')||L('مشکل واضحی پیدا نشد.','No obvious issues found.')}
+$('rvg').onclick=async()=>{const c=$('rvc').value.trim();if(!c)return;const o=$('rvo');o.textContent=t('chatWait');
+ try{const SM=await getSM();if(!SM)throw{code:'na'};const r=await SM(`You are a senior code reviewer. Review the code below. List (1) bugs, (2) security issues, (3) readability or performance improvements, then give a corrected version in a fenced block. Be concise. Reply in ${lang==='fa'?'Persian':'English'}.\n\n${c.slice(0,6000)}`,{cache:false,onText:({text})=>{o.textContent=text}});o.textContent=r.text;stat('reviews');addXP(5)}
+ catch(e){o.textContent=L('هوش مصنوعی در دسترس نیست؛ بررسی ساده:\n','AI unavailable; basic check:\n')+lint(c)}};
+/* pomodoro */
+let pm={w:1,left:1500,run:false,end:0};const pmS=()=>store.get('cs_pomo',{n:0,tot:0,d:'',td:0});
+function beep(){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=880;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+.4)}catch(e){}}
+function pmDraw(){$('pmt').textContent=String(pm.left/60|0).padStart(2,'0')+':'+String(pm.left%60).padStart(2,'0');$('pmm').textContent=pm.w?L('🍅 تمرکز','🍅 Focus'):L('☕ استراحت','☕ Break');$('pmg').textContent=t(pm.run?'pmPause':'pmGo');
+ const s=pmS();$('pms').textContent=L('امروز: ','Today: ')+(s.d===new Date().toDateString()?s.td:0)+' 🍅 · '+L('کل تمرکز: ','Total focus: ')+Math.round(s.tot/6)/10+'h'}
+function pmSet(w){pm={w,left:(w?(+C.settings.pmW||25):(+C.settings.pmB||5))*60,run:false,end:0};pmDraw()}
+$('pmg').onclick=()=>{if(pm.run){pm.run=false;pm.left=Math.max(0,Math.round((pm.end-Date.now())/1000))}else{pm.run=true;pm.end=Date.now()+pm.left*1000}pmDraw()};
+$('pmr').onclick=()=>pmSet(pm.w);$('pmx').onclick=()=>pmSet(pm.w?0:1);
+setInterval(()=>{if(!pm.run)return;pm.left=Math.max(0,Math.round((pm.end-Date.now())/1000));
+ if(pm.left<=0){pm.run=false;if(pm.w){const s=pmS(),td=new Date().toDateString();if(s.d!==td){s.d=td;s.td=0}s.td++;s.n++;s.tot+=(+C.settings.pmW||25);store.set('cs_pomo',s);stat('pomo');addXP(10)}beep();toast(pm.w?L('تمرکز تمام شد! استراحت کن ☕','Focus done! Take a break ☕'):L('استراحت تمام شد!','Break over!'));pmSet(pm.w?0:1);return}pmDraw()},1000);
+/* snippet vault (this browser only) */
+const vl0=()=>store.get('cs_vault',[]);
+function vaultDraw(){const q=$('vq').value.toLowerCase(),l=vl0().map((x,i)=>({...x,i})).filter(x=>(x.t+' '+x.g+' '+x.c).toLowerCase().includes(q));
+ $('vl').innerHTML=l.map(x=>`<div class="card" style="margin-top:.8rem"><h3 style="font-family:Lalezar,Vazirmatn;font-weight:400;direction:inherit;text-align:start">${esc(x.t)}</h3><div>${x.g.split(',').filter(a=>a.trim()).map(a=>`<span class="tg">${esc(a.trim())}</span>`).join('')}</div><pre class="pc">${hl(x.c)}</pre><button class="btn sm ghost" data-vcp="${x.i}">${L('کپی','Copy')}</button> <button class="btn sm ghost" data-vdl="${x.i}">×</button></div>`).join('')}
+$('va').onclick=()=>{const ttl=$('vt').value.trim(),c=$('vc').value;if(!ttl||!c)return;const l=vl0();l.unshift({t:ttl,g:$('vg').value,c});store.set('cs_vault',l.slice(0,100));$('vt').value=$('vg').value=$('vc').value='';vaultDraw();addXP(1)};
+$('vq').oninput=vaultDraw;
+$('vl').onclick=e=>{const l=vl0(),cp=e.target.dataset.vcp,dl=e.target.dataset.vdl;if(cp!=null){const a=document.createElement('textarea');a.value=l[+cp].c;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(er){}a.remove();toast(L('کپی شد','Copied'))}if(dl!=null){l.splice(+dl,1);store.set('cs_vault',l);vaultDraw()}};
+/* resume builder */
+const RF=['rn1','rr1','re1','rp1','rk1','rx1','rj1','rd1'];
+function resDraw(){const g=i=>$(i).value,br=s=>esc(s).replace(/\n/g,'<br>'),sec=(k,en,fa,h)=>g(k)?`<h4>${L(fa,en)}</h4><p>${h}</p>`:'';
+ $('rsp').innerHTML=`<div class="rsc"><h2>${esc(g('rn1'))||'Your Name'}</h2><p><b>${esc(g('rr1'))}</b></p><p>${esc(g('re1'))} ${esc(g('rp1'))}</p>${sec('rk1','Skills','مهارت‌ها',g('rk1').split(',').map(x=>esc(x.trim())).filter(Boolean).join(' · '))}${sec('rx1','Experience','سوابق',br(g('rx1')))}${sec('rj1','Projects','پروژه‌ها',br(g('rj1')))}${sec('rd1','Education','تحصیلات',esc(g('rd1')))}</div>`;store.set('cs_res',RF.map(g))}
+RF.forEach(i=>$(i).oninput=resDraw);
+$('rpr').onclick=()=>{try{window.print()}catch(e){toast('print?')}};
+$('rcp').onclick=()=>{const a=document.createElement('textarea');a.value=$('rsp').innerText;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();toast(L('کپی شد','Copied'))};
+function extraInit(){const sv=store.get('cs_res',[]);RF.forEach((i,k)=>$(i).value=sv[k]||'');resDraw();lsDraw();bugDraw();pmSet(1);vaultDraw();renderBadges(false)}
+
+/* page builder: order, visibility, headings, intros, menu, custom blocks, background options */
+const U1=(k,n,h,m,id)=>[k,n,()=>[$(id||k)],h,m];
+const PG=[['stats','آمار / Stats',()=>[qs('.stats'),$('ad0')],'',0],U1('join','ثبت‌نام / Sign up','h_join',0),U1('about','درباره‌ی ما / About','h_about',1),U1('band1','نوار ۱ / Band 1','',0),U1('services','خدمات / Services','h_serv',1),U1('demo','دمو و بازار / Vision demo & market','',0),U1('band2','نوار ۲ / Band 2','',0),U1('projects','پروژه‌ها / Projects','h_proj',1),U1('terminal','ترمینال / Terminal','h_term',1),U1('tools','جعبه‌ابزار / Toolbox','h_tools',0),U1('roi','ماشین‌حساب ROI','h_roi',0),U1('typing','تست تایپ / Typing','h_type',0),U1('quiz','چالش روزانه / Quiz','h_quiz',0),U1('lessons','درس‌ها / Lessons','h_less',0),U1('bugs','باگ رو پیدا کن / Bugs','h_bug',0),U1('review','بازبین کد / AI review','h_rev',0),U1('pomo','تایمر تمرکز / Focus','h_pomo',0),U1('vault','انبار اسنیپت / Vault','h_vault',0),U1('resume','رزومه‌ساز / Resume','h_res',0),U1('badges','نشان‌ها / Badges','h_badge',0),U1('blog','آکادمی / Academy','h_blog',0),U1('play','زمین بازی کد / Playground','h_play',0),U1('globe','نقشه‌ی زمان / World time','h_globe',0),U1('est','تخمین هوش مصنوعی / AI estimate','h_est',0),U1('game','شکارچی باگ / Bug hunter','h_game',0),U1('wall','دیوار هکرها / Wall','h_wall',0),U1('news','اخبار / News','h_news',1),U1('req','درخواست پروژه / Request','h_req',0)];
+const els=k=>{const g=PG.find(x=>x[0]===k);return g?g[2]():[$('blk_'+k.slice(3))]};
+function applyPage(s){const so=s.sec||{},hide=s.hide||{},fa=lang==='fa',blocks=C.blocks||[],anchor=$('ad1');
+ document.querySelectorAll('.cblk').forEach(e=>e.remove());
+ blocks.forEach(b=>{const e=document.createElement('section');e.className='s cblk';e.id='blk_'+b.id;const h=document.createElement('h2');h.className='dc';h.dataset.t=(fa?b.tfa:b.t)||b.t||b.tfa||'';h.textContent=h.dataset.t;e.appendChild(h);
+  const w=document.createElement('div');w.className='card rv';const im=imgOk(b.img);if(im){const i=document.createElement('img');i.src=im;i.alt='';i.style.cssText='max-width:100%;max-height:340px;display:block;margin:0 auto 1rem';w.appendChild(i)}
+  const p=document.createElement('p');p.style.whiteSpace='pre-wrap';p.textContent=(fa?b.bfa:b.b)||b.b||b.bfa||'';w.appendChild(p);
+  const lt=(fa?b.btfa:b.bt)||b.bt||b.btfa;if(lt&&/^https?:\/\//.test(b.l||'')){const a=document.createElement('a');a.href=b.l;a.target='_blank';a.rel='noopener';const bt=document.createElement('button');bt.className='btn';bt.textContent=lt;a.appendChild(bt);w.appendChild(a)}
+  e.appendChild(w);anchor.parentNode.insertBefore(e,anchor)});
+ const keys=[...PG.map(x=>x[0]),...blocks.map(b=>'blk'+b.id)],od=s.order||[],ord=[...od.filter(k=>keys.includes(k)),...keys.filter(k=>!od.includes(k))];
+ ord.forEach(k=>els(k).forEach(e=>{if(e)anchor.parentNode.insertBefore(e,anchor)}));
+ ord.forEach(k=>els(k).forEach(e=>{if(e)e.style.display=(hide[k]||(k.startsWith('band')&&hide.bands))?'none':''}));
+ PG.forEach(([k,n,f,hk])=>{const el=els(k)[0];if(!el||!hk)return;const h=el.querySelector('h2.dc'),o=so[k]||{};if(!h)return;const v=(fa?o.hfa:o.h)||t(hk);h.dataset.t=v;h.textContent=v;
+  let p=el.querySelector('.pgi');const tx=fa?o.i_fa:o.i_en;if(tx){if(!p){p=document.createElement('p');p.className='pgi rv';p.style.cssText='max-width:720px;color:var(--mut);margin:-1rem 0 1.5rem';h.after(p)}p.textContent=tx}else if(p)p.remove()});
+ const nl=$('nl');nl.textContent='';
+ ord.forEach(k=>{if(hide[k])return;const g=PG.find(x=>x[0]===k),o=so[k]||{};let id,label;
+  if(g){const el=els(k)[0];if(!g[3]||!el)return;const m=o.m===undefined?g[4]:o.m;if(!m)return;id=el.id;label=el.querySelector('h2.dc')?.dataset.t}
+  else{const b=blocks.find(x=>'blk'+x.id===k);if(!b||!o.m)return;id='blk_'+b.id;label=(fa?b.tfa:b.t)||b.t||b.tfa}
+  if(id&&label){const a=document.createElement('a');a.href='#'+id;a.textContent=label;nl.appendChild(a)}});
+ const cta=qs('#heroIn a');if(cta){const bt=cta.firstElementChild,tx=fa?s.ctaF:s.ctaE;if(tx&&bt)bt.textContent=tx;const l=(s.ctaL||'').trim();cta.href=/^(https?:\/\/|#)/.test(l)?l:'#services';if(/^https?:/.test(l)){cta.target='_blank';cta.rel='noopener'}else cta.removeAttribute('target')}
+ [['st1','sl1'],['st2','sl2'],['st3','sl3']].forEach(([k,f])=>{const e=qs(`[data-i="${k}"]`),tx=fa?s[f+'f']:s[f+'e'];if(e&&tx)e.textContent=tx});
+ const m=s.bgm||'cyber';cv.style.opacity=((+s.bgi||70)/100)*.6;if(m==='grid'||m==='off')cx.clearRect(0,0,cv.width,cv.height);if(RM)bgFx(0);dirty=true;watch()}
+/* admin: page builder */
+let PB=null,bimg='';
+const pbName=k=>{const g=PG.find(x=>x[0]===k);if(g)return g[1];const b=(C.blocks||[]).find(x=>'blk'+x.id===k);return '🧩 '+(b?(b.tfa||b.t):k)};
+function pbModel(){const s=C.settings,keys=[...PG.map(x=>x[0]),...(C.blocks||[]).map(b=>'blk'+b.id)],o=s.order||[];PB={order:[...o.filter(k=>keys.includes(k)),...keys.filter(k=>!o.includes(k))],sec:JSON.parse(JSON.stringify(s.sec||{})),hide:{...(s.hide||{})}}}
+function pbRead(){document.querySelectorAll('#pbl [data-k]').forEach(d=>{const k=d.dataset.k,q=c=>d.querySelector(c);PB.sec[k]=Object.assign(PB.sec[k]||{},{h:q('.pbh').value,hfa:q('.pbhf').value,i_en:q('.pbi').value,i_fa:q('.pbif').value,m:q('.pbm').checked?1:0});if(q('.pbs').checked)delete PB.hide[k];else PB.hide[k]=1})}
+function pbDraw(){$('pbl').innerHTML=PB.order.map(k=>{const o=PB.sec[k]||{},g=PG.find(x=>x[0]===k),m=o.m===undefined?(g?g[4]:0):o.m,hasH=!!(g&&g[3]);
+ return `<details class="card" data-k="${k}"><summary><b>${esc(pbName(k))}</b> <button class="btn sm ghost" data-mv="-1">▲</button><button class="btn sm ghost" data-mv="1">▼</button> <label style="white-space:nowrap"><input type="checkbox" class="pbs" ${PB.hide[k]?'':'checked'} style="width:auto"> نمایش / Show</label></summary>`+
+ (hasH?`<label>Heading (EN)</label><input class="pbh ltr" value="${esc(o.h||'')}"><label>عنوان (فارسی)</label><input class="pbhf" value="${esc(o.hfa||'')}"><label>Intro (EN)</label><textarea class="pbi ltr" rows="2">${esc(o.i_en||'')}</textarea><label>توضیح (فارسی)</label><textarea class="pbif" rows="2">${esc(o.i_fa||'')}</textarea>`:'<input class="pbh hide"><input class="pbhf hide"><textarea class="pbi hide"></textarea><textarea class="pbif hide"></textarea>')+
+ `<label style="display:block"><input type="checkbox" class="pbm" ${m?'checked':''} style="width:auto"> در منو / In menu</label></details>`}).join('')}
+$('pbl').onclick=e=>{const b=e.target.closest('[data-mv]');if(!b)return;e.preventDefault();pbRead();const k=b.closest('[data-k]').dataset.k,i=PB.order.indexOf(k),j=i+ +b.dataset.mv;if(j<0||j>=PB.order.length)return;PB.order.splice(i,1);PB.order.splice(j,0,k);pbDraw()};
+const OPT=['ctaE','ctaF','ctaL','sl1e','sl1f','sl2e','sl2f','sl3e','sl3f'];
+function fillOpts(){const s=C.settings;OPT.forEach(k=>$('o_'+k).value=s[k]||'');['pmW','pmB','gSec'].forEach(k=>$('o_'+k).value=s[k]||'');$('o_chat').checked=!(s.hide||{}).chat;$('bgm').value=s.bgm||'cyber';$('bgi').value=s.bgi||70}
+$('pbSave').onclick=async()=>{pbRead();const s=C.settings;s.order=PB.order;s.sec=PB.sec;s.hide=PB.hide;OPT.forEach(k=>s[k]=$('o_'+k).value.trim());['pmW','pmB','gSec'].forEach(k=>s[k]=+$('o_'+k).value||0);if($('o_chat').checked)delete s.hide.chat;else s.hide.chat=1;await saveC();applySettings();renderAll();pbModel();pbDraw();toast(t('saved'))};
+/* admin: custom blocks */
+function renderBlk(){$('adminBlk').innerHTML=(C.blocks||[]).map((b,i)=>`<div class="row"><span>🧩 ${esc(b.tfa||b.t)}</span><button class="btn sm ghost" data-dbk="${i}">×</button></div>`).join('')}
+$('bk_add').onclick=async()=>{const t1=$('bk_t').value.trim(),t2=$('bk_tf').value.trim();if(!t1&&!t2)return;C.blocks.push({id:Date.now().toString(36),t:t1,tfa:t2,b:$('bk_b').value,bfa:$('bk_bf').value,img:bimg,bt:$('bk_bt').value,btfa:$('bk_btf').value,l:$('bk_l').value.trim()});bimg='';
+ ['bk_t','bk_tf','bk_b','bk_bf','bk_i','bk_bt','bk_btf','bk_l'].forEach(i=>$(i).value='');await saveC();applySettings();renderAll();pbModel();pbDraw();toast(t('saved'))};
+$('adminBlk').onclick=async e=>{const i=e.target.dataset.dbk;if(i==null)return;const b=C.blocks[+i];delete C.settings.hide['blk'+b.id];C.blocks.splice(+i,1);await saveC();applySettings();renderAll();pbModel();pbDraw()};
+
+/* canvases: code rain, CV demo, market */
+let bgo=store.get('cs_bgo','');const cv=$('bg'),cx=cv.getContext('2d'),c2=$('bg2'),x2=c2.getContext('2d'),G='01{}[]<>/=;()+-*#$%&defimportｱｲｳｴｵｶｷｸﾊﾋﾌﾍﾎ',fw=15;let cols=[],fc=0,mpx=-999,mpy=-999,lastY=0,scrollSpd=0,glt=0,gy=0,gh=0;
+function size(){cv.width=c2.width=innerWidth;cv.height=c2.height=innerHeight;cols=Array.from({length:Math.ceil(innerWidth/fw)},(_,i)=>({x:i*fw,y:Math.random()*innerHeight,v:.6+Math.random()*2.2,z:Math.random()}))}
+size();addEventListener('resize',size);addEventListener('pointermove',e=>{mpx=e.clientX;mpy=e.clientY},{passive:true});
+const hexA=(h,a)=>{h=h.replace('#','');return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${a})`};
+function rain(){const m=bgo||C.settings.bgm||'cyber';if(m==='grid'||m==='off')return;cx.globalCompositeOperation='destination-out';cx.fillStyle='rgba(0,0,0,.1)';cx.fillRect(0,0,cv.width,cv.height);cx.globalCompositeOperation='source-over';
+ const sp=1+Math.min(2,scrollSpd);cols.forEach(c=>{cx.font=(9+c.z*8)+'px Share Tech Mono,monospace';let x=c.x;const dx=x-mpx,dy=c.y-mpy,d=Math.hypot(dx,dy);if(d<130)x+=dx/(d||1)*(130-d)*.35;
+  cx.fillStyle=c.z>.92?'#fff':hexA(AC,.35+c.z*.65);cx.fillText(G[Math.random()*G.length|0],x,c.y);c.y+=c.v*(1+c.z)*sp;if(c.y>cv.height+20&&Math.random()>.97){c.y=-20;c.v=.6+Math.random()*2.2}})}
+const LOGS=['[ OK ] mount /dev/cs0','GET /api/db/site 200 4ms','auth: session rotated','sudo: 3 incorrect attempts','nmap -sV 10.0.0.0/24','ssh: key exchange ok','kernel: cs_code 6.1.0 #1 SMP','[WARN] anomaly detected','tls: handshake complete','scanning ports 1-1024...','vision-core: 3 objects tracked','rpa-bot: job #4182 done','decrypting payload ████░░ 62%','firewall: blocked 203.0.113.9','db: write ok (site/content)','audit: admin unlock denied','cron: backup complete','[ OK ] started cs-sh'];
+const hx8=n=>(n>>>0).toString(16).padStart(8,'0');
+function hud(t,W,H,k){if(W<900)return;x2.font='11px Share Tech Mono,monospace';x2.textAlign='left';const lh=15,n=Math.ceil(H/lh)+2,base=Math.floor(t/700),fr=(t/700)%1;
+ for(let j=0;j<n;j++){const i=base-j,y=H-j*lh-fr*lh,a=Math.max(0,Math.min(1,Math.min(y,H-y)/160))*.32*k;if(a<=0)continue;x2.fillStyle=hexA(AC,a);
+  x2.fillText(LOGS[((Math.imul(i,2654435761))>>>0)%LOGS.length],16,y);const h=Math.imul(i,2246822519)>>>0;
+  x2.fillText('0x'+hx8(h)+'  '+hx8(h*3)+' '+hx8(h*7)+'  |'+String.fromCharCode(33+h%90,33+(h>>>8)%90,33+(h>>>16)%90,33+(h>>>24)%90)+'|',W-330,y)}
+ x2.strokeStyle=hexA(AC,.5*k);x2.lineWidth=2;[[8,8,1,1],[W-8,8,-1,1],[8,H-8,1,-1],[W-8,H-8,-1,-1]].forEach(([x,y,sx,sy])=>{x2.beginPath();x2.moveTo(x,y+sy*24);x2.lineTo(x,y);x2.lineTo(x+sx*24,y);x2.stroke()});
+ x2.fillStyle=hexA(AC,.7*k);x2.fillText('SYS://CS_CODE ● LIVE  '+new Date().toISOString().slice(11,19)+'Z',22,H-18);x2.textAlign='right';x2.fillText('UPLINK '+(120+Math.sin(t/900)*30).toFixed(1)+' KB/s  ◉ ENCRYPTED',W-22,H-18);x2.textAlign='left';
+ const sy=((t/7000)%1)*H,sg=x2.createLinearGradient(0,sy-30,0,sy+2);sg.addColorStop(0,hexA(AC,0));sg.addColorStop(1,hexA(AC,.18*k));x2.fillStyle=sg;x2.fillRect(0,sy-30,W,32);
+ if(mpx>0){x2.strokeStyle=hexA(AC,.4*k);x2.lineWidth=1;x2.beginPath();x2.arc(mpx,mpy,16,0,7);x2.moveTo(mpx-26,mpy);x2.lineTo(mpx-8,mpy);x2.moveTo(mpx+8,mpy);x2.lineTo(mpx+26,mpy);x2.moveTo(mpx,mpy-26);x2.lineTo(mpx,mpy-8);x2.moveTo(mpx,mpy+8);x2.lineTo(mpx,mpy+26);x2.stroke();x2.fillStyle=hexA(AC,.6*k);x2.fillText('X:'+(mpx|0)+' Y:'+(mpy|0),mpx+22,mpy-20)}}
+function bgFx(t){const W=c2.width,H=c2.height,m=bgo||C.settings.bgm||'cyber',k=(+C.settings.bgi||70)/100,hz=H*.62;x2.fillStyle=`rgb(${BG})`;x2.fillRect(0,0,W,H);if(m==='off')return;
+ for(let i=0;i<3;i++){const X=W*(.2+.3*i)+Math.sin(t/4000+i*2)*W*.12,Y=H*(.25+.1*Math.sin(t/5000+i)),r=Math.max(W,H)*.45,g=x2.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,hexA(AC,.14*k));g.addColorStop(1,hexA(AC,0));x2.fillStyle=g;x2.fillRect(0,0,W,H)}
+ if(m!=='rain'){const off=(t/9000+scrollY/900)%1;x2.lineWidth=1;for(let j=0;j<14;j++){const p=(j+off)/14,y=hz+(H-hz)*p*p;x2.strokeStyle=hexA(AC,(.08+.5*p)*k);x2.beginPath();x2.moveTo(0,y);x2.lineTo(W,y);x2.stroke()}
+  for(let i=-12;i<=12;i++){x2.strokeStyle=hexA(AC,.25*k*(1-Math.abs(i)/14));x2.beginPath();x2.moveTo(W/2+i*W*.012,hz);x2.lineTo(W/2+i*W*.09,H);x2.stroke()}
+  const g2=x2.createLinearGradient(0,hz-60,0,hz+40);g2.addColorStop(0,hexA(AC,0));g2.addColorStop(.5,hexA(AC,.25*k));g2.addColorStop(1,hexA(AC,0));x2.fillStyle=g2;x2.fillRect(0,hz-60,W,100)}
+ if(m==='cyber')hud(t,W,H,k);if(mpx>0){const g=x2.createRadialGradient(mpx,mpy,0,mpx,mpy,240);g.addColorStop(0,hexA(AC,.12*k));g.addColorStop(1,hexA(AC,0));x2.fillStyle=g;x2.fillRect(0,0,W,H)}
+ if(glt>0){glt--;x2.fillStyle=hexA(AC,.1*k);x2.fillRect(0,gy,W,gh)}else if(Math.random()<.01){glt=4;gy=Math.random()*H;gh=4+Math.random()*30}
+ const v=x2.createRadialGradient(W/2,H/2,Math.min(W,H)*.3,W/2,H/2,Math.max(W,H)*.75);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(0,0,0,.6)');x2.fillStyle=v;x2.fillRect(0,0,W,H)}
+const vx=$('cvc').getContext('2d'),cars=[{x:50,l:0,s:1.6,w:70},{x:300,l:1,s:1.1,w:80},{x:520,l:2,s:2.1,w:64}];
+function cvd(){vx.fillStyle='#0a0609';vx.fillRect(0,0,600,300);for(let i=0;i<12;i++){vx.fillStyle='#160a0d';vx.fillRect(i*52,40+(i*37%60),40,130)}
+ vx.fillStyle='#1c1014';vx.fillRect(0,170,600,130);vx.strokeStyle='#ffffff33';vx.setLineDash([14,14]);[212,250].forEach(y=>{vx.beginPath();vx.moveTo(0,y);vx.lineTo(600,y);vx.stroke()});vx.setLineDash([]);
+ cars.forEach((c,i)=>{c.x=(c.x+c.s)%700;const x=c.x-80,y=185+c.l*38,w=c.w;vx.fillStyle='#a30f1b';vx.fillRect(x,y,w,26);vx.fillStyle='#000';vx.fillRect(x+w*.6,y+3,w*.25,10);
+  vx.strokeStyle=AC;vx.lineWidth=1.5;vx.strokeRect(x-6,y-8,w+12,40);vx.fillStyle=AC;vx.font='11px Share Tech Mono';vx.fillText('car '+(.9+(i+1)*.023).toFixed(2),x-6,y-12)});
+ vx.fillStyle=AC;vx.fillRect(10,10,150,22);vx.fillStyle='#fff';vx.font='12px Share Tech Mono';vx.fillText('OBJECT DETECTED',18,26)}
+const MK={BTC:68432.17,ETH:3248.76,SOL:152.31},B0={...MK};let cd=[];{let v=MK.BTC;for(let i=0;i<36;i++){const o=v;v*=1+(Math.random()-.48)*.006;cd.push({o,c:v,h:Math.max(o,v)*1.001,l:Math.min(o,v)*.999})}}
+function mkt(){Object.keys(MK).forEach(k=>MK[k]*=1+(Math.random()-.48)*.004);const p=cd[cd.length-1].c;cd.push({o:p,c:MK.BTC,h:Math.max(p,MK.BTC)*(1+Math.random()*.002),l:Math.min(p,MK.BTC)*(1-Math.random()*.002)});cd.shift();
+ $('mkt').innerHTML=Object.keys(MK).map(k=>{const c=(MK[k]/B0[k]-1)*100;return `<div class="mr"><b>${k}</b><span>${MK[k].toFixed(2)}</span><span class="${c>=0?'up':'dn'}">${c>=0?'+':''}${c.toFixed(2)}%</span></div>`}).join('');
+ const m=$('mkc'),x=m.getContext('2d'),W=m.width,H=m.height,w=W/cd.length,lo=Math.min(...cd.map(c=>c.l)),hi=Math.max(...cd.map(c=>c.h)),Y=v=>H-(v-lo)/(hi-lo||1)*(H-10)-5;x.clearRect(0,0,W,H);
+ cd.forEach((c,i)=>{x.fillStyle=x.strokeStyle=c.c>=c.o?'#eee':AC;x.beginPath();x.moveTo(i*w+w/2,Y(c.h));x.lineTo(i*w+w/2,Y(c.l));x.stroke();x.fillRect(i*w+2,Math.min(Y(c.o),Y(c.c)),w-4,Math.max(2,Math.abs(Y(c.o)-Y(c.c))))})}
+function frame(now){fc++;if(!document.hidden){if(RM){if(fc===2)bgFx(0)}else{if(fc%2===0){scrollSpd=Math.abs(scrollY-lastY)/30;lastY=scrollY;rain()}if(fc%3===0)bgFx(now||0)}}if(fc%2===0&&cvv)cvd();requestAnimationFrame(frame)}
+
+(async()=>{await initCaps();await loadC();i18n();initFeatures();enterSite();mkt();setInterval(mkt,1500);frame()})();
+})();
+</script>
+</body>
+</html>
