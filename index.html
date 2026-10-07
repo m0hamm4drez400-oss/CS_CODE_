@@ -580,7 +580,35 @@ function welcome(){outH('<span style="color:#fff">Cs_Code terminal</span> — '+
 Object.assign(T,{h_blog:['آکادمی','Academy'],h_play:['زمین بازی کد','Code playground'],h_globe:['شبکه‌ی جهانی','Global network'],h_est:['تخمین پروژه با هوش مصنوعی','AI project estimate'],h_game:['شکارچی باگ','Bug hunter'],h_wall:['دیوار هکرها','Hacker wall'],estPh:['پروژه‌ات را توضیح بده...','Describe your project...'],estBtn:['تخمین بزن','Estimate'],gStart:['شروع (۳۰ ثانیه)','Start (30s)'],wnPh:['نام مستعار','Nickname'],wmPh:['یک خط بنویس...','Write a line...'],wBtn:['ارسال','Post'],noPost:['هنوز مطلبی نیست.','No posts yet.'],palPh:['جستجو یا اجرای دستور...','Search or run a command...'],bootSkip:['برای رد کردن کلیک کنید','click to skip']});
 let hist=[],SMp=null;
 function add(c,x){const d=document.createElement('div');d.className='m '+c;d.textContent=x;$('cm').appendChild(d);$('cm').scrollTop=1e9;return d}
-const getSM=()=>SMp||(SMp=(window.claude?claude.use('sample'):Promise.resolve(null)).catch(()=>null));
+// پیاده‌سازی موتور یکپارچه هوش مصنوعی برای هر ۴ ابزار سایت
+const getSM = async () => {
+  const runner = async (prompt, opts = {}) => {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt, json: false })
+    });
+    if (!res.ok) throw new Error('API offline');
+    const data = await res.json();
+    if (opts.onText) opts.onText(data.reply);
+    return { text: data.reply };
+  };
+
+  // پشتیبانی از تخمین‌گر پروژه (SM.json)
+  runner.json = async (prompt) => {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt, json: true })
+    });
+    if (!res.ok) throw new Error('API offline');
+    const data = await res.json();
+    return JSON.parse(data.reply);
+  };
+
+  return runner;
+};
+
 function faq(q){const s=C.settings,m=[[/خدمت|service|what do you|چه کار/i,C.services.map(x=>'• '+x.t).join('\n')],[/ثبت|sign|account|حساب/i,L('از صفحه‌ی ورود با شماره موبایل و کد تأیید ثبت‌نام کنید.','Sign up from the entry page with your phone number and the code.')],[/درخواست|request|price|قیمت|هزینه|cost|hire/i,L('از بخش «تخمین پروژه» یا فرم «درخواست پروژه» استفاده کنید.','Use the AI estimate or the "Request a project" form.')],[/ترمینال|terminal|command|دستور/i,L('در بخش ترمینال بنویسید help.','Open the terminal section and type help.')],[/تماس|contact|email|ایمیل|telegram|تلگرام/i,[s.em,s.tg&&'@'+s.tg].filter(Boolean).join(' · ')||L('از فرم درخواست استفاده کنید.','Use the request form.')]],h=m.find(x=>x[0].test(q));
  return h?h[1]:L('الان هوش مصنوعی در دسترس نیست. درباره‌ی خدمات، ثبت‌نام، قیمت یا تماس می‌تونم کمک کنم.','AI is offline right now. I can still help with services, sign-up, pricing or contact.')}
 async function ask(q){add('u',q);const b=add('b',t('chatWait'));hist.push('User: '+q);
